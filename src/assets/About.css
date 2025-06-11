@@ -1,0 +1,52 @@
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #fffaf3;
+  padding: 40px 20px;
+}
+
+.about-card {
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 700px;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(255, 152, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fb8c00;
+  font-weight: bold;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.about-contact h3 {
+  color: #f57c00;
+  margin-bottom: 10px;
+}
+
+.about-contact a {
+  color: #fb8c00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.about-contact a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

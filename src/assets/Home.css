@@ -1,0 +1,197 @@
+/* Home.css */
+
+.home {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  color: #333;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 80px;
+  background-color: #f6f6f6;
+  
+  color: #555;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  background-color: #fff;
+  
+}
+
+.hero-text {
+  width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.btn {
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.btn.black {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn.black:hover {
+  background-color: #333;
+}
+
+.btn.green {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn.green:hover {
+  background-color: #3e8e41;
+}
+
+/* Imagen de mascotas */
+.hero-image.pets {
+  width: 45%;
+  height: 350px;
+  background-image: url('../assets/perro2.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Sección informativa */
+.info-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px;
+  background-color: #fefefe;
+}
+
+
+
+.info-image {
+  width: 350px;
+  height: 350px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  background-image: url('../assets/perro1.jpg');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.info-text {
+  width: 55%;
+}
+
+.info-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.info-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.register-learn {
+  display: flex;
+  gap: 15px;
+}
+
+/* Servicios */
+.services {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 80px;
+  gap: 20px;
+}
+
+.service {
+  flex: 1;
+  background-color: #fefefe;
+  padding: 30px 20px;
+  border-radius: 12px;
+  
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.service .icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.service h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.service p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Footer */
+.footer {
+  padding: 60px 80px;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer-links span {
+  margin: 0 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.footer-links span:hover {
+  text-decoration: underline;
+}
+
+.footer .social-icons span {
+  margin: 0 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: #888;
+}
