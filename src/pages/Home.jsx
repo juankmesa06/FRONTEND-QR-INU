@@ -15,7 +15,7 @@ const Home = () => {
             personalizada y segura.
           </h1>
           <div className="hero-buttons">
-            <Link to="/CompraQr" className="btn black">Comprar QR</Link>
+            <Link to="/CompraQr" className="btn black">Com</Link>
             <Link to="/Encontrar" className="btn black">Encontrar mi mascota</Link>
             <Link to="/login" className="btn black">Inicio de sesion</Link>
           </div>
