@@ -1,59 +1,55 @@
-// src/pages/CompraQR.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../assets/CompraQR.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CompraQR() {
-  const [nombreMascota, setNombreMascota] = useState('');
-  const [especie, setEspecie] = useState('');
-  const [tamano, setTamano] = useState('');
-  const [dueño, setDueño] = useState('');
-  const [email, setEmail] = useState('');
-
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const data = {
-      nombreMascota,
-      especie,
-      tamano,
-      dueño,
-      email,
-    };
-
-    const encodedData = encodeURIComponent(JSON.stringify(data));
-    navigate(`/qr-generado?data=${encodedData}`);
-  };
-
   return (
-    <div className="qr-container">
-      <form className="qr-form" onSubmit={handleSubmit}>
-        <h2>Comprar QR para Mascota</h2>
+    <div className="container my-5">
+      <div className="text-center mb-4">
+        <h2 className="text-primary">🐾 Collares QR para Mascotas</h2>
+        <p className="lead">
+          Protege a tu mascota con un collar QR de identificación. Escanea y conecta.
+        </p>
+      </div>
 
-        <label>Nombre de la Mascota:</label>
-        <input type="text" value={nombreMascota} onChange={(e) => setNombreMascota(e.target.value)} required />
+      <div className="row text-center mb-5">
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <h5 className="text-success">Collar Básico</h5>
+            <p>Hecho de nylon resistente, QR visible y seguro. Ideal para mascotas pequeñas.</p>
+          </div>
+        </div>
 
-        <label>Especie:</label>
-        <input type="text" value={especie} onChange={(e) => setEspecie(e.target.value)} required />
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <h5 className="text-warning">Collar Estilo Premium</h5>
+            <p>Material acolchado, varios colores, QR metálico grabado. Cómodo y elegante.</p>
+          </div>
+        </div>
 
-        <label>Tamaño:</label>
-        <select value={tamano} onChange={(e) => setTamano(e.target.value)} required>
-          <option value="">Selecciona una opción</option>
-          <option value="pequeño">Pequeño</option>
-          <option value="mediano">Mediano</option>
-          <option value="grande">Grande</option>
-        </select>
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <h5 className="text-danger">Collar Personalizado</h5>
+            <p>Elige el diseño, color y forma. El QR va grabado con un código único para tu mascota.</p>
+          </div>
+        </div>
+      </div>
 
-        <label>Nombre del Dueño:</label>
-        <input type="text" value={dueño} onChange={(e) => setDueño(e.target.value)} required />
+      <div className="alert alert-info text-center" role="alert">
+        🧾 <strong>¿Cómo funciona?</strong><br />
+        1. Compra un collar QR en nuestra tienda o distribuidores.<br />
+        2. La primera vez que se escanea el QR, se abre una página de registro.<br />
+        3. El dueño debe crear una cuenta.<br />
+        4. Luego, registra a su mascota ingresando el ID del QR impreso en el collar.<br />
+        5. ¡Listo! Ahora cualquiera que escanee el QR podrá ver tus datos de contacto si tu mascota se pierde.
+      </div>
 
-        <label>Email de contacto:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-
-        <button type="submit">Comprar QR</button>
-      </form>
+      <div className="text-center">
+        <a href="/registro" className="btn btn-outline-primary me-2">Registrarse</a>
+        <a href="/formulario-mascota" className="btn btn-outline-success me-2">Ya tengo un QR</a>
+        <a href="tel:+573001234567" className="btn btn-outline-danger">
+          📞 Llamar a un agente
+        </a>
+      </div>
     </div>
   );
 }

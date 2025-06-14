@@ -1,197 +1,114 @@
-/* Home.css */
-
-.home {
-  font-family: 'Arial', sans-serif;
-  background-color: #fff;
-  color: #333;
-  max-width: 1400px;
-  margin: 0 auto;
+/* General */
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Top bar */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 80px;
-  background-color: #f6f6f6;
-  
-  color: #555;
-}
-
-/* Hero */
+/* Hero Section */
 .hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 80px;
-  background-color: #fff;
-  
+  background-color: #f8f9fa;
+  padding: 80px 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 40px;
 }
 
-.hero-text {
-  width: 50%;
-}
-
-.hero-text h1 {
-  font-size: 3rem;
+.hero h1 {
+  font-size: 2.8rem;
   font-weight: bold;
-  margin-bottom: 30px;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.btn {
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 25px;
-  cursor: pointer;
-  border: none;
-  transition: 0.3s ease-in-out;
-}
-
-.btn.black {
-  background-color: #000;
-  color: #fff;
-}
-
-.btn.black:hover {
-  background-color: #333;
-}
-
-.btn.green {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.btn.green:hover {
-  background-color: #3e8e41;
-}
-
-/* Imagen de mascotas */
-.hero-image.pets {
-  width: 45%;
-  height: 350px;
-  background-image: url('../assets/perro2.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* Sección informativa */
-.info-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px;
-  background-color: #fefefe;
-}
-
-
-
-.info-image {
-  width: 350px;
-  height: 350px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  background-image: url('../assets/perro1.jpg');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.info-text {
-  width: 55%;
-}
-
-.info-text h2 {
-  font-size: 2.2rem;
   margin-bottom: 20px;
 }
 
-.info-text p {
+.hero .highlight {
+  color: #0d6efd; /* Bootstrap primary color */
+}
+
+.hero p {
   font-size: 1.1rem;
-  line-height: 1.6;
+  color: #555;
   margin-bottom: 30px;
 }
 
-.register-learn {
+.hero .btn {
+  margin: 0 10px;
+}
+
+/* Info Section */
+.info-section {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  padding: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.info-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.info-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.info-content p {
+  color: #444;
+  line-height: 1.6;
 }
 
 /* Servicios */
 .services {
-  display: flex;
-  justify-content: space-between;
-  padding: 60px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
+  padding: 40px 20px;
 }
 
 .service {
-  flex: 1;
-  background-color: #fefefe;
-  padding: 30px 20px;
+  background: #ffffff;
+  padding: 20px;
   border-radius: 12px;
-  
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.service .icon {
-  font-size: 40px;
-  margin-bottom: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .service h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #0d6efd;
 }
 
 .service p {
-  font-size: 1rem;
-  color: #555;
+  color: #666;
+  font-size: 0.95rem;
 }
 
 /* Footer */
 .footer {
-  padding: 60px 80px;
-  background-color: #f2f2f2;
+  background-color: #0d6efd;
+  color: white;
+  padding: 40px 20px;
   text-align: center;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  border-radius: 12px 12px 0 0;
 }
 
 .footer .logo {
-  font-size: 24px;
+  font-size: 1.6rem;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  margin-top: 15px;
 }
 
 .footer-links span {
   margin: 0 15px;
-  font-size: 16px;
   cursor: pointer;
-}
-
-.footer-links span:hover {
-  text-decoration: underline;
-}
-
-.footer .social-icons span {
-  margin: 0 10px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.footer-copy {
-  font-size: 14px;
-  color: #888;
+  font-weight: 500;
 }
