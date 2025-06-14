@@ -1,114 +1,123 @@
-/* General */
-body {
-  background-color: #f9f9f9;
-  font-family: 'Segoe UI', sans-serif;
+/* 🎨 Colores de marca InuTrips */
+:root {
+  --inu-white: #ffffff;
+  --inu-primary: #f9af15;  /* Amarillo Saffron */
+  --inu-dark: #675544;     /* Marrón Buffalo */
+  --inu-light: #fef8ef;
+  --inu-text: #3d3d3d;
 }
 
-/* Hero Section */
-.hero {
-  background-color: #f8f9fa;
-  padding: 80px 20px;
+/* ✨ HERO SECTION */
+.hero-inu {
+  background: var(--inu-primary);
+  color: var(--inu-dark);
+  padding: 100px 20px;
+  min-height: 70vh;
   text-align: center;
-  border-radius: 10px;
-  margin-bottom: 40px;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.hero .highlight {
-  color: #0d6efd; /* Bootstrap primary color */
-}
-
-.hero p {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 30px;
-}
-
-.hero .btn {
-  margin: 0 10px;
-}
-
-/* Info Section */
-.info-section {
   display: flex;
-  flex-wrap: wrap;
-  background-color: #ffffff;
-  padding: 50px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  margin-bottom: 40px;
   align-items: center;
 }
 
-.info-content {
-  flex: 1;
-  padding: 20px;
+.hero-inu h1 {
+  font-size: 2.8rem;
+  line-height: 1.4;
 }
 
-.info-content h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+.hero-inu .text-dark {
+  color: var(--inu-dark);
 }
 
-.info-content p {
-  color: #444;
-  line-height: 1.6;
+.hero-inu .inu-brand {
+  color: var(--inu-dark);
+  font-weight: 800;
 }
 
-/* Servicios */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 40px 20px;
-}
-
-.service {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.service h3 {
-  margin-top: 15px;
-  font-size: 1.2rem;
-  color: #0d6efd;
-}
-
-.service p {
-  color: #666;
-  font-size: 0.95rem;
-}
-
-/* Footer */
-.footer {
-  background-color: #0d6efd;
+.hero-inu .btn-inu {
+  background-color: var(--inu-dark);
   color: white;
-  padding: 40px 20px;
-  text-align: center;
-  border-radius: 12px 12px 0 0;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  padding: 10px 25px;
+  transition: all 0.3s ease-in-out;
 }
 
-.footer .logo {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+.hero-inu .btn-inu:hover {
+  background-color: #4f4336;
+  color: white;
 }
 
-.footer-links {
-  margin-top: 15px;
-}
-
-.footer-links span {
-  margin: 0 15px;
-  cursor: pointer;
+.hero-inu .btn-outline-light {
+  border-radius: 30px;
   font-weight: 500;
+  border: 2px solid white;
+}
+
+.hero-inu .btn-outline-light:hover {
+  background-color: white;
+  color: var(--inu-dark);
+}
+
+/* 🐶 INFO SECTION */
+.info-section {
+  background-color: var(--inu-light);
+  padding: 60px 0;
+}
+
+.text-inu {
+  color: var(--inu-dark);
+}
+
+.info-section img {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 💡 CARDS / SERVICIOS */
+.card {
+  border-radius: 1rem;
+  border: 1px solid #ddd;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-body i {
+  font-size: 2.2rem;
+  color: var(--inu-dark);
+}
+
+/* 📲 SECCIÓN DE DESCARGA */
+.download-section {
+  background-color: var(--inu-dark);
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.download-section .btn {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-inu h1 {
+    font-size: 2rem;
+  }
+
+  .hero-inu p {
+    font-size: 1rem;
+  }
+
+  .btn-inu,
+  .btn-outline-light {
+    padding: 8px 18px;
+    font-size: 0.95rem;
+  }
 }

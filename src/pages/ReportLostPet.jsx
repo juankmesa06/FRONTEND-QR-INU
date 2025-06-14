@@ -1,38 +1,33 @@
 // src/pages/ReportLostPet.jsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { QrReader } from '@blackbox-vision/react-qr-reader';
+import React, { useEffect } from 'react';
+import { Html5QrcodeScanner } from "html5-qrcode";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ReportLostPet() {
-  const navigate = useNavigate();
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: 250 },
+      false
+    );
 
-  const handleResult = (result, error) => {
-    if (!!result) {
-      const qrText = result?.text;
-      if (qrText) {
-        // Redirige automáticamente a la página de la mascota
-        navigate(`/mascota/${encodeURIComponent(qrText)}`);
+    scanner.render(
+      (qrCodeMessage) => {
+        console.log("QR leído:", qrCodeMessage);
+        // Redirigir a otra ruta con el código escaneado
+        window.location.href = `/mascota/${qrCodeMessage}`;
+      },
+      (error) => {
+        console.warn("Escaneo fallido:", error);
       }
-    }
-  };
+    );
+  }, []);
 
   return (
-    <div className="container my-5 text-center">
-      <h2 className="mb-4">📷 Escanea el QR de la Mascota Encontrada</h2>
-      <p className="mb-4">Usa tu cámara para leer el código QR del collar de la mascota</p>
-
-      <div className="d-flex justify-content-center">
-        <div style={{ maxWidth: 400, width: '100%' }}>
-          <QrReader
-            constraints={{ facingMode: 'environment' }}
-            onResult={handleResult}
-            style={{ width: '100%' }}
-          />
-        </div>
-      </div>
-
-      <p className="mt-3 text-muted">Apunta la cámara al código QR para ver la información del dueño.</p>
+    <div className="container text-center py-5">
+      <h2>📷 Escanea el código QR de la mascota</h2>
+      <p>Coloca el código QR frente a tu cámara</p>
+      <div id="reader" style={{ width: "100%", maxWidth: "400px", margin: "0 auto" }}></div>
     </div>
   );
 }

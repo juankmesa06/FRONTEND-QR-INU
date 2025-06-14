@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/assets/App.css';
 
 import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -36,9 +37,7 @@ function App() {
         </Routes>
       </main>
 
-      <footer className="bg-light py-3 text-center">
-        <p>&copy; 2025 QR Mascotas | Contacto: contacto@qrm.com</p>
-      </footer>
+      <Footer />
     </Router>
   );
 }

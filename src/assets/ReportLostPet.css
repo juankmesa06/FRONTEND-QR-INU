@@ -1,69 +1,73 @@
-.report-container {
+/* ============================== */
+/* 🎨 PALETA DE COLORES INU       */
+/* ============================== */
+:root {
+  --inu-primary: #f9af15;   /* Amarillo Saffron */
+  --inu-dark: #675544;      /* Marrón Buffalo */
+  --inu-white: #ffffff;
+  --inu-bg: #fef8ef;
+  --inu-accent: #3d3d3d;
+}
+
+/* ============================== */
+/* 📷 ESCÁNER DE CÓDIGO QR        */
+/* ============================== */
+.qr-container {
+  background-color: var(--inu-bg);
+  padding: 60px 20px;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 90vh;
-  background: linear-gradient(to right, #ffe5b4, #fff3e0);
-  padding: 20px;
-}
-
-.report-card {
-  background-color: #fff;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 16px 32px rgba(255, 132, 0, 0.2);
-  width: 100%;
-  max-width: 500px;
-  animation: fadeIn 0.6s ease;
-  border: 2px solid #ffa726;
-}
-
-.report-title {
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-  color: #ef6c00;
+  justify-content: center;
   text-align: center;
+}
+
+.qr-title {
+  font-size: 2.5rem;
   font-weight: bold;
+  color: var(--inu-dark);
+  margin-bottom: 1rem;
 }
 
-.report-input,
-.report-textarea {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 18px;
-  border: 1.5px solid #ffa726;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #fff9f0;
-  transition: all 0.3s ease;
-}
-
-.report-input:focus,
-.report-textarea:focus {
-  outline: none;
-  border-color: #fb8c00;
-  box-shadow: 0 0 5px #fb8c00;
-}
-
-.report-button {
-  width: 100%;
-  padding: 14px;
+.qr-subtitle {
   font-size: 1.1rem;
-  background-color: #fb8c00;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s;
+  color: var(--inu-accent);
+  margin-bottom: 2rem;
+  max-width: 500px;
 }
 
-.report-button:hover {
-  background-color: #e65100;
-  transform: scale(1.03);
+#reader {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  border: 4px solid var(--inu-primary);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInQR 0.8s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Animación suave cuando aparece el escáner */
+@keyframes fadeInQR {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================== */
+/* 📱 RESPONSIVE                  */
+/* ============================== */
+@media (max-width: 576px) {
+  .qr-title {
+    font-size: 1.8rem;
+  }
+
+  .qr-subtitle {
+    font-size: 1rem;
+  }
 }

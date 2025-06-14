@@ -7,20 +7,21 @@ const Register = () => {
     last_name: '',
     email: '',
     password: '',
+    phone: '',
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Validaciones de los campos
   const validate = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio';
     if (!formData.last_name.trim()) newErrors.last_name = 'El apellido es obligatorio';
     if (!formData.email.includes('@')) newErrors.email = 'Correo electrónico inválido';
-    if (formData.password.length < 6)
-      newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
+    if (formData.password.length < 8)
+      newErrors.password = 'La contraseña debe tener al menos 8 caracteres';
+    if (!formData.phone.trim()) newErrors.phone = 'El teléfono es obligatorio';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -28,12 +29,12 @@ const Register = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' }); // limpiar error al escribir
+    setErrors({ ...errors, [e.target.name]: '' });
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!validate()) return; // ⚠️ Detiene si hay errores
+    if (!validate()) return;
 
     setLoading(true);
     try {
@@ -101,6 +102,16 @@ const Register = () => {
             className="register-input"
           />
           {errors.password && <div className="text-danger">{errors.password}</div>}
+
+          <input
+            type="text"
+            name="phone"
+            placeholder="Teléfono"
+            value={formData.phone}
+            onChange={handleChange}
+            className="register-input"
+          />
+          {errors.phone && <div className="text-danger">{errors.phone}</div>}
 
           <button type="submit" disabled={loading} className="register-button">
             {loading ? 'Registrando...' : 'Registrarse'}

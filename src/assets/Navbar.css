@@ -1,18 +1,38 @@
-.navbar {
-  background-color: #f5f5f5;
-  padding: 12px 24px;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  font-size: 18px;
+:root {
+  --inu-primary: #F9AF15;
+  --inu-dark: #675544;
+  --inu-white: #FFFFFF;
 }
 
-.navbar a {
-  text-decoration: none;
-  color: black;
-  transition: color 0.3s ease;
+/* Fondo degradado con amarillo INU + marrón oscuro */
+.custom-navbar {
+  background: linear-gradient(to right, var(--inu-primary), var(--inu-dark));
+  border-bottom: 2px solid #ffffff22;
 }
 
-.navbar a:hover {
-  color: #28a745; /* Verde bonito */
+.navbar-brand {
+  font-size: 1.5rem;
+  color: var(--inu-white) !important;
+  letter-spacing: 1px;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.nav-link {
+  color: var(--inu-white) !important;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0.25rem;
 }
