@@ -1,114 +1,171 @@
-/* 🎨 Colores de marca InuTrips */
 :root {
   --inu-white: #ffffff;
-  --inu-primary: #f9af15;  /* Amarillo Saffron */
-  --inu-dark: #675544;     /* Marrón Buffalo */
+  --inu-primary: #f9af15;   /* Amarillo Saffron */
+  --inu-dark: #675544;      /* Marrón Buffalo */
   --inu-light: #fef8ef;
   --inu-text: #3d3d3d;
 }
 
-/* ✨ HERO SECTION */
+/* =============================== */
+/* ✨ HERO INU - CON FONDO IMAGEN  */
+/* =============================== */
 .hero-inu {
-  background: var(--inu-primary);
-  color: var(--inu-dark);
+  position: relative;
   padding: 100px 20px;
-  min-height: 70vh;
-  text-align: center;
+  min-height: 80vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background-image: url('/images/bg_1.jpg'); /* Usa la carpeta public directamente */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 0 0 60px 60px;
+  box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Superposición oscura para texto legible */
+.hero-inu::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Ajusta opacidad según contraste */
+  z-index: 1;
+}
+
+.hero-inu .container {
+  position: relative;
+  z-index: 2;
+  color: var(--inu-white);
 }
 
 .hero-inu h1 {
-  font-size: 2.8rem;
-  line-height: 1.4;
-}
-
-.hero-inu .text-dark {
-  color: var(--inu-dark);
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--inu-white);
 }
 
 .hero-inu .inu-brand {
-  color: var(--inu-dark);
-  font-weight: 800;
+  font-weight: 900;
+  color: var(--inu-primary);
 }
 
-.hero-inu .btn-inu {
-  background-color: var(--inu-dark);
-  color: white;
-  border: none;
+.hero-inu p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--inu-white);
+}
+
+.hero-inu .btn-inu,
+.hero-inu .btn-outline-light {
   border-radius: 30px;
+  padding: 12px 28px;
   font-weight: 600;
-  padding: 10px 25px;
   transition: all 0.3s ease-in-out;
 }
 
+.hero-inu .btn-inu {
+  background-color: var(--inu-primary);
+  color: var(--inu-dark);
+  border: none;
+}
+
 .hero-inu .btn-inu:hover {
-  background-color: #4f4336;
-  color: white;
+  background-color: #e79c10;
+  color: var(--inu-white);
 }
 
 .hero-inu .btn-outline-light {
-  border-radius: 30px;
-  font-weight: 500;
-  border: 2px solid white;
+  border: 2px solid var(--inu-white);
+  color: var(--inu-white);
+  background: transparent;
 }
 
 .hero-inu .btn-outline-light:hover {
-  background-color: white;
+  background-color: var(--inu-white);
   color: var(--inu-dark);
 }
 
-/* 🐶 INFO SECTION */
-.info-section {
-  background-color: var(--inu-light);
-  padding: 60px 0;
+/* =============================== */
+/* 🐾 SECCIÓN COLLAR QR            */
+/* =============================== */
+.qr-collar-section {
+  padding: 60px 20px;
+  background-color: var(--inu-white);
+  text-align: center;
 }
 
-.text-inu {
+.qr-collar-section h2 {
   color: var(--inu-dark);
+  font-weight: 800;
+  margin-bottom: 1rem;
 }
 
-.info-section img {
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.qr-collar-section p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 1.1rem;
 }
 
-/* 💡 CARDS / SERVICIOS */
+.qr-collar-section img {
+  margin-top: 2rem;
+  border-radius: 20px;
+  max-width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================== */
+/* 🧩 SERVICIOS                    */
+/* =============================== */
 .card {
-  border-radius: 1rem;
-  border: 1px solid #ddd;
-  background-color: white;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--inu-white);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .card-body i {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   color: var(--inu-dark);
 }
 
-/* 📲 SECCIÓN DE DESCARGA */
+/* =============================== */
+/* 📲 DESCARGA APP                 */
+/* =============================== */
 .download-section {
   background-color: var(--inu-dark);
-  color: white;
+  color: var(--inu-white);
   padding: 60px 0;
   text-align: center;
 }
 
 .download-section .btn {
-  border-radius: 20px;
-  font-weight: 500;
-  padding: 10px 20px;
+  border-radius: 25px;
+  padding: 12px 22px;
+  font-weight: 600;
+  transition: 0.3s ease;
 }
 
-/* 📱 RESPONSIVE */
+.download-section .btn:hover {
+  opacity: 0.9;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVE                  */
+/* =============================== */
 @media (max-width: 768px) {
   .hero-inu h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .hero-inu p {
@@ -117,7 +174,75 @@
 
   .btn-inu,
   .btn-outline-light {
-    padding: 8px 18px;
-    font-size: 0.95rem;
+    padding: 10px 20px;
+    font-size: 1rem;
   }
+}
+
+/* ============================== */
+/* ✨ SECCIÓN DE SERVICIOS INUTRIPS */
+/* ============================== */
+.services-section {
+  background-color: #fefefe;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Imagen de fondo opcional */
+.services-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('/images/bg_services.jpg'); /* cambia según tu ruta */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+.services-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.services-section h2 {
+  color: var(--inu-dark);
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.services-section .card {
+  border: none;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--inu-white);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.services-section .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.services-section .card-body {
+  padding: 30px 20px;
+}
+
+.services-section .card-body i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--inu-primary);
+}
+
+.services-section .card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--inu-dark);
+  margin-bottom: 10px;
+}
+
+.services-section .card-text {
+  font-size: 1rem;
+  color: var(--inu-text);
 }

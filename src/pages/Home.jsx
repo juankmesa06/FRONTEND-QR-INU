@@ -9,95 +9,137 @@ const Home = () => {
   return (
     <div className="home">
 
-      {/* HERO SECTION */}
-      <section className="hero-inu d-flex align-items-center">
-        <div className="container text-center text-white">
-          <motion.h1
-            className="display-4 fw-bold"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Collar QR Inteligente <br />
-            <span className="text-dark">para tu mascota con <strong className="inu-brand">INUTrips 🐾</strong></span>
-          </motion.h1>
+      {/* HERO SECTION - INUTRIPS PRINCIPAL */}
+      <section className="hero-inu-white d-flex align-items-center">
+  <div className="container text-center">
+    
+    {/* Logo de INU */}
+    <img 
+      src="/images/LOGO PRINCIPAL.png" 
+      alt="Logo INUTrips" 
+      style={{ height: '100px', marginBottom: '20px' }} 
+    />
 
-          <motion.p
-            className="lead mt-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Conectado a la red de transporte pet-friendly más segura de Colombia.
-          </motion.p>
+    <motion.h1
+      className="display-4 fw-bold"
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
+      Bienvenido a <strong className="inu-brand">INU Trips</strong>
+    </motion.h1>
 
-          <motion.div
-            className="mt-4 d-flex justify-content-center flex-wrap gap-3"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            <Link to="/encontrar" className="btn btn-outline-light px-4">Encontrar Mascota</Link>
-            <a href="https://www.inutrips.com" target="_blank" rel="noreferrer" className="btn btn-inu px-4">
-              Descarga INU
-            </a>
-          </motion.div>
-        </div>
-      </section>
+    <motion.p
+      className="lead mt-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
+      La red de transporte pet-friendly más segura de Colombia.
+    </motion.p>
 
-      {/* INFO SECTION */}
+    <motion.div
+      className="mt-4 d-flex justify-content-center flex-wrap gap-3"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.8 }}
+    >
+    <Link to="/login" className="btn btn-outline-dark px-4">Iniciar Sesión</Link>
+    </motion.div>
+  </div>
+</section>
+
+      
+
+      {/* SECCIÓN ESPECIAL DEL COLLAR QR INU */}
       <section className="container py-5">
         <div className="row align-items-center">
           <div className="col-md-6">
-            <img src="/images/Untitled.png" alt="Mascota QR" className="img-fluid rounded shadow" />
+            <img src="/images/Untitled.png" alt="Collar QR INU" className="img-fluid rounded shadow" />
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <h2 className="fw-bold text-inu">¿Qué es el collar QR INU?</h2>
+            <h2 className="fw-bold text-inu">Collar QR INU</h2>
             <p>
-              Es un identificador inteligente que conecta a tu mascota con nuestra plataforma y servicios de transporte INUTrips.
-              Si se pierde, cualquier persona puede escanear el código QR del collar y contactarte fácilmente.
+              Un producto oficial de INU Trips que identifica a tu mascota en todo momento. Si tu mascota se pierde, cualquier persona puede escanear el código QR del collar y contactarte fácilmente.
             </p>
             <div className="d-flex gap-3 mt-3 flex-wrap">
               <Link to="/register" className="btn btn-success">Regístrate</Link>
-              <Link to="/about" className="btn btn-outline-secondary">Conoce más sobre INU</Link>
+              <Link to="./CompraQr" className="btn btn-outline-secondary">Saber más</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SERVICIOS */}
+{/* SECCIÓN DEL KIT INU */}
+<section className="kit-inu-section py-5">
+  <div className="container">
+    <motion.div 
+      className="row align-items-center"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <div className="col-md-6 mb-4 mb-md-0">
+        <img 
+          src="/images/1.1.jpg" 
+          alt="Kit INU" 
+          className="img-fluid rounded shadow" 
+        />
+      </div>
+      <div className="col-md-6">
+        <h2 className="fw-bold text-inu mb-3">Kit INU</h2>
+        <p className="mb-3">
+          El <strong>Kit INU</strong>un producto oficial de INU Trips y esta diseñado para que los peludos
+            viajen cómodos y seguros en su viaje protegiendo el vehiculo y al conductor de cualqueir anomalia que pase en el viaje.
+        </p>
+        <ul className="list-unstyled mb-4">
+          <li>✔ Lona Antifluidos para proteccion silla trasera</li>
+          <li>✔ Cinturones especiales para la seguridad de las mascotas</li>
+          <li>✔ Bozal para perros PPP(perros potencialmente peligrosoa)</li>
+        </ul>
+        <motion.a 
+          href="https://www.instagram.com/p/DHEyO9FTMow/?img_index=1" 
+          className="btn btn-inu px-4"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+        >
+          Ver Kit INU
+        </motion.a>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
+
+      {/* SERVICIOS DESTACADOS DE INUTRIPS */}
       <section className="bg-light py-5 text-center">
         <div className="container">
-          <h2 className="fw-bold mb-4 text-inu">Servicios del Collar QR</h2>
+          <h2 className="fw-bold mb-4 text-inu">¿Qué ofrece INUTrips?</h2>
           <div className="row g-4">
-            {[
-              {
-                icon: "bi-phone",
-                title: "Escaneo Fácil",
-                text: "Con solo escanear el QR, acceden al perfil de tu mascota."
-              },
-              {
-                icon: "bi-shield-check",
-                title: "Protección",
-                text: "Mantén seguros los datos de tu mascota y permite reencuentros rápidos."
-              },
-              {
-                icon: "bi-bus-front",
-                title: "Integrado con INUTrips",
-                text: "Registra tu mascota como pasajero para viajar contigo en nuestras rutas."
-              },
-              {
-                icon: "bi-cloud-arrow-down",
-                title: "Acceso 24/7",
-                text: "Consulta los datos desde cualquier lugar con conexión."
-              },
-            ].map((service, idx) => (
-              <motion.div className="col-md-3" key={idx} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.2 }} viewport={{ once: true }}>
+            {[{
+              icon: "bi-geo-alt",
+              title: "Transporte Seguro",
+              text: "Viaja con tu mascota en rutas especializadas y seguras."
+            }, {
+              icon: "bi-heart",
+              title: "Atención Veterinaria",
+              text: "Servicios veterinarios aliados a lo largo de tu viaje."
+            }, {
+              icon: "bi-houses",
+              title: "Red de Aliados",
+              text: "Conexión con hoteles, tiendas y refugios pet-friendly."
+            }, {
+              icon: "bi-person-badge",
+              title: "Identidad Digital",
+              text: "Tu mascota tiene un perfil con QR único gracias al collar."
+            }].map((s, i) => (
+              <motion.div key={i} className="col-md-3" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} viewport={{ once: true }}>
                 <div className="card h-100 shadow-sm">
                   <div className="card-body">
-                    <i className={`bi ${service.icon} fs-1 mb-3 text-inu`}></i>
-                    <h5 className="card-title">{service.title}</h5>
-                    <p className="card-text">{service.text}</p>
+                    <i className={`bi ${s.icon} fs-1 mb-3 text-inu`}></i>
+                    <h5 className="card-title">{s.title}</h5>
+                    <p className="card-text">{s.text}</p>
                   </div>
                 </div>
               </motion.div>
@@ -109,8 +151,8 @@ const Home = () => {
       {/* DESCARGA APP */}
       <section className="download-section text-center text-white py-5">
         <div className="container">
-          <h2 className="fw-bold">Descarga nuestra App</h2>
-          <p className="mb-4">Administra tu mascota, viajes y datos desde el celular.</p>
+          <h2 className="fw-bold">Descarga la App de INUTrips</h2>
+          <p className="mb-4">Gestiona tus mascotas, tus viajes y tus servicios favoritos desde un solo lugar.</p>
           <div className="d-flex justify-content-center gap-3 flex-wrap">
             <a href="#" className="btn btn-dark">
               <i className="bi bi-apple me-2"></i> App Store
@@ -121,6 +163,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';  
 import '../assets/About.css';
 
 function About() {
@@ -7,13 +7,13 @@ function About() {
       <section className="about-card">
         <h2 className="about-title">Quiénes Somos</h2>
         <p className="about-text">
-          <strong>QR Mascotas</strong> es un producto innovador de la plataforma <strong>INUTrips</strong>, diseñado para ofrecer soluciones de identificación inteligente para nuestros compañeros peludos.
+          <strong>INUTrips</strong> es una plataforma integral de movilidad pet-friendly en Colombia, comprometida con ofrecer soluciones tecnológicas seguras para humanos y animales. Como parte de este ecosistema, el producto <strong>QR Mascotas</strong> ha sido diseñado para identificar mascotas mediante collares con código QR, conectándolas directamente con su familia y la red de transporte INU.
         </p>
         <p className="about-text">
-          En INUTrips no solo nos movilizamos con responsabilidad, también extendemos nuestro compromiso con el bienestar animal. Por eso desarrollamos el <strong>Collar QR</strong>, un identificador moderno que ayuda a localizar mascotas perdidas de forma rápida y confiable, integrándolas como pasajeros dentro del ecosistema digital de nuestra plataforma.
+          En INUTrips creemos que las mascotas son parte de la familia y merecen estar protegidas. Por eso, el <strong>Collar QR INU</strong> permite localizar a una mascota en caso de extravío, utilizando tecnologías modernas e integradas con nuestros servicios de movilidad.
         </p>
         <p className="about-text">
-          Este proyecto nació del amor por los animales, combinando tecnología, empatía y movilidad inteligente para que cada mascota registrada esté siempre conectada con su familia.
+          Esta iniciativa nace del amor por los animales y la visión de una movilidad más empática, conectada y eficiente. En INUTrips, cada paso que damos está pensado en mejorar la calidad de vida de nuestros usuarios y sus compañeros peludos.
         </p>
       </section>
 
@@ -21,14 +21,14 @@ function About() {
         <section className="about-section">
           <h3>Misión</h3>
           <p>
-            Brindar soluciones tecnológicas accesibles y efectivas para la identificación de mascotas, integradas con el ecosistema de movilidad de INUTrips.
+            Proporcionar soluciones tecnológicas inteligentes que conecten la movilidad urbana con la protección y bienestar de las mascotas, promoviendo una ciudad más segura y solidaria.
           </p>
         </section>
 
         <section className="about-section">
           <h3>Visión</h3>
           <p>
-            Ser líderes en Latinoamérica en movilidad segura y conectada para personas y mascotas, fomentando ciudades más responsables y amigables con los animales.
+            Ser la red de transporte pet-friendly más confiable de Latinoamérica, integrando innovación, seguridad y amor por los animales en cada ruta y producto que ofrecemos.
           </p>
         </section>
 
@@ -36,11 +36,11 @@ function About() {
           <h3>Valores</h3>
           <ul>
             <li>❤️ Amor por los animales</li>
-            <li>🔒 Compromiso con la seguridad</li>
-            <li>💡 Innovación tecnológica</li>
+            <li>🔒 Seguridad e integridad</li>
+            <li>💡 Tecnología con propósito</li>
             <li>🚌 Movilidad inclusiva</li>
-            <li>🤝 Trabajo colaborativo</li>
-            <li>🌱 Responsabilidad social</li>
+            <li>🌍 Sostenibilidad</li>
+            <li>🤝 Comunidad y colaboración</li>
           </ul>
         </section>
 

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/Navbar.css'; // Asegúrate de tener este archivo
+import '../assets/Navbar.css'; // Asegúrate de que este archivo existe
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg shadow custom-navbar">
+    <nav className="navbar navbar-expand-lg custom-navbar shadow-lg">
       <div className="container">
-        <Link className="navbar-brand fw-bold text-white" to="/">
-          INUTrips 🐾
+        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
+          <img src="/images/LOGO PRINCIPAL.png" alt="INUTrips Logo" style={{ height: '40px' }} />
+
+          <span className="fw-bold text-white">INU</span>
         </Link>
+
 
         <button
           className="navbar-toggler"
@@ -23,25 +26,21 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto text-end">
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/">Inicio</Link>
+              <Link className="nav-link" to="/login">Iniciar Sesión</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/about">Quiénes Somos</Link>
+              <Link className="nav-link" to="/about">Quiénes Somos</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/login">Iniciar Sesión</Link>
+              <Link className="nav-link" to="/report">Encontré una Mascota</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/report">Encontré una Mascota</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/mypets">Mis Mascotas</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link btn btn-light text-primary ms-3" to="/CompraQr">Comprar QR</Link>
+              <Link className="btn btn-light text-dark fw-semibold ms-3 px-4 rounded-pill" to="/CompraQr">
+                Comprar QR
+              </Link>
             </li>
           </ul>
         </div>

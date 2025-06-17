@@ -29,7 +29,7 @@ const Login = () => {
         alert(result.message || 'Credenciales incorrectas');
       } else {
         alert('Inicio de sesión exitoso');
-        navigate('/formulario-mascota');
+        navigate('/mypets'); // Redirige a Mis Mascotas
       }
     } catch (error) {
       alert('Error al conectar con el servidor');
