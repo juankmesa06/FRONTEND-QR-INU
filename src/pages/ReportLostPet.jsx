@@ -16,6 +16,7 @@ function ReportLostPet() {
         console.log("QR leído:", qrCodeMessage);
         // Redirigir a otra ruta con el código escaneado
         window.location.href = `/mascota/${qrCodeMessage}`;
+
       },
       (error) => {
         console.warn("Escaneo fallido:", error);
