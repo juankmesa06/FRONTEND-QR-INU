@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  // Función para validar campos
+  // Validaciones básicas
   const validate = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,11 +34,13 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Cambios en campos
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' }); // Limpiar error al escribir
+    setErrors({ ...errors, [e.target.name]: '' });
   };
 
+  // Login y redirección según rol
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -59,9 +61,15 @@ const Login = () => {
       if (!res.ok) {
         alert(result.message || 'Correo o contraseña incorrecta');
       } else {
-        login({ token: result.token });
-        alert('Inicio de sesión exitoso');
-        setTimeout(() => navigate('/mypets'), 100);
+        // Guardamos en contexto
+        login({ token: result.token, user: result.user });
+
+        const roles = result.user.roles || [];
+        if (roles.includes('admin')) {
+          navigate('/Dashboard');
+        } else {
+          navigate('/mypets');
+        }
       }
     } catch (error) {
       console.error(error);
@@ -107,7 +115,6 @@ const Login = () => {
               required
             />
             {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-
             <div className="text-end mt-1">
               <Link to="/recuperar" className="small text-primary">
                 ¿Olvidaste tu contraseña?
@@ -134,3 +141,4 @@ const Login = () => {
 };
 
 export default Login;
+

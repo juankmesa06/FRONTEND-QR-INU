@@ -156,9 +156,8 @@
 
 .brand-gradient {
   background: var(--gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+
   position: relative;
 }
 
@@ -475,7 +474,7 @@
   position: absolute;
   font-size: 2rem;
   opacity: 0.1;
-  user-select: none;
+
 }
 
 .paw-1 {

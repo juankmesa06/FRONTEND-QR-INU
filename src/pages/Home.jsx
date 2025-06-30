@@ -45,7 +45,7 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <Link to="/login" className="btn btn-outline-dark px-4">Iniciar Sesión</Link>
+            
           </motion.div>
         </div>
       </section>
