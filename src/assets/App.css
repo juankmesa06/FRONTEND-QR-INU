@@ -1,0 +1,15 @@
+/* Apunta a los links dentro de la topbar específicamente */
+.topbar .nav-link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ff7a00 !important; /* Forzamos el color si Bootstrap lo sobrescribe */
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.topbar .nav-link:hover {
+  background-color: #ff7a00;
+  color: white !important; /* Forzamos color blanco al hacer hover */
+}

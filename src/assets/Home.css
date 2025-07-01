@@ -1,0 +1,588 @@
+:root {
+  --inu-primary: #f9af15;
+  --inu-primary-light: #fbc547;
+  --inu-primary-dark: #e69a00;
+  --inu-dark: #675544;
+  --inu-dark-light: #7a6555;
+  --inu-white: #ffffff;
+  --inu-light: #fef8ef;
+  --inu-text: #3d3d3d;
+  --inu-text-light: #6b7280;
+
+  /* Gradientes modernos */
+  --gradient-primary: linear-gradient(135deg, var(--inu-primary) 0%, var(--inu-primary-light) 100%);
+  --gradient-dark: linear-gradient(135deg, var(--inu-dark) 0%, var(--inu-dark-light) 100%);
+  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+  /* Sombras modernas */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.16), 0 12px 40px rgba(0, 0, 0, 0.12);
+
+  /* Transiciones */
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Bordes */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
+}
+
+/* =============================== */
+/* 🎨 ESTILOS GENERALES           */
+/* =============================== */
+.modern-home {
+  position: relative;
+  overflow-x: hidden;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Cursor personalizado */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, var(--inu-primary) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.6;
+  transition: var(--transition-fast);
+}
+
+/* =============================== */
+/* 🚀 HERO SECTION MODERNIZADO    */
+/* =============================== */
+.hero-modern {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--inu-light) 0%, var(--inu-white) 100%);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--gradient-primary);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  background: var(--gradient-dark);
+  top: 60%;
+  right: 10%;
+  animation-delay: 5s;
+}
+
+.orb-3 {
+  width: 150px;
+  height: 150px;
+  background: var(--gradient-primary);
+  bottom: 20%;
+  left: 60%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+}
+
+.hero-logo {
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.1));
+  transition: var(--transition);
+}
+
+.hero-logo:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--inu-text);
+}
+
+.brand-gradient {
+  background: var(--gradient-primary);
+
+
+  position: relative;
+}
+
+.brand-inu {
+  color: var(--inu-dark);
+}
+
+.brand-trips {
+  color: var(--inu-primary);
+  margin-left: 8px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--inu-text-light);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero-cta {
+  margin-bottom: 4rem;
+}
+
+.btn-hero-modern {
+  background: var(--gradient-primary);
+  border: none;
+  color: var(--inu-dark);
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 18px 40px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-hero-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  color: var(--inu-dark);
+}
+
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.btn-hero-modern:hover .btn-shine {
+  left: 100%;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.scroll-arrow {
+  width: 2px;
+  height: 30px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+  position: relative;
+}
+
+.scroll-arrow::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--inu-primary);
+  border-bottom: 2px solid var(--inu-primary);
+  transform: rotate(45deg);
+}
+
+/* =============================== */
+/* 🎯 SERVICIOS SECTION MODERNA   */
+/* =============================== */
+.services-modern {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--inu-white) 0%, var(--inu-light) 100%);
+  position: relative;
+}
+
+.services-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(249, 175, 21, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--inu-text);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-primary);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.services-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* =============================== */
+/* 🎴 SERVICE CARDS MODERNAS      */
+/* =============================== */
+.service-card {
+  background: var(--inu-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  border: 1px solid rgba(249, 175, 21, 0.1);
+  position: relative;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: var(--transition);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-image-wrapper {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.service-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-content {
+  padding: 2rem;
+}
+
+.service-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--inu-dark);
+  margin-bottom: 1rem;
+  transition: var(--transition-fast);
+}
+
+.service-description {
+  color: var(--inu-text-light);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.service-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-modern {
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-modern {
+  background: var(--gradient-primary);
+  border: none;
+  color: var(--inu-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--inu-dark);
+}
+
+.btn-outline-modern {
+  background: transparent;
+  border: 2px solid var(--inu-dark);
+  color: var(--inu-dark);
+}
+
+.btn-outline-modern:hover {
+  background: var(--inu-dark);
+  color: var(--inu-white);
+  transform: translateY(-2px);
+}
+
+/* =============================== */
+/* 🖼️ LAZY LOADING IMAGES         */
+/* =============================== */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.lazy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+  opacity: 0;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+.image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* =============================== */
+/* 🐾 FLOATING ELEMENTS           */
+/* =============================== */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-paw {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+
+}
+
+.paw-1 {
+  top: 20%;
+  left: 10%;
+}
+
+.paw-2 {
+  top: 60%;
+  right: 15%;
+}
+
+.paw-3 {
+  bottom: 30%;
+  left: 70%;
+}
+
+/* =============================== */
+/* 📱 RESPONSIVE DESIGN           */
+/* =============================== */
+@media (max-width: 768px) {
+  .hero-modern {
+    min-height: 80vh;
+    padding: 60px 0;
+  }
+
+  .services-modern {
+    padding: 80px 0;
+  }
+
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .service-buttons {
+    flex-direction: column;
+  }
+
+  .btn-modern {
+    text-align: center;
+  }
+
+  .floating-paw {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 0 15px;
+  }
+
+  .hero-cta {
+    margin-bottom: 2rem;
+  }
+
+  .btn-hero-modern {
+    width: 100%;
+    padding: 16px 20px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+}
+
+/* =============================== */
+/* 🎨 ANIMACIONES ADICIONALES     */
+/* =============================== */
+@media (prefers-reduced-motion: no-preference) {
+  .service-card {
+    animation: slideInUp 0.6s ease-out backwards;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Efectos de hover mejorados */
+.service-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(249, 175, 21, 0.3);
+}
+
+/* Gradiente animado en títulos */
+.brand-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}

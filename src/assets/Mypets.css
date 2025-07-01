@@ -1,0 +1,117 @@
+/* ===== DISEÑO GENERAL DE LA SECCIÓN MIS MASCOTAS ===== */
+
+.mypets-header {
+  background-color: #fffaf0; /* fondo claro suave */
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-top: 70px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mypets-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #675544; /* marrón de marca */
+}
+
+.inu-highlight {
+  color: #F9AF15; /* amarillo de marca */
+}
+
+.mypets-subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Botón agregar mascota */
+.btn-inu-agregar {
+  background-color: #F9AF15;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-inu-agregar:hover {
+  background-color: #d99000;
+  color: #fff;
+}
+
+/* ===== TARJETAS DE MASCOTAS ===== */
+
+.pet-card-custom {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+}
+
+.pet-card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card-custom img {
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 3px solid #F9AF15;
+}
+
+.card-body {
+  padding: 1.2rem;
+}
+
+.card-title {
+  color: #675544;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: #444;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: #212529;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* RESPONSIVE */
+@media (max-width: 767px) {
+  .mypets-header {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .mypets-title {
+    font-size: 1.6rem;
+  }
+
+  .mypets-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .btn-inu-agregar {
+    width: 100%;
+  }
+}
