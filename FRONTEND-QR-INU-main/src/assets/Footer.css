@@ -1,0 +1,69 @@
+:root {
+  --inu-brown: #675544;
+  --inu-yellow: #F9AF15;
+  --inu-yellow-dark: #d99000;
+}
+
+.inu-footer {
+  background: linear-gradient(135deg, var(--inu-brown), var(--inu-yellow));
+  color: #fff;
+  padding: 3rem 1rem 2rem;
+}
+
+.brand-logo {
+  width: 56px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.brand-tagline {
+  font-weight: 600;
+  color: var(--inu-yellow);
+}
+
+.brand-desc {
+  max-width: 320px;
+  color: #f1f1f1;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: var(--inu-yellow-dark);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--inu-yellow);
+}
+
+.footer-bottom {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1rem;
+}
+
+.text-yellow {
+  color: var(--inu-yellow);
+}
+
+.text-brown {
+  color: var(--inu-brown);
+}
