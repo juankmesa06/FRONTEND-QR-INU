@@ -1,70 +1,173 @@
-.home {
-  min-height: 100vh;
+/* ======== Fondo general ======== */
+html, body {
+  background: #fff;
+  overflow-x: hidden;
   width: 100vw;
-  background: #fff; /* Puedes cambiar por un color suave o imagen */
-  position: relative;
+  box-sizing: border-box;
 }
 
-.hero-section {
-  min-height: 70vh;
+/* ======== Carrusel principal ======== */
+.hero-carousel {
+  min-height: 60vh;
+  background: #fff;
+  padding: 3rem 0 2rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  padding-top: 2rem;
+  box-shadow: none;
+}
+.inu-carousel {
+  box-shadow: none !important;
+  border-radius: 1.5rem;
+  background: #fff;
+}
+.inu-carousel .carousel-item img,
+.hero-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  transition: none;
+}
+
+/* ======== Servicios destacados ======== */
+.services-section {
+  background: #fff;
+  border-radius: 2rem;
+  margin-top: 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
   padding-bottom: 2rem;
 }
-
-.hero-content {
-  width: 100%;
-  max-width: 1200px;
+.service-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border: 1px solid #f3f3f3;
 }
-
-.hero-logo {
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto;
-  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.10));
+.service-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 4px 16px rgba(249,175,21,0.07);
 }
-
-.hero-img-natural {
-  max-width: 400px;
-  width: 100%;
-  border-radius: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-  background: transparent;
-  margin: 0 auto;
-  display: block;
+.service-card img {
+  max-width: 100%;
+  max-height: 180px;
   object-fit: cover;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
-.whatsapp-float {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9999;
+/* ======== Títulos y textos ======== */
+.brand-inu {
+  color: #675544;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.brand-trips {
+  color: #F9AF15;
+  margin-left: 3px;
+}
+.text-inu {
+  color: #675544;
 }
 
-.whatsapp-float img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  background: #25d366;
-  padding: 8px;
-  transition: transform 0.2s;
+/* ======== Botones ======== */
+.btn-inu {
+  background-color: #F9AF15;
+  color: #675544;
+  border-radius: 30px;
+  font-weight: 600;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-inu:hover {
+  background-color: #675544;
+  color: #fff;
+}
+.btn-outline-dark {
+  border-radius: 30px;
+  font-weight: 600;
+  border: 2px solid #675544;
+  color: #675544;
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline-dark:hover {
+  background: #675544;
+  color: #fff;
 }
 
-.whatsapp-float img:hover {
-  transform: scale(1.1) rotate(-5deg);
+/* ======== Efecto zoom eliminado ======== */
+.zoom-effect,
+.zoom-effect:hover {
+  transition: none;
+  transform: none;
 }
 
-@media (max-width: 768px) {
-  .hero-section .row {
-    flex-direction: column;
+/* ======== Secciones generales ======== */
+.how-section,
+.testimonials-section {
+  background: #f9fafc;
+}
+.benefits-section,
+.cta-section {
+  background: #fff;
+}
+
+/* ======== Imágenes de pasos y beneficios ======== */
+.how-section img,
+.benefits-section img {
+  max-width: 100%;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ======== Testimonios ======== */
+.testimonials-section .card {
+  border-radius: 1.2rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ======== CTA ======== */
+.cta-section .btn-inu,
+.cta-section .btn-outline-dark {
+  font-size: 1.1rem;
+  padding: 0.7rem 2.2rem;
+}
+
+/* ======== Responsive ======== */
+@media (max-width: 991px) {
+  .inu-carousel .carousel-item img,
+  .hero-img {
+    height: 220px;
   }
-  .hero-logo, .hero-img-natural {
-    max-width: 240px;
-    margin-bottom: 2rem;
+  .services-section {
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+}
+@media (max-width: 767px) {
+  .hero-carousel {
+    min-height: 40vh;
+    padding: 2rem 0 1rem 0;
+  }
+  .inu-carousel .carousel-item img,
+  .hero-img {
+    height: 150px;
+  }
+  .services-section {
+    margin-top: 0;
+    border-radius: 0.5rem;
+    padding-bottom: 1rem;
+  }
+  .service-card img {
+    max-height: 120px;
+  }
+  .how-section .row,
+  .benefits-section .row,
+  .testimonials-section .row {
+    flex-direction: column;
+    text-align: center;
   }
 }
