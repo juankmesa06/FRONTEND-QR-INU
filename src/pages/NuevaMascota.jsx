@@ -4,6 +4,7 @@ import '../assets/NuevaMascota.css';
 
 const NuevaMascota = () => {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: '',
     age: 0,
@@ -13,6 +14,7 @@ const NuevaMascota = () => {
     size: '',
     petCode: '',
   });
+
   const [imageFile, setImageFile] = useState('');
   const [petCodeError, setPetCodeError] = useState('');
 
@@ -21,7 +23,6 @@ const NuevaMascota = () => {
     if (e.target.name === 'petCode') setPetCodeError('');
   };
 
-  // Se encarga de subir la imagen y asignarla a imageFile
   const handleFileChange = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
@@ -31,9 +32,7 @@ const NuevaMascota = () => {
         method: 'POST',
         body: formData,
       });
-  
       const result = await res.json();
-  
       setImageFile(result.fileName);
     } catch (error) {
       console.error('Error al subir la imagen', error);
@@ -41,16 +40,14 @@ const NuevaMascota = () => {
     }
   };
 
-  // ✅ Verifica si el petCode ya está registrado
   const verificarPetCodeDisponible = async (code) => {
     try {
       const res = await fetch(`http://localhost:3000/api/pets/pet-code/${code}`);
-      
       const data = await res.json();
-      return !data; // Si existe mascota, está ocupado
+      return !data;
     } catch (err) {
       console.error('Error al verificar petCode', err);
-      return false; // En caso de error, no bloqueamos
+      return false;
     }
   };
 
@@ -64,7 +61,7 @@ const NuevaMascota = () => {
 
     const disponible = await verificarPetCodeDisponible(form.petCode);
     if (!disponible) {
-      setPetCodeError('Este código QR ya está registrado por otra mascota o no se encuentra disponible');
+      setPetCodeError('Este código QR ya está registrado o no está disponible');
       return;
     }
 
@@ -75,7 +72,7 @@ const NuevaMascota = () => {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ ...form, age: +form.age, image: imageFile }),
       });
@@ -99,7 +96,7 @@ const NuevaMascota = () => {
         </div>
 
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          {/* Campo petCode con validación visual */}
+          {/* PetCode */}
           <div className="mb-3">
             <label className="form-label">PetCode (ID del QR)</label>
             <input
@@ -113,27 +110,72 @@ const NuevaMascota = () => {
             {petCodeError && <div className="invalid-feedback">{petCodeError}</div>}
           </div>
 
-          {/* Otros campos */}
+          {/* Nombre de la mascota */}
+          <div className="mb-3">
+            <label className="form-label">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+
+          {/* Campos con lista de opciones */}
           {[
-            { label: 'Nombre', name: 'name' },
-            { label: 'Edad', name: 'age', type: 'number' },
-            { label: 'Especie', name: 'species' },
-            { label: 'Raza', name: 'breed' },
-            { label: 'Género', name: 'gender' },
-            { label: 'Tamaño', name: 'size' },
-          ].map(({ label, name, type = 'text' }) => (
+            {
+              label: 'Especie',
+              name: 'species',
+              options: ['Perro', 'Gato', 'Ave', 'Conejo', 'Otro'],
+            },
+            {
+              label: 'Raza',
+              name: 'breed',
+              options: ['Labrador', 'Criollo', 'Poodle', 'Siames', 'Persa', 'Otro'],
+            },
+            {
+              label: 'Género',
+              name: 'gender',
+              options: ['Macho', 'Hembra'],
+            },
+            {
+              label: 'Tamaño',
+              name: 'size',
+              options: ['Pequeño', 'Mediano', 'Grande'],
+            },
+          ].map(({ label, name, options }) => (
             <div className="mb-3" key={name}>
               <label className="form-label">{label}</label>
-              <input
-                type={type}
+              <select
                 name={name}
                 value={form[name]}
                 onChange={handleChange}
-                className="form-control"
+                className="form-select"
                 required
-              />
+              >
+                <option value="">Seleccione una opción</option>
+                {options.map((option, idx) => (
+                  <option key={idx} value={option}>{option}</option>
+                ))}
+              </select>
             </div>
           ))}
+
+          {/* Edad */}
+          <div className="mb-3">
+            <label className="form-label">Edad (en años)</label>
+            <input
+              type="number"
+              name="age"
+              value={form.age}
+              onChange={handleChange}
+              className="form-control"
+              min="0"
+              required
+            />
+          </div>
 
           {/* Imagen */}
           <div className="mb-4">

@@ -45,8 +45,16 @@ const Dashboard = () => {
 
         if (!res.ok) throw new Error('Error al cargar el dashboard');
         const data = await res.json();
-        setStats(data.stats);
-        setRecentScans(data.recentScans);
+
+        setStats({
+          totalPets: data.totalPets ?? 0,
+          qrGenerated: data.qrGenerated ?? 0,
+          qrClaimed: data.qrClaimed ?? 0,
+          totalActiveUsers: data.totalActiveUsers ?? 0,
+          petsByType: data.petsByType ?? [],
+        });
+
+        setRecentScans([]); // Actualiza con datos reales cuando estén disponibles
       } catch (error) {
         console.error('Error al cargar el dashboard:', error);
         alert('Error al cargar el dashboard');
@@ -58,24 +66,44 @@ const Dashboard = () => {
 
   if (!stats) return <p className="text-center my-5">Cargando datos del dashboard...</p>;
 
-  const petTypes = stats.petsByType.map(p => p.type);
-  const petCounts = stats.petsByType.map(p => p.count);
+  const petTypes = stats.petsByType.map(p => p.species);
+  const petCounts = stats.petsByType.map(p => p._count);
 
   return (
     <div className="dashboard container py-5">
-      <h2 className="text-center fw-bold mb-5">Panel de Control INUTrips</h2>
+      <h2 className="text-center fw-bold mb-5">Panel de Control QR INUTrips</h2>
 
-      {/* Cards resumen */}
+      {/* 📊 Tarjetas resumen */}
       <div className="row g-4 mb-5">
-        {[{
-          title: 'Mascotas Registradas', value: stats.totalPets, icon: 'bi bi-shield-check'
-        }, {
-          title: 'QR Generados', value: stats.qrGenerated, icon: 'bi bi-qr-code'
-        }, {
-          title: 'Mascotas Perdidas', value: stats.lostPets, icon: 'bi bi-exclamation-triangle'
-        }, {
-          title: 'Escaneos Hoy', value: stats.scansToday, icon: 'bi bi-search'
-        }].map((card, i) => (
+        {[
+          {
+            title: 'Mascotas Registradas',
+            value: stats.totalPets,
+            icon: 'bi bi-shield-check'
+          },
+          {
+            title: 'QR Generados',
+            value: stats.qrGenerated,
+            icon: 'bi bi-qr-code'
+          },
+          {
+            title: 'QR Activados',
+            value: stats.qrClaimed,
+            icon: 'bi bi-search'
+          },
+          {
+            title: 'QR Sin Activar',
+            value: stats.qrGenerated - stats.qrClaimed,
+            icon: 'bi bi-search'
+          },
+          {
+            title: 'Usuarios Activos',
+            value: stats.totalActiveUsers,
+            icon: 'bi bi-exclamation-triangle'
+          },
+          
+
+        ].map((card, i) => (
           <div className="col-md-3" key={i}>
             <div className="card stat-card text-center shadow-sm">
               <div className="card-body">
@@ -88,86 +116,71 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Gráficos */}
-      <div className="row mb-5">
-        <div className="col-md-6">
-          <h5 className="fw-bold mb-3">Distribución por Tipo de Mascota</h5>
-          <Pie
-            data={{
-              labels: petTypes,
-              datasets: [{
-                label: 'Mascotas',
-                data: petCounts,
-                backgroundColor: ['#F9AF15', '#675544', '#4caf50', '#f44336']
-              }]
-            }}
-          />
+      <div className="col-12 d-flex justify-content-center mb-4">
+  <div style={{ width: '100%', maxWidth: '600px' }}>
+    <h5 className="fw-bold mb-3 text-center">Mascotas Registradas por Especie</h5>
+    <Bar
+      data={{
+        labels: petTypes,
+        datasets: [{
+          label: 'Cantidad de Mascotas',
+          data: petCounts,
+          backgroundColor: ['#F9AF15', '#675544', '#4caf50', '#f44336', '#03a9f4'],
+        }]
+      }}
+      options={{
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Especie'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Cantidad'
+            }
+          }
+        }
+      }}
+    />
+  </div>
+</div>
+
+
+
+      {/* 🧭 Botones de acción (CTA) */}
+      <section className="dashboard-cta mt-5">
+        <h4 className="fw-bold text-center mb-4">📌 Acciones Rápidas</h4>
+        <div className="row g-3 justify-content-center">
+          {[
+            {
+              text: '⚙️ Generar Códigos QR',
+              route: '/generar-codigos',
+              className: 'btn btn-outline-warning'
+            },
+
+            {
+              text: '⚙️ Ver Códigos NO RECLAMADOS',
+              route: '/ver-codigos',
+              className: 'btn btn-outline-warning'
+            }, 
+          ].map((btn, index) => (
+            <div className="col-12 col-md-auto" key={index}>
+              <button className={`${btn.className} px-4 py-2 w-100`} onClick={() => navigate(btn.route)}>
+                {btn.text}
+              </button>
+            </div>
+          ))}
         </div>
-        <div className="col-md-6">
-          <h5 className="fw-bold mb-3">Escaneos por Periodo</h5>
-          <Bar
-            data={{
-              labels: ['Día', 'Semana', 'Mes', 'Año'],
-              datasets: [{
-                label: 'Escaneos',
-                data: [stats.scansToday, stats.scansWeek, stats.scansMonth, stats.scansYear],
-                backgroundColor: '#675544'
-              }]
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Tabla escaneos recientes */}
-      <h4 className="fw-bold mb-3">Escaneos Recientes</h4>
-      <div className="table-responsive mb-5">
-        <table className="table table-bordered table-hover text-center">
-          <thead className="table-dark">
-            <tr>
-              <th>Fecha</th>
-              <th>PetCode</th>
-              <th>Ubicación</th>
-              <th>Dispositivo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentScans.length === 0 ? (
-              <tr><td colSpan="4">No hay escaneos recientes</td></tr>
-            ) : recentScans.map((scan, i) => (
-              <tr key={i}>
-                <td>{new Date(scan.date).toLocaleString()}</td>
-                <td>{scan.petCode}</td>
-                <td>{scan.location}</td>
-                <td>{scan.device || 'Desconocido'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Botones CTA */}
-      <div className="text-center d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
-        <button
-          className="btn btn-inu px-4 py-2"
-          onClick={() => navigate('/nueva-mascota')}
-        >
-          🐶 Registrar Mascota
-        </button>
-
-        <button
-          className="btn btn-outline-warning px-4 py-2"
-          onClick={() => navigate('/generar-codigos')}
-        >
-          ⚙️ Generar Códigos QR
-        </button>
-
-        <button
-          className="btn btn-outline-secondary px-4 py-2"
-          onClick={() => navigate('/ver-codigos')}
-        >
-          📄 Ver Códigos Generados
-        </button>
-      </div>
+      </section>
     </div>
   );
 };

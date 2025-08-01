@@ -1,17 +1,95 @@
-/* src/assets/Dashboard.css */
-.dashboard-container {
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: 'Nunito', sans-serif;
+/* Dashboard.css - Estilo completo modo claro INUTrips */
+
+:root {
+  --inu-yellow: #F9AF15;
+  --inu-brown: #675544;
+  --inu-light: #fdfaf5;
+  --inu-dark: #2f2f2f;
+  --inu-border: #e5e5e5;
+  --inu-muted: #777;
 }
 
-.dashboard-container .card {
-  border-radius: 16px;
-  padding: 20px;
+body {
+
+  color: var(--inu-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard h2 {
+  color: var(--inu-brown);
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid var(--inu-border);
   transition: transform 0.3s ease;
 }
 
-.dashboard-container .card:hover {
+.stat-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h5 {
+  color: var(--inu-muted);
+}
+
+.stat-card .text-inu {
+  color: var(--inu-yellow);
+}
+
+.table thead {
+  background-color: var(--inu-brown);
+  color: white;
+}
+
+.table tbody tr:hover {
+  background-color: #fef5e5;
+}
+
+.dashboard-cta h4 {
+  color: var(--inu-brown);
+}
+
+.dashboard-cta .btn {
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.dashboard-cta .btn-inu {
+  background-color: var(--inu-yellow);
+  color: white;
+  border: none;
+}
+
+.dashboard-cta .btn-inu:hover {
+  background-color: #e09d12;
+}
+
+.dashboard-cta .btn-outline-warning:hover,
+.dashboard-cta .btn-outline-secondary:hover,
+.dashboard-cta .btn-outline-danger:hover,
+.dashboard-cta .btn-outline-info:hover,
+.dashboard-cta .btn-outline-success:hover,
+.dashboard-cta .btn-outline-dark:hover,
+.dashboard-cta .btn-outline-primary:hover {
+  opacity: 0.85;
+}
+
+/* Gráficos */
+.dashboard canvas {
+  background: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 0.5rem rgba(0,0,0,0.05);
+}
+
+/* Responsive mejoras */
+@media (max-width: 768px) {
+  .dashboard-cta .btn {
+    margin-bottom: 10px;
+  }
 }

@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -11,7 +10,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  // Validaciones básicas
   const validate = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,13 +32,11 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Cambios en campos
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: '' });
   };
 
-  // Login y redirección según rol
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -61,12 +57,22 @@ const Login = () => {
       if (!res.ok) {
         alert(result.message || 'Correo o contraseña incorrecta');
       } else {
-        // Guardamos en contexto
+        // Guarda en contexto
         login({ token: result.token, user: result.user });
 
+        // 🔐 Guarda también en localStorage para el dashboard
+        localStorage.setItem('user', JSON.stringify({
+          token: result.token,
+          user: {
+            email: result.user.email,
+            roles: result.user.roles
+          }
+        }));
+
+        // Redirección según rol
         const roles = result.user.roles || [];
         if (roles.includes('admin')) {
-          navigate('/Dashboard');
+          navigate('/dashboard'); // corregido: minúscula
         } else {
           navigate('/mypets');
         }
@@ -141,4 +147,3 @@ const Login = () => {
 };
 
 export default Login;
-

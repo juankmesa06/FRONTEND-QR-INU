@@ -1,183 +1,70 @@
-:root {
-  --color-primario: #F9AF15;
-  --color-secundario: #675544;
-  --color-claro: #ffffff;
-  --color-fondo: #fffaf3;
-  --sombra: 0 8px 20px rgba(0, 0, 0, 0.08);
-  --transicion: all 0.3s ease-in-out;
-  --borde-radio: 18px;
-  --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.home {
+  min-height: 100vh;
+  width: 100vw;
+  background: #fff; /* Puedes cambiar por un color suave o imagen */
+  position: relative;
 }
 
-body {
-  font-family: var(--fuente-principal);
-  background-color: var(--color-fondo);
-  color: var(--color-secundario);
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
+.hero-section {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
-h1, h2, h3, h4, h5 {
-  font-weight: bold;
-  color: var(--color-secundario);
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
 }
 
-a {
-  color: var(--color-secundario);
-  text-decoration: none;
-  transition: var(--transicion);
+.hero-logo {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.10));
 }
 
-a:hover {
-  color: var(--color-primario);
+.hero-img-natural {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  background: transparent;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
 }
 
-/* Navbar */
-.navbar {
-  background-color: var(--color-claro);
-  padding: 1rem 2rem;
-  box-shadow: var(--sombra);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-primario);
+.whatsapp-float img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  background: #25d366;
+  padding: 8px;
+  transition: transform 0.2s;
 }
 
-.nav-link {
-  margin: 0 10px;
-  transition: var(--transicion);
+.whatsapp-float img:hover {
+  transform: scale(1.1) rotate(-5deg);
 }
 
-.nav-link:hover {
-  color: var(--color-primario);
-}
-
-/* Hero Section */
-.hero {
-  background: linear-gradient(to right, #fff3e0, #fff8dc);
-  padding: 80px 20px;
-  text-align: center;
-  animation: fadeInUp 1s ease;
-}
-
-.hero h1 {
-  color: var(--color-primario);
-  font-size: 2.8rem;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-top: 10px;
-}
-
-/* Botones */
-.btn-inutrips {
-  background-color: var(--color-primario);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: var(--borde-radio);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: var(--transicion);
-}
-
-.btn-inutrips:hover {
-  background-color: #d48c00;
-  transform: scale(1.05);
-}
-
-.btn-outline-inutrips {
-  border: 2px solid var(--color-primario);
-  background-color: transparent;
-  color: var(--color-primario);
-  padding: 10px 18px;
-  border-radius: var(--borde-radio);
-  transition: var(--transicion);
-}
-
-.btn-outline-inutrips:hover {
-  background-color: var(--color-primario);
-  color: white;
-}
-
-/* Cards */
-.card-inutrips {
-  background-color: var(--color-claro);
-  border-radius: var(--borde-radio);
-  padding: 25px;
-  box-shadow: var(--sombra);
-  transition: var(--transicion);
-}
-
-.card-inutrips:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Secciones */
-.section {
-  padding: 60px 20px;
-}
-
-.section-title {
-  font-size: 2rem;
-  color: var(--color-secundario);
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Footer */
-.footer {
-  background-color: var(--color-secundario);
-  color: white;
-  text-align: center;
-  padding: 30px 20px;
-  font-size: 0.9rem;
-}
-
-.footer a {
-  color: var(--color-primario);
-  margin: 0 8px;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* Animaciones */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
+@media (max-width: 768px) {
+  .hero-section .row {
+    flex-direction: column;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .hero-logo, .hero-img-natural {
+    max-width: 240px;
+    margin-bottom: 2rem;
   }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.fade-in {
-  animation: fadeInUp 1s ease forwards;
-}
-
-.slide-in {
-  animation: slideIn 1s ease forwards;
 }

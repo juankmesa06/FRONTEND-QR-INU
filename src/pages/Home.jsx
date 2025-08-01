@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../assets/Home.css';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
           <img 
             src="/images/LOGO PRINCIPAL.png" 
             alt="Logo INUTrips" 
-            style={{ height: '100px', marginBottom: '20px' }} 
+            style={{ height: '500px', marginBottom: '50px' }} 
           />
 
           <motion.h1
@@ -48,16 +49,27 @@ const Home = () => {
             
           </motion.div>
         </div>
+        <div className="col-md-6 text-center d-flex align-items-center justify-content-center">
+          <img 
+            src="/images/about-1.jpg" 
+            alt="Mascota feliz"
+            className="hero-img-natural"
+          />
+</div>
+        
       </section>
 
 {/* APP MÓVIL INUTRIPS */}
 {/* SERVICIOS DESTACADOS - APP, COLLAR, KIT INU */}
 <section className="bg-light py-5 text-center">
   <div className="container">
-    <h2 className="fw-bold mb-4 text-inu">¿Qué ofrece <strong className="brand-text">
-            <span style={{ color: '#675544' }}>INU</span>
-            <span style={{ color: '#F9AF15', marginLeft: '3px' }}>Trips</span>
-          </strong>?</h2>
+    <h2 className="fw-bold mb-4 text-inu">
+  ¿Qué ofrece <strong className="brand-text">
+    <span style={{ color: '#675544' }}>INU</span>
+    <span style={{ color: '#F9AF15', marginLeft: '3px' }}>Trips</span>
+  </strong>?
+</h2>
+
     <div className="row g-4">
 
       {/* APP MÓVIL */}
@@ -110,6 +122,9 @@ const Home = () => {
   Si se pierde, cualquier persona puede escanear el QR y contactarte de inmediato.
 </p>
 
+
+
+
 <div className="d-flex justify-content-center gap-2 flex-wrap mt-3">
   <Link 
     to="/register" 
@@ -155,6 +170,18 @@ const Home = () => {
       </motion.div>
 
     </div>
+
+<div className="whatsapp-float">
+  <a
+    href="https://wa.me/57316103438" // Cambia por tu número de WhatsApp
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Agéndate aquí por WhatsApp"
+  >
+    <img src="/images/m024t0256_f_whatsapp_17oct22.jpg" alt="WhatsApp" />
+  </a>
+</div>
+
   </div>
 </section>
 

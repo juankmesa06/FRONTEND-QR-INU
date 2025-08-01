@@ -2,14 +2,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../src/assets/App.css';
 
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import PrivateRoute from './Components/PrivateRoute';
 import PrivateRouteAdmin from './Components/PrivateRouteAdmin';
 import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
+import Home from './pages/Home.jsx';
 import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -19,7 +18,8 @@ import PetInfo from './pages/PetInfo';
 import CompraQR from './pages/CompraQR';
 import QRGenerado from './pages/QRGenerado';
 import NuevaMascota from './pages/NuevaMascota';
-
+import GenerarCodigos from './pages/generar-codigos';
+import VerCodigos from './pages/VerCodigos';
 
 function App() {
   return (
@@ -38,6 +38,9 @@ function App() {
           <Route path="/compraqr" element={<CompraQR />} />
           <Route path="/qr-generado" element={<QRGenerado />} />
           <Route path="/nueva-mascota" element={<NuevaMascota />} />
+          <Route path="/generar-codigos" element={<GenerarCodigos />} />
+          <Route path="/ver-codigos" element={<VerCodigos />} />
+  
         </Routes>
       </main>
       <Footer />
