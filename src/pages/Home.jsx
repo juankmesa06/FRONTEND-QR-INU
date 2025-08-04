@@ -8,10 +8,6 @@ import { Carousel } from 'react-bootstrap';
 
 const images = [
   '/images/banner-inutrips-principal.jpg',
-  '/images/2.jpg',
-  '/images/about-2.jpg',
-  '/images/1.5.jpg',
-  '/images/1.1.jpg'
 ];
 
 const Home = () => {
@@ -121,7 +117,7 @@ const Home = () => {
           <h3 className="fw-bold text-inu text-center mb-4">¿Cómo funciona?</h3>
           <div className="row text-center">
             <div className="col-md-4 mb-4">
-              <img src="/images/step1.png" alt="Descarga la app" className="mb-3" style={{width: 80}} />
+              <img src="/images/1.5.jpg" alt="Descarga la app" className="mb-3" style={{width: 80}} />
               <h6 className="fw-bold">1. Descarga la app</h6>
               <p className="small">Regístrate y crea el perfil de tu mascota.</p>
             </div>

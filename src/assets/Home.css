@@ -23,7 +23,7 @@ html, body {
 }
 .inu-carousel .carousel-item img,
 .hero-img {
-  width: 100%;
+  width: 200%;
   height: 350px;
   object-fit: cover;
   border-radius: 1.5rem;
