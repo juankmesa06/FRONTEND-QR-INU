@@ -5,6 +5,7 @@ import "../assets/Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -70,7 +71,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/auth/register", {
+      const res = await fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

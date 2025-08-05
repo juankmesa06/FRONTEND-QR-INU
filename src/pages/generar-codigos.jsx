@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function GenerarCodigos() {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [cantidad, setCantidad] = useState(1);
   const [qrs, setQrs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ function GenerarCodigos() {
       const user = JSON.parse(localStorage.getItem('user'));
       const token = user?.token;
 
-      const res = await fetch(`http://localhost:3000/api/admin/generate-codes/${cantidad}`, {
+      const res = await fetch(`${apiUrl}/admin/generate-codes/${cantidad}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

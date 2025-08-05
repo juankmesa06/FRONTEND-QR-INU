@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import '../assets/Login.css';
 
 const Login = () => {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/api/auth/login', {
+      const res = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -57,10 +58,7 @@ const Login = () => {
       if (!res.ok) {
         alert(result.message || 'Correo o contraseña incorrecta');
       } else {
-        // Guarda en contexto
         login({ token: result.token, user: result.user });
-
-        // 🔐 Guarda también en localStorage para el dashboard
         localStorage.setItem('user', JSON.stringify({
           token: result.token,
           user: {
@@ -69,10 +67,9 @@ const Login = () => {
           }
         }));
 
-        // Redirección según rol
         const roles = result.user.roles || [];
         if (roles.includes('admin')) {
-          navigate('/dashboard'); // corregido: minúscula
+          navigate('/dashboard');
         } else {
           navigate('/mypets');
         }

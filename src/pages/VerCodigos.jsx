@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const VerCodigos = () => {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [codigos, setCodigos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(50); // cantidad seleccionada
@@ -12,7 +13,7 @@ const VerCodigos = () => {
       const userData = JSON.parse(localStorage.getItem('user'));
       const token = userData?.token;
 
-      const res = await fetch(`http://localhost:3000/api/admin/generated-codes/${limite}`, {
+      const res = await fetch(`${apiUrl}/admin/generated-codes/${limite}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -5,6 +5,7 @@ import '../assets/MyPets.css';
 const placeholderImg = "https://via.placeholder.com/300x200?text=Mascota";
 
 function MyPets() {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const navigate = useNavigate();
   const [mascotas, setMascotas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ function MyPets() {
         return;
       }
 
-      const res = await fetch('http://localhost:3000/api/pets', {
+      const res = await fetch(`${apiUrl}/pets`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -56,7 +57,7 @@ function MyPets() {
 
   const eliminarMascota = async (id) => {
     if (confirm('¿Estás seguro de que deseas eliminar esta mascota?')) {
-      await fetch(`http://localhost:3000/api/pets/${id}`, {
+      await fetch(`${apiUrl}/pets/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))?.token}`,

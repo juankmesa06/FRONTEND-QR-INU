@@ -4,6 +4,7 @@ import '../assets/NuevaMascota.css';
 
 const NuevaMascota = () => {
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const [form, setForm] = useState({
     name: '',
@@ -28,7 +29,7 @@ const NuevaMascota = () => {
     formData.append('file', e.target.files[0]);
 
     try {
-      const res = await fetch('http://localhost:3000/api/files/pet', {
+      const res = await fetch(`${apiUrl}/files/pet`, {
         method: 'POST',
         body: formData,
       });
@@ -42,7 +43,7 @@ const NuevaMascota = () => {
 
   const verificarPetCodeDisponible = async (code) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/pets/pet-code/${code}`);
+      const res = await fetch(`${apiUrl}/pets/pet-code/${code}`);
       const data = await res.json();
       return !data;
     } catch (err) {
@@ -68,7 +69,7 @@ const NuevaMascota = () => {
     try {
       const token = JSON.parse(localStorage.getItem('user'))?.token;
 
-      const res = await fetch('http://localhost:3000/api/pets', {
+      const res = await fetch(`${apiUrl}/pets`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,

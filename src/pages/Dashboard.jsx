@@ -22,6 +22,9 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
+  // Verifica si el usuario es admin
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [recentScans, setRecentScans] = useState([]);
@@ -39,7 +42,7 @@ const Dashboard = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:3000/api/admin/dashboard', {
+        const res = await fetch(`${apiUrl}/admin/dashboard`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 

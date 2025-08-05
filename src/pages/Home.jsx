@@ -12,7 +12,7 @@ const images = [
 
 const Home = () => {
   return (
-    <div className="home">
+    <>
       {/* Solo Carrusel al inicio */}
       <section className="hero-carousel d-flex align-items-center justify-content-center">
         <div className="container">
@@ -122,12 +122,12 @@ const Home = () => {
               <p className="small">Regístrate y crea el perfil de tu mascota.</p>
             </div>
             <div className="col-md-4 mb-4">
-              <img src="/images/step2.png" alt="Solicita tu viaje" className="mb-3" style={{width: 80}} />
+              <img src="/images/5.2.jpg" alt="Solicita tu viaje" className="mb-3" style={{width: 80}} />
               <h6 className="fw-bold">2. Solicita tu viaje</h6>
               <p className="small">Elige el destino y el tipo de servicio que necesitas.</p>
             </div>
             <div className="col-md-4 mb-4">
-              <img src="/images/step3.png" alt="Viaja seguro" className="mb-3" style={{width: 80}} />
+              <img src="/images/5.2.jpg" alt="Viaja seguro" className="mb-3" style={{width: 80}} />
               <h6 className="fw-bold">3. Viaja seguro</h6>
               <p className="small">Disfruta el trayecto con tu mascota y califica el servicio.</p>
             </div>
@@ -141,19 +141,19 @@ const Home = () => {
           <h3 className="fw-bold text-inu text-center mb-4">Beneficios de usar INU Trips</h3>
           <div className="row text-center">
             <div className="col-md-3 mb-4">
-              <img src="/images/beneficio1.png" alt="Pet Friendly" style={{width: 60}} />
+              <img src="/images/5.3.jpg" alt="Pet Friendly" style={{width: 60}} />
               <p className="fw-semibold mt-2">100% Pet Friendly</p>
             </div>
             <div className="col-md-3 mb-4">
-              <img src="/images/beneficio2.png" alt="Soporte 24/7" style={{width: 60}} />
+              <img src="/images/5.2.jpg" alt="Soporte 24/7" style={{width: 60}} />
               <p className="fw-semibold mt-2">Soporte 24/7</p>
             </div>
             <div className="col-md-3 mb-4">
-              <img src="/images/beneficio3.png" alt="Cobertura" style={{width: 60}} />
+              <img src="/images/5.1.jpg" alt="Cobertura" style={{width: 60}} />
               <p className="fw-semibold mt-2">Cobertura nacional</p>
             </div>
             <div className="col-md-3 mb-4">
-              <img src="/images/beneficio4.png" alt="Conductores capacitados" style={{width: 60}} />
+              <img src="/images/5.4.jpg" alt="Conductores capacitados" style={{width: 60}} />
               <p className="fw-semibold mt-2">Conductores capacitados</p>
             </div>
           </div>
@@ -167,12 +167,14 @@ const Home = () => {
           <div className="row justify-content-center">
             <div className="col-md-4 mb-4">
               <div className="card border-0 shadow-sm p-3 h-100">
+                <img src="/images/about-3.jpg" alt="mujer con perro" style={{width: 250}} />
                 <p className="small">"Viajar con mi perro nunca fue tan fácil. Los conductores son muy amables y entienden a los animales."</p>
                 <div className="fw-bold mt-2">- Laura G.</div>
               </div>
             </div>
             <div className="col-md-4 mb-4">
               <div className="card border-0 shadow-sm p-3 h-100">
+                <img src="/images/image_1.jpg" alt="Conductores capacitados" style={{width: 250}} />
                 <p className="small">"Me encanta la seguridad y la comodidad. ¡Recomiendo INU Trips a todos los pet lovers!"</p>
                 <div className="fw-bold mt-2">- Andrés P.</div>
               </div>
@@ -194,7 +196,7 @@ const Home = () => {
           </a>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

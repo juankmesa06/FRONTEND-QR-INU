@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function PetInfo() {
+  // Obtiene el código QR de la URL
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const { qrCode } = useParams();
   const [pet, setPet] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ function PetInfo() {
   useEffect(() => {
     const fetchPet = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/pets/code/${qrCode}`);
+        const res = await fetch(`${apiUrl}/pets/code/${qrCode}`);
         if (!res.ok) throw new Error('Mascota no encontrada');
         const data = await res.json();
         setPet(data);
@@ -34,7 +36,7 @@ function PetInfo() {
       <div className="card p-4 mx-auto" style={{ maxWidth: '500px' }}>
         {pet.image && (
           <img
-            src={`http://localhost:3000/api/files/pet/${pet.image}`}
+            src={`${apiUrl}/files/pet/${pet.image}`}
             alt="Foto mascota"
             className="img-fluid rounded mb-3"
           />
