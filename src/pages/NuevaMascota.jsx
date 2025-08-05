@@ -34,7 +34,7 @@ const NuevaMascota = () => {
         body: formData,
       });
       const result = await res.json();
-      setImageFile(result.fileName);
+      setImageFile(result.secureUrl);
     } catch (error) {
       console.error('Error al subir la imagen', error);
       alert('Ocurrió un error al subir la imagen');

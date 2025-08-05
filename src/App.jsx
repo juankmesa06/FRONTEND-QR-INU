@@ -20,6 +20,7 @@ import QRGenerado from './pages/QRGenerado';
 import NuevaMascota from './pages/NuevaMascota';
 import GenerarCodigos from './pages/generar-codigos';
 import VerCodigos from './pages/VerCodigos';
+import EditarMascota from './pages/EditarMascota';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/nueva-mascota" element={<NuevaMascota />} />
           <Route path="/generar-codigos" element={<GenerarCodigos />} />
           <Route path="/ver-codigos" element={<VerCodigos />} />
+          <Route path="/editar-mascota/:id" element={<EditarMascota />} />
   
         </Routes>
       </main>

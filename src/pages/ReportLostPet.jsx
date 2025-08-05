@@ -27,7 +27,8 @@ function ReportLostPet() {
               .then(() => {
                 html5QrCode.clear();
                 // Redirige a PetInfo pasando el código QR
-                navigate(`/petinfo/${decodedText}`);
+                 //navigate(decodedText);
+                window.location.href = decodedText;
               })
               .catch((err) => console.error('Error al detener escáner:', err));
           },

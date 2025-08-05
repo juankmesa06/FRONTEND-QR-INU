@@ -31,27 +31,52 @@ function PetInfo() {
   if (!pet) return <p className="text-center text-danger mt-5">Mascota no encontrada</p>;
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">Mascota Encontrada</h2>
-      <div className="card p-4 mx-auto" style={{ maxWidth: '500px' }}>
-        {pet.image && (
+    <div className="card p-4 mx-auto" style={{ maxWidth: '500px' }}>
+        {pet.pet.image && (
           <img
-            src={`${apiUrl}/files/pet/${pet.image}`}
+            src={pet.pet.image}
             alt="Foto mascota"
             className="img-fluid rounded mb-3"
           />
         )}
-        <p><strong>Nombre:</strong> {pet.name}</p>
-        <p><strong>Edad:</strong> {pet.age} años</p>
-        <p><strong>Especie:</strong> {pet.species}</p>
-        <p><strong>Raza:</strong> {pet.breed}</p>
-        <p><strong>Género:</strong> {pet.gender}</p>
-        <p><strong>Tamaño:</strong> {pet.size}</p>
+        <p><strong>Nombre:</strong> {pet.pet.name}</p>
+        <p><strong>Edad:</strong> {pet.pet.age} años</p>
+        <p><strong>Especie:</strong> {pet.pet.species}</p>
+        <p><strong>Raza:</strong> {pet.pet.breed}</p>
+        <p><strong>Género:</strong> {pet.pet.gender}</p>
+        <p><strong>Tamaño:</strong> {pet.pet.size}</p>
         <hr />
         <p><strong>Dueño:</strong> {pet.owner?.name} {pet.owner?.last_name}</p>
-        <p><strong>Correo:</strong> {pet.owner?.email}</p>
         <p><strong>Teléfono:</strong> {pet.owner?.phone}</p>
-      </div>
+        <div className="d-flex gap-3 mt-3 justify-content-center">
+          <a
+            href={`https://wa.me/57${pet.owner?.phone}?text=Hola, encontramos tu mascota ${pet.pet.name} usando el QR de INUTrips.`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-success"
+          >
+            Contactar <strong>{pet.owner?.name} {pet.owner?.last_name}</strong>
+          </a>
+          <button
+            className="btn btn-outline-success"
+            onClick={() => {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                  const lat = position.coords.latitude;
+                  const lng = position.coords.longitude;
+                  const mensaje = `Hola, encontramos una mascota de nombre ${pet.pet.name} usando el QR de INUTrips. Estamos en la siguiente ubicación: https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+                  window.open(`https://api.whatsapp.com/send?phone=573161034386&text=${encodeURIComponent(mensaje)}`, '_blank');
+                }, () => {
+                  alert('No se pudo obtener la ubicación. Activa el GPS y vuelve a intentarlo.');
+                });
+              } else {
+                alert('Tu navegador no soporta geolocalización.');
+              }
+            }}
+          >
+            Soporte inutrips (enviar ubicación)
+          </button>
+        </div>
     </div>
   );
 }

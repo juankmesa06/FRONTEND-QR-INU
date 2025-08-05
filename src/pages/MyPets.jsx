@@ -77,6 +77,55 @@ function MyPets() {
     navigate('/dashboard');
   };
 
+  const editarPerfil = () => {
+    navigate('/editar-perfil');
+  };
+
+  let mascotasContent;
+  if (loading) {
+    mascotasContent = <p className="text-center">Cargando mascotas...</p>;
+  } else if (mascotas.length === 0) {
+    mascotasContent = <p className="text-center">No tienes mascotas registradas.</p>;
+  } else {
+    mascotasContent = (
+      <div className="row">
+        {mascotas.map((m) => (
+          <div className="col-md-6 col-lg-4 mb-4" key={m.id}>
+            <div className="card shadow-sm border-0 pet-card-custom">
+              <img src={`${m.image}`} alt={m.nombre} className="card-img-top" />
+              <div className="card-body text-center">
+                <h5 className="card-title">{m.nombre}</h5>
+                <p className="card-text">
+                  <strong>Nombre:</strong> {m.name} <br />
+                  <strong>Especie:</strong> {m.species}<br />
+                  <strong>Edad:</strong> {m.age} años
+                </p>
+                <div className="mb-2">
+                  <span className="badge bg-secondary">ID: {m.petCode.code}</span>
+                </div>
+                <div>
+                  <img src={`${m.qr}`} alt={m.petCode.id} />
+                </div>
+                <button
+                  onClick={() => editarMascota(m.id)}
+                  className="btn btn-sm btn-warning me-2"
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={() => eliminarMascota(m.id)}
+                  className="btn btn-sm btn-danger"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="container py-4">
       <div className="mypets-header">
@@ -93,45 +142,14 @@ function MyPets() {
             <button onClick={agregarMascota} className="btn-inu-agregar">
               ➕ Agregar Mascota
             </button>
+            <button onClick={editarPerfil} className="btn btn-outline-primary">
+              Editar Perfil
+            </button>
           </div>
         </div>
       </div>
 
-      {loading ? (
-        <p className="text-center">Cargando mascotas...</p>
-      ) : mascotas.length === 0 ? (
-        <p className="text-center">No tienes mascotas registradas.</p>
-      ) : (
-        <div className="row">
-          {mascotas.map((m) => (
-            <div className="col-md-6 col-lg-4 mb-4" key={m.id}>
-              <div className="card shadow-sm border-0 pet-card-custom">
-                <img src={`http://localhost:3000/api/files/pet/${m.image}`} alt={m.nombre} className="card-img-top" />
-                <div className="card-body text-center">
-                  <h5 className="card-title">{m.nombre}</h5>
-                  <p className="card-text">
-                    <strong>Nombre:</strong> {m.name} <br />
-                    <strong>Especie:</strong> {m.species}<br />
-                    <strong>Edad:</strong> {m.age} años
-                  </p>
-                  <button
-                    onClick={() => editarMascota(m.id)}
-                    className="btn btn-sm btn-warning me-2"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => eliminarMascota(m.id)}
-                    className="btn btn-sm btn-danger"
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {mascotasContent}
     </div>
   );
 }

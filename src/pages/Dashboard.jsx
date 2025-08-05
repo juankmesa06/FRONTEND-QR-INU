@@ -27,7 +27,6 @@ const Dashboard = () => {
   // Verifica si el usuario es admin
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
-  const [recentScans, setRecentScans] = useState([]);
 
   useEffect(() => {
     const fetchDashboard = async () => {
