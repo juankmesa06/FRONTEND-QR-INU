@@ -63,13 +63,10 @@ const ValueCard = ({ title, children, delay = 0 }) => {
 
 // Componente principal
 function About() {
-  const [videoLoaded, setVideoLoaded] = useState(false)
-
   const galleryImages = [
-    { src: "/images/image_2.jpg", alt: "Perro feliz disfrutando del viaje" },
-    { src: "/images/gallery-2.jpg", alt: "Paseo pet-friendly por la ciudad" },
-    { src: "/images/gallery-3.jpg", alt: "Collar QR INU en acción" },
-    { src: "/images/gallery-4.jpg", alt: "Gato protegido con tecnología INU" },
+    { src: "/images/1.1.jpg", alt: "Perro feliz disfrutando del viaje" },
+    { src: "/images/4.jpg", alt: "Paseo pet-friendly por la ciudad" },
+    { src: "/images/medalla2.png", alt: "Gato protegido con tecnología INU" },
   ]
 
   const contactInfo = [
@@ -101,30 +98,21 @@ function About() {
 
   return (
     <div className="about-container">
-      {/* 🎬 Hero con video mejorado */}
-      <section className="about-hero-section">
-        <div className="video-wrapper">
-          <video
-            className="about-video"
-            src="/videos/hero-inutrips.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            onLoadedData={() => setVideoLoaded(true)}
-            poster="/images/video-poster.jpg" // Añade un poster
-          />
-          <div className="video-overlay">
-            <motion.h1
-              className="about-hero-title"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              Movilidad pet-friendly con propósito
-            </motion.h1>
-          </div>
-        </div>
+      {/* Hero amigable y moderno */}
+      <section className="about-hero-section simple-hero">
+        <motion.div
+          className="about-hero-content"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="about-hero-title">
+            Movilidad pet-friendly con propósito
+          </h1>
+          <p className="about-hero-subtitle">
+            Tecnología, amor y seguridad para tu mascota en cada viaje.
+          </p>
+        </motion.div>
       </section>
 
       {/* 🐾 Quiénes Somos - Tarjeta principal */}
@@ -137,29 +125,73 @@ function About() {
       >
         <h2 className="about-title">Quiénes Somos</h2>
 
-        <div className="about-content-grid">
-          <div className="text-content">
-            <p className="about-text">
-              <strong>INUTrips</strong> es una plataforma integral de movilidad pet-friendly en Colombia, comprometida
-              con ofrecer soluciones tecnológicas seguras para humanos y animales.
-            </p>
-            <p className="about-text">
-              Nuestro producto <strong>QR Mascotas</strong> permite identificar y proteger mascotas con collares
-              inteligentes que las conectan con sus familias.
-            </p>
-            <p className="about-text">
-              Esta iniciativa nace del amor por los animales y la visión de una movilidad más empática y conectada.
-            </p>
-          </div>
-
-          <div className="image-content">
-            <LazyImage
-              src="/images/gallery-5.jpg"
-              alt="Familia con mascota disfrutando de un viaje seguro"
-              className="about-img-full"
-            />
-          </div>
-        </div>
+  <div className="about-content-grid">
+  <motion.div
+    className="text-content"
+    initial={{ opacity: 0, x: -40 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.7 }}
+    viewport={{ once: true }}
+  >
+    <p className="about-text">
+      <strong>INUTrips</strong> es una plataforma y aplicación móvil 100% pet-friendly en Colombia, que conecta a propietarios de mascotas con conductores capacitados para ofrecer viajes seguros y cómodos para todos. Nuestra app facilita la movilidad urbana de las familias multiespecie, permitiendo solicitar servicios de transporte especialmente adaptados para mascotas.
+    </p>
+    <div className="about-benefits-box">
+      <p className="about-text fw-semibold mb-2" style={{ color: "#f9af15" }}>
+        ¿Por qué elegir INUTrips?
+      </p>
+      <ul className="about-benefits-list">
+        <li>Solicitar viajes en tiempo real o programados para ti y tu mascota.</li>
+        <li>Contar con conductores entrenados en manejo y bienestar animal.</li>
+        <li>Registrar y gestionar el perfil de tus mascotas desde la app.</li>
+        <li>Acceder a servicios y comercios pet-friendly aliados.</li>
+        <li>Viajar con tranquilidad gracias a la identificación QR y soporte en caso de extravío.</li>
+      </ul>
+    </div>
+    <motion.p
+      className="about-text"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      Nuestro producto <strong>QR Mascotas</strong> permite identificar y proteger a tu mascota con collares inteligentes que la conectan contigo en caso de pérdida, facilitando su regreso a casa.
+    </motion.p>
+    <motion.p
+      className="about-text"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      Además, contamos con el <strong>Kit INU</strong>: un conjunto de accesorios diseñados para proteger tanto a tu mascota como a tu vehículo durante los trayectos. Incluye lona impermeable, cinturones de seguridad y bozal especial, garantizando comodidad y seguridad para todos.
+    </motion.p>
+    <motion.p
+      className="about-text"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4, duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      Esta iniciativa nace del amor por los animales y la visión de una movilidad más empática, conectada y responsable en las ciudades.
+    </motion.p>
+  </motion.div>
+  <motion.div
+    className="image-content"
+    initial={{ opacity: 0, scale: 0.92 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    whileHover={{ scale: 1.04, rotate: 1 }}
+    style={{ boxShadow: "0 4px 24px 0 rgba(249, 175, 21, 0.10)", borderRadius: "1.5rem" }}
+  >
+    <LazyImage
+      src="/images/juntos a todas partes.jpg"
+      alt="Familia con mascota disfrutando de un viaje seguro"
+      className="about-img-full"
+    />
+  </motion.div>
+</div>
       </motion.section>
 
       {/* 🚀 Misión, Visión, Valores */}
@@ -193,7 +225,7 @@ function About() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Nuestros Peludos Embajadores
+          Nuestros Productos
         </motion.h2>
 
         <div className="gallery-grid">

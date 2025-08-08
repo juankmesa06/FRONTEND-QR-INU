@@ -1,69 +1,103 @@
-:root {
-  --inu-brown: #675544;
-  --inu-yellow: #F9AF15;
-  --inu-yellow-dark: #d99000;
-}
-
 .inu-footer {
-  background: linear-gradient(135deg, var(--inu-brown), var(--inu-yellow));
-  color: #fff;
-  padding: 3rem 1rem 2rem;
+  background: #fffbe7;
+  border-top: 2px solid #f9af15;
+  padding: 28px 0 10px 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #675544;
+  font-size: 1rem;
+  box-shadow: 0 -2px 12px 0 rgba(249, 175, 21, 0.04);
 }
 
-.brand-logo {
+.inu-footer .brand-logo {
   width: 56px;
-  height: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  height: 56px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 6px;
 }
 
-.brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;
+.inu-footer .brand-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 2px;
 }
 
-.brand-tagline {
-  font-weight: 600;
-  color: var(--inu-yellow);
+.inu-footer .text-brown {
+  color: #675544;
 }
 
-.brand-desc {
-  max-width: 320px;
-  color: #f1f1f1;
+.inu-footer .text-yellow {
+  color: #f9af15;
 }
 
-.social-icons a {
+.inu-footer .brand-tagline {
+  font-size: 1rem;
+  color: #675544cc;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.inu-footer .brand-desc {
+  font-size: 0.98rem;
+  color: #675544b0;
+  margin-bottom: 10px;
+}
+
+.inu-footer .social-icons a {
+  color: #f9af15;
   font-size: 1.5rem;
-  color: #fff;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.social-icons a:hover {
-  transform: scale(1.2);
-  color: var(--inu-yellow-dark);
+.inu-footer .social-icons a:hover {
+  color: #675544;
+  transform: scale(1.15) translateY(-2px);
 }
 
-.footer-link {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
+.inu-footer .footer-link {
+  color: #675544;
+  font-size: 0.98rem;
   text-decoration: none;
-  transition: color 0.2s;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.footer-link:hover {
-  color: var(--inu-yellow);
+.inu-footer .footer-link:hover {
+  background: #f9af15;
+  color: #fff;
 }
 
-.footer-bottom {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 1rem;
+.inu-footer .footer-bottom {
+  font-size: 0.93rem;
+  color: #675544a0;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
 }
 
-.text-yellow {
-  color: var(--inu-yellow);
-}
-
-.text-brown {
-  color: var(--inu-brown);
+/* Responsive */
+@media (max-width: 600px) {
+  .inu-footer {
+    padding: 18px 0 6px 0;
+    font-size: 0.97rem;
+  }
+  .inu-footer .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+  .inu-footer .brand-name {
+    font-size: 1.05rem;
+  }
+  .inu-footer .social-icons a {
+    font-size: 1.2rem;
+  }
+  .inu-footer .footer-link {
+    font-size: 0.93rem;
+    padding: 2px 6px;
+  }
 }

@@ -1,173 +1,212 @@
-/* ======== Fondo general ======== */
-html, body {
-  background: #fff;
-  overflow-x: hidden;
-  width: 100vw;
-  box-sizing: border-box;
+/* HERO */
+.hero-carousel {
+  min-height: 380px;
+  background: linear-gradient(90deg, #fffbe7 0%, #f9af15 100%);
+  border-radius: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 24px 0 rgba(249, 175, 21, 0.08);
+  overflow: hidden;
+}
+.hero-img {
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.10);
 }
 
-/* ======== Carrusel principal ======== */
-.hero-carousel {
-  min-height: 60vh;
+/* SECCIONES */
+.services-section, .how-section, .benefits-section, .testimonials-section, .cta-section {
+  margin-bottom: 32px;
+}
+
+.brand-inu {
+  color: #675544;
+  font-weight: 800;
+}
+.brand-trips {
+  color: #f9af15;
+  font-weight: 800;
+}
+
+.text-inu {
+  color: #f9af15 !important;
+}
+
+.service-card {
+  border-radius: 18px;
   background: #fff;
-  padding: 3rem 0 2rem 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+}
+.service-card:hover {
+  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
+  transform: translateY(-6px) scale(1.03);
+}
+.service-card img {
+  border-radius: 12px;
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+  transition: transform 0.3s;
+}
+.service-card:hover img {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+.service-img-wrapper {
+  width: 100%;
+  max-width: 320px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: none;
-}
-.inu-carousel {
-  box-shadow: none !important;
-  border-radius: 1.5rem;
-  background: #fff;
-}
-.inu-carousel .carousel-item img,
-.hero-img {
-  width: 200%;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 1.5rem;
-  transition: none;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fffbe7;
+  margin: 0 auto 18px auto;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.06);
 }
 
-/* ======== Servicios destacados ======== */
-.services-section {
+.service-img-wrapper {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fffbe7;
+  margin: 0 auto 18px auto;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.06);
+}
+.drivers-section {
   background: #fff;
   border-radius: 2rem;
-  margin-top: 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-  padding-bottom: 2rem;
+  margin: 48px auto 0 auto;
+  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.07);
 }
-.service-card {
-  transition: transform 0.2s, box-shadow 0.2s;
+
+.drivers-benefits-list {
+  color: #675544;
+  font-size: 1.08rem;
+  margin-left: 1.2em;
+  margin-bottom: 1.5em;
+  padding-left: 0;
+}
+
+.drivers-benefits-list li {
+  margin-bottom: 0.5em;
+  list-style: disc inside;
+}
+
+.drivers-img {
+  max-width: 340px;
   border-radius: 1.5rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  border: 1px solid #f3f3f3;
+  background: #fffbe7;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
 }
-.service-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 4px 16px rgba(249,175,21,0.07);
-}
-.service-card img {
-  max-width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
+.service-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Así la imagen siempre se ve completa y centrada */
+  border-radius: 12px;
+  background: transparent;
+  box-shadow: none;
 }
 
-/* ======== Títulos y textos ======== */
-.brand-inu {
-  color: #675544;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-.brand-trips {
-  color: #F9AF15;
-  margin-left: 3px;
-}
-.text-inu {
-  color: #675544;
+.service-card:hover .service-img {
+  transform: scale(1.04);
 }
 
-/* ======== Botones ======== */
+/* Responsive para que se vea bien en móvil */
+@media (max-width: 600px) {
+  .service-img-wrapper {
+    height: 110px;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .service-img {
+    border-radius: 10px;
+  }
+}
+
+/* BOTONES */
 .btn-inu {
-  background-color: #F9AF15;
-  color: #675544;
-  border-radius: 30px;
-  font-weight: 600;
+  background: #f9af15;
+  color: #fff !important;
+  font-weight: 700;
   border: none;
-  transition: background 0.2s, color 0.2s;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
 }
 .btn-inu:hover {
-  background-color: #675544;
-  color: #fff;
+  background: #675544;
+  color: #fff !important;
+  box-shadow: 0 4px 16px 0 rgba(249, 175, 21, 0.13);
 }
 .btn-outline-dark {
-  border-radius: 30px;
+  border-radius: 8px;
   font-weight: 600;
-  border: 2px solid #675544;
+  border: 1.5px solid #675544;
   color: #675544;
-  background: transparent;
+  background: #fff;
   transition: background 0.2s, color 0.2s;
 }
 .btn-outline-dark:hover {
   background: #675544;
-  color: #fff;
+  color: #fff !important;
 }
 
-/* ======== Efecto zoom eliminado ======== */
-.zoom-effect,
-.zoom-effect:hover {
-  transition: none;
-  transform: none;
+/* COMO FUNCIONA */
+.how-section {
+  border-radius: 18px;
+  background: #fffbe7;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+}
+.how-section img {
+  border-radius: 50%;
+  border: 2px solid #f9af15;
+  background: #fff;
+  padding: 6px;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }
 
-/* ======== Secciones generales ======== */
-.how-section,
-.testimonials-section {
-  background: #f9fafc;
-}
-.benefits-section,
+/* CTA */
 .cta-section {
-  background: #fff;
+  background: linear-gradient(90deg, #fffbe7 0%, #f9af15 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
 }
-
-/* ======== Imágenes de pasos y beneficios ======== */
-.how-section img,
-.benefits-section img {
-  max-width: 100%;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-}
-
-/* ======== Testimonios ======== */
-.testimonials-section .card {
-  border-radius: 1.2rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-/* ======== CTA ======== */
-.cta-section .btn-inu,
-.cta-section .btn-outline-dark {
+.cta-section .btn {
   font-size: 1.1rem;
-  padding: 0.7rem 2.2rem;
+  margin: 0 8px 8px 0;
 }
 
-/* ======== Responsive ======== */
-@media (max-width: 991px) {
-  .inu-carousel .carousel-item img,
-  .hero-img {
-    height: 220px;
+/* Responsive */
+@media (max-width: 900px) {
+  .service-card img {
+    height: 140px;
   }
-  .services-section {
-    border-radius: 1rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  .testimonials-section img {
+    max-width: 140px;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .hero-carousel {
-    min-height: 40vh;
-    padding: 2rem 0 1rem 0;
+    min-height: 200px;
   }
-  .inu-carousel .carousel-item img,
-  .hero-img {
-    height: 150px;
+  .service-card img, .benefits-section img, .how-section img {
+    height: 90px;
+    width: 90px;
   }
-  .services-section {
-    margin-top: 0;
-    border-radius: 0.5rem;
-    padding-bottom: 1rem;
+  .testimonials-section img {
+    max-width: 100px;
   }
-  .service-card img {
-    max-height: 120px;
-  }
-  .how-section .row,
-  .benefits-section .row,
-  .testimonials-section .row {
-    flex-direction: column;
-    text-align: center;
+  .cta-section {
+    padding: 18px 8px;
   }
 }

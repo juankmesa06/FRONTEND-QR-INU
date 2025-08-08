@@ -1,88 +1,144 @@
-/* Fondo general blanco y padding suave */
 .compraqr-page {
-  background: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
-  padding: 2rem 1rem;
-  margin-top: 90px; /* Para evitar que el navbar tape el contenido */
+  background: #f8f9fa;
+  border-radius: 18px;
+  padding-bottom: 40px;
 }
 
-/* Título principal */
-.display-5 {
-  font-size: 2.3rem;
-  font-weight: 700;
-  color: #675544;
-}
-
-/* Subtítulo */
-.text-inu {
-  color: #675544;
-}
-
-/* Cards de collares */
 .card-collar {
-  border-radius: 1.5rem;
+  border-radius: 18px;
   background: #fff;
+  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.08);
   transition: box-shadow 0.2s, transform 0.2s;
-  border: 1px solid #f3f3f3;
-  min-height: 410px;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .card-collar:hover {
-  box-shadow: 0 8px 32px rgba(249,175,21,0.10);
-  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
+  transform: translateY(-4px) scale(1.02);
 }
 
-/* Botón personalizado */
-.btn-inu {
-  background-color: #F9AF15;
-  color: #675544;
-  border-radius: 30px;
+.card-collar img {
+  border-radius: 12px;
+  background: #fffbe7;
+  border: 2px solid #f9af15;
+  padding: 6px;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.card-collar h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.card-collar ul {
+  padding-left: 18px;
+}
+
+.card-collar .badge {
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+.btn-outline-secondary {
+  border-radius: 8px;
   font-weight: 600;
-  border: none;
+  border: 1.5px solid #675544;
+  color: #675544;
+  background: #fff;
   transition: background 0.2s, color 0.2s;
 }
-.btn-inu:hover {
-  background-color: #675544;
+
+.btn-outline-secondary:hover {
+  background: #f9af15;
   color: #fff;
 }
 
-/* Colores de títulos según tamaño */
-.text-success {
-  color: #1db954 !important;
-}
-.text-warning {
-  color: #F9AF15 !important;
-}
-.text-danger {
-  color: #e74c3c !important;
+.form-label {
+  font-weight: 600;
+  color: #675544;
+  margin-bottom: 4px;
 }
 
-/* Imagen de collar */
-.card-collar img {
-  max-width: 80px;
-  max-height: 80px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
+.form-control {
+  border-radius: 10px;
+  border: 1.5px solid #e0e0e0;
+  background: #f7f7f7;
+  color: #675544;
+  font-size: 1rem;
+  padding: 10px 14px;
+  margin-bottom: 2px;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 
-/* Listas dentro de las cards */
-.card-collar ul {
-  margin-bottom: 0.5rem;
-  padding-left: 1.2rem;
+.form-control:focus {
+  border-color: #f9af15;
+  box-shadow: 0 0 0 2px #f9af1533;
+  background: #fff;
+  color: #2d2d2d;
 }
 
-/* Responsive */
-@media (max-width: 767px) {
+.btn-primary {
+  background: #f9af15;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background: #f9af1580;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #675544;
+  color: #fff;
+}
+
+.alert-info, .alert-secondary {
+  border-radius: 14px;
+  font-size: 1.05rem;
+  background: #fffbe7;
+  color: #675544;
+  border: 1.5px solid #f9af15;
+}
+
+.alert-info strong, .alert-secondary strong {
+  color: #f9af15;
+}
+
+@media (max-width: 900px) {
+  .card-collar {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 600px) {
   .compraqr-page {
-    border-radius: 0;
-    padding: 1rem 0.2rem;
-    margin-top: 70px;
+    padding: 0 2px 24px 2px;
   }
   .card-collar {
-    min-height: unset;
+    min-height: 0;
+    padding: 16px 6px;
   }
-  .display-5 {
-    font-size:
+  .card-collar img {
+    width: 60px;
+    height: 60px;
+  }
+}

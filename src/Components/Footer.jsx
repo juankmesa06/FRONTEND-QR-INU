@@ -47,17 +47,11 @@ const Footer = () => {
           </a>
         </div>
 
-        {/* Enlaces */}
-        <div className="d-flex flex-wrap justify-content-center gap-3 mb-3">
-          <a href="#" className="footer-link">Compañía</a>
-          <a href="#" className="footer-link">Soporte</a>
-          <a href="#" className="footer-link">Términos y Condiciones</a>
-          <a href="#" className="footer-link">Privacidad</a>
-        </div>
+        
 
         {/* Derechos reservados */}
         <div className="footer-bottom mt-3">
-          &copy; {new Date().getFullYear()} <span className="text-yellow">INU</span>Trips – Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} <span className="text-yellow">ARIME</span>SOFTWARE – Todos los derechos reservados.
         </div>
       </div>
     </footer>

@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/CompraQR.css';
 
 const precios = {
-  pequeno: 15000,
-  mediano: 20000,
-  grande: 25000,
+  pequeno: 10000,
+  mediano: 15000,
+  grande: 20000,
 };
 
 function CompraQR() {
@@ -135,13 +135,13 @@ function CompraQR() {
         <div className="col-md-4">
           <div className="card p-4 shadow-sm h-100 border-0 card-collar">
             <div className="text-center mb-2">
-              <img src="/images/collar-pequeno.png" alt="Collar pequeño" style={{width: 80}} />
+              <img src="/images/medallas.png" alt="Collar pequeño" style={{width: 250, height: 250}} />
             </div>
             <h5 className="text-success fw-bold">🐶 Tamaño Pequeño</h5>
             <p className="mb-2">Ideal para chihuahuas, poodles toy y gatos.</p>
             <ul className="text-start small">
-              <li>Collar QR en nylon resistente</li>
-              <li>Medalla de <strong>acrílico</strong> o <strong>aluminio</strong></li>
+              <li>Medalla QR en nylon resistente</li>
+              <li>Medalla de <strong>acrílico</strong></li>
               <li>Personalizado con código único</li>
             </ul>
             <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
@@ -176,14 +176,14 @@ function CompraQR() {
         <div className="col-md-4">
           <div className="card p-4 shadow-sm h-100 border-0 card-collar">
             <div className="text-center mb-2">
-              <img src="/images/collar-mediano.png" alt="Collar mediano" style={{width: 80}} />
+              <img src="/images/medallas.png" alt="Collar mediano" style={{width: 250, height: 250}} />
             </div>
             <h5 className="text-warning fw-bold">🐕 Tamaño Mediano</h5>
             <p className="mb-2">Perfecto para beagles, cockers y similares.</p>
             <ul className="text-start small">
-              <li>Medalla QR reforzada</li>
-              <li>Medalla de <strong>aluminio</strong> o <strong>acero inoxidable</strong></li>
-              <li>Personalizado con QR grabado</li>
+              <li>Medalla QR en nylon resistente</li>
+              <li>Medalla de <strong>acrílico</strong></li>
+              <li>Personalizado con código único</li>
             </ul>
             <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
               <button className="btn btn-outline-secondary" onClick={() => handleCantidad('mediano', -1)}>-</button>
@@ -217,14 +217,14 @@ function CompraQR() {
         <div className="col-md-4">
           <div className="card p-4 shadow-sm h-100 border-0 card-collar">
             <div className="text-center mb-2">
-              <img src="/images/collar-grande.png" alt="Collar grande" style={{width: 80}} />
+              <img src="/images/medallas.png" alt="Collar grande" style={{width: 250, height: 250}} />
             </div>
             <h5 className="text-danger fw-bold">🐕‍🦺 Tamaño Grande</h5>
             <p className="mb-2">Para golden retriever, labradores o pastores.</p>
             <ul className="text-start small">
-              <li>Medalla resistente con QR metálico</li>
-              <li>Medalla de <strong>acero inoxidable</strong></li>
-              <li>Personalización avanzada</li>
+              <li>Medalla QR en nylon resistente</li>
+              <li>Medalla de <strong>acrílico</strong></li>
+              <li>Personalizado con código único</li>
             </ul>
             <div className="d-flex align-items-center justify-content-center gap-2 mt-3">
               <button className="btn btn-outline-secondary" onClick={() => handleCantidad('grande', -1)}>-</button>

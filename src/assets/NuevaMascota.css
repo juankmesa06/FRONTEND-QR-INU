@@ -1,73 +1,112 @@
-:root {
-  --inu-primary: #f9af15;
-  --inu-dark: #675544;
-  --inu-white: #ffffff;
-  --inu-light: #fef8ef;
-  --inu-shadow: rgba(0, 0, 0, 0.05);
-  --inu-radius: 16px;
-  --inu-font: 'Nunito', sans-serif;
-}
-
-/* 🎨 Contenedor general */
 .login-inu-wrapper {
   min-height: 100vh;
-  background-color: var(--inu-light);
-  padding: 60px 20px;
-  font-family: var(--inu-font);
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 8px;
+  box-sizing: border-box;
 }
 
-/* 📦 Tarjeta del formulario */
 .login-inu-box {
-  background-color: var(--inu-white);
-  border-radius: var(--inu-radius);
-  padding: 40px 30px;
-  max-width: 500px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 32px 0 rgba(249, 175, 21, 0.10);
+  padding: 36px 28px 28px 28px;
+  max-width: 410px;
   width: 100%;
-  box-shadow: 0 10px 30px var(--inu-shadow);
-}
-
-/* 🐾 Estilo del logo */
-.login-inu-box img {
-  max-height: 70px;
-}
-
-/* 📝 Etiquetas e inputs */
-.login-inu-box .form-label {
-  font-weight: 600;
-  color: var(--inu-dark);
-}
-
-.login-inu-box .form-control {
-  border-radius: 12px;
-  padding: 10px 14px;
-  border: 1px solid #ccc;
-  transition: border-color 0.3s ease;
-}
-
-.login-inu-box .form-control:focus {
-  border-color: var(--inu-primary);
-  box-shadow: 0 0 0 0.2rem rgba(249, 175, 21, 0.2);
-}
-
-/* 🟡 Botón INU */
-.btn-inu {
-  background-color: var(--inu-primary);
-  color: var(--inu-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: none;
-  border-radius: 30px;
+  margin: 0 auto;
+}
+
+.text-inu-dark {
+  color: #675544;
+}
+
+.login-inu-box img {
+  margin-bottom: 6px;
+}
+
+.login-inu-box h2 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -1px;
+}
+
+.login-inu-box .text-muted {
+  color: #888 !important;
+  font-size: 1.02rem;
+  margin-bottom: 18px;
+}
+
+.form-label {
   font-weight: 600;
-  padding: 12px;
-  transition: background-color 0.3s ease;
+  color: #675544;
+  margin-bottom: 4px;
+}
+
+.form-control, .form-select {
+  border-radius: 10px;
+  border: 1.5px solid #e0e0e0;
+  background: #f7f7f7;
+  color: #675544;
+  font-size: 1rem;
+  padding: 10px 14px;
+  margin-bottom: 2px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #f9af15;
+  box-shadow: 0 0 0 2px #f9af1533;
+  background: #fff;
+  color: #2d2d2d;
+}
+
+.btn-inu {
+  background: #f9af15;
+  color: #fff !important;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
+  cursor: pointer;
 }
 
 .btn-inu:hover {
-  background-color: #e79c10;
-  color: var(--inu-white);
+  background: #675544;
+  color: #fff !important;
 }
 
-/* 📱 Responsive */
-@media (max-width: 576px) {
+.is-invalid, .form-control.is-invalid, .form-select.is-invalid {
+  border-color: #f44336 !important;
+  background: #fff0f0;
+}
+
+.invalid-feedback {
+  color: #f44336;
+  font-size: 0.97rem;
+  margin-bottom: 6px;
+  margin-top: -4px;
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
   .login-inu-box {
-    padding: 30px 20px;
+    padding: 18px 6px 16px 6px;
+    max-width: 98vw;
+  }
+  .login-inu-box h2 {
+    font-size: 1.2rem;
   }
 }

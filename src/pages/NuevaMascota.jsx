@@ -2,13 +2,48 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/NuevaMascota.css';
 
+const RAZAS = {
+  Perro: [
+    'Labrador Retriever', 'Bulldog', 'Poodle', 'Golden Retriever', 'Chihuahua',
+    'Pastor Alemán', 'Beagle', 'Rottweiler', 'Yorkshire Terrier', 'Boxer',
+    'Dálmata', 'Schnauzer', 'Shih Tzu', 'Cocker Spaniel', 'Doberman',
+    'Pug', 'Border Collie', 'French Bulldog', 'Husky Siberiano', 'Mestizo'
+  ],
+  Gato: [
+    'Siames', 'Persa', 'Maine Coon', 'Bengala', 'Ragdoll',
+    'Sphynx', 'British Shorthair', 'Abisinio', 'Scottish Fold', 'Bombay',
+    'Azul Ruso', 'Bosque de Noruega', 'Manx', 'Oriental', 'Himalayo',
+    'Angora', 'Exótico', 'Savannah', 'Munchkin', 'Mestizo'
+  ],
+  Ave: [
+    'Periquito', 'Canario', 'Cacatúa', 'Agapornis', 'Loro',
+    'Diamante Mandarín', 'Ninfa', 'Guacamayo', 'Jilguero', 'Cotorra',
+    'Pinzón', 'Tucán', 'Paloma', 'Gorrión', 'Calopsita',
+    'Amazonas', 'Cacique', 'Cardenal', 'Aratinga', 'Otro'
+  ],
+  Conejo: [
+    'Enano Holandés', 'Cabeza de León', 'Mini Lop', 'Rex', 'Angora',
+    'Belier', 'Californiano', 'Chinchilla', 'Flemish Giant', 'Hotot',
+    'Himalayo', 'Mini Rex', 'Polish', 'Satin', 'Tan',
+    'English Spot', 'Dutch', 'Harlequin', 'Lop', 'Otro'
+  ],
+  Otro: [
+    'Mestizo', 'Desconocida', 'Otra'
+  ]
+};
+
+const ESPECIES = ['Perro', 'Gato', 'Ave', 'Conejo', 'Otro'];
+
+const GENEROS = ['Macho', 'Hembra'];
+const TAMANOS = ['Pequeño', 'Mediano', 'Grande'];
+
 const NuevaMascota = () => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const [form, setForm] = useState({
     name: '',
-    age: 0,
+    age: '',
     species: '',
     breed: '',
     gender: '',
@@ -20,14 +55,19 @@ const NuevaMascota = () => {
   const [petCodeError, setPetCodeError] = useState('');
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    if (e.target.name === 'petCode') setPetCodeError('');
+    const { name, value } = e.target;
+    // Si cambia la especie, limpia la raza
+    if (name === 'species') {
+      setForm({ ...form, species: value, breed: '' });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+    if (name === 'petCode') setPetCodeError('');
   };
 
   const handleFileChange = async (e) => {
     const formData = new FormData();
     formData.append('file', e.target.files[0]);
-
     try {
       const res = await fetch(`${apiUrl}/files/pet`, {
         method: 'POST',
@@ -87,6 +127,9 @@ const NuevaMascota = () => {
     }
   };
 
+  // Razas según especie seleccionada
+  const razasOptions = form.species ? RAZAS[form.species] : [];
+
   return (
     <div className="login-inu-wrapper d-flex align-items-center justify-content-center mt-navbar-spacing">
       <div className="login-inu-box shadow-lg">
@@ -96,7 +139,7 @@ const NuevaMascota = () => {
           <p className="text-muted">Llena los datos para registrar tu mascota</p>
         </div>
 
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} encType="multipart/form-data" autoComplete="off">
           {/* PetCode */}
           <div className="mb-3">
             <label className="form-label">PetCode (ID del QR)</label>
@@ -107,6 +150,7 @@ const NuevaMascota = () => {
               onChange={handleChange}
               className={`form-control ${petCodeError ? 'is-invalid' : ''}`}
               required
+              autoComplete="off"
             />
             {petCodeError && <div className="invalid-feedback">{petCodeError}</div>}
           </div>
@@ -121,48 +165,78 @@ const NuevaMascota = () => {
               onChange={handleChange}
               className="form-control"
               required
+              autoComplete="off"
             />
           </div>
 
-          {/* Campos con lista de opciones */}
-          {[
-            {
-              label: 'Especie',
-              name: 'species',
-              options: ['Perro', 'Gato', 'Ave', 'Conejo', 'Otro'],
-            },
-            {
-              label: 'Raza',
-              name: 'breed',
-              options: ['Labrador', 'Criollo', 'Poodle', 'Siames', 'Persa', 'Otro'],
-            },
-            {
-              label: 'Género',
-              name: 'gender',
-              options: ['Macho', 'Hembra'],
-            },
-            {
-              label: 'Tamaño',
-              name: 'size',
-              options: ['Pequeño', 'Mediano', 'Grande'],
-            },
-          ].map(({ label, name, options }) => (
-            <div className="mb-3" key={name}>
-              <label className="form-label">{label}</label>
-              <select
-                name={name}
-                value={form[name]}
-                onChange={handleChange}
-                className="form-select"
-                required
-              >
-                <option value="">Seleccione una opción</option>
-                {options.map((option, idx) => (
-                  <option key={idx} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-          ))}
+          {/* Especie */}
+          <div className="mb-3">
+            <label className="form-label">Especie</label>
+            <select
+              name="species"
+              value={form.species}
+              onChange={handleChange}
+              className="form-select"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              {ESPECIES.map((option, idx) => (
+                <option key={idx} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Raza */}
+          <div className="mb-3">
+            <label className="form-label">Raza</label>
+            <select
+              name="breed"
+              value={form.breed}
+              onChange={handleChange}
+              className="form-select"
+              required
+              disabled={!form.species}
+            >
+              <option value="">Seleccione una opción</option>
+              {razasOptions.map((option, idx) => (
+                <option key={idx} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Género */}
+          <div className="mb-3">
+            <label className="form-label">Género</label>
+            <select
+              name="gender"
+              value={form.gender}
+              onChange={handleChange}
+              className="form-select"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              {GENEROS.map((option, idx) => (
+                <option key={idx} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Tamaño */}
+          <div className="mb-3">
+            <label className="form-label">Tamaño</label>
+            <select
+              name="size"
+              value={form.size}
+              onChange={handleChange}
+              className="form-select"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              {TAMANOS.map((option, idx) => (
+                <option key={idx} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
 
           {/* Edad */}
           <div className="mb-3">

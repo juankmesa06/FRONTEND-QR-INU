@@ -1,100 +1,135 @@
-/* src/assets/Register.css */
-
-:root {
-  --inu-yellow: #F9AF15;
-  --inu-brown: #675544;
-  --white: #ffffff;
-  --error: #e74c3c;
-  --input-bg: #fff;
-  --input-border: #ccc;
-  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
+/* Elimina scroll horizontal global */
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #f8f9fa;
   margin: 0;
   padding: 0;
-  font-family: var(--font-main);
-  background-color: var(--white);
 }
 
+/* Fondo limpio y centrado */
 .register-container {
+  min-height: 100vh;
+  background: #f8f9fa;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to bottom right, var(--inu-yellow), var(--inu-brown));
+  justify-content: center;
+  padding: 32px 8px;
+  box-sizing: border-box;
 }
 
+/* Tarjeta flotante, sin recuadro fuerte */
 .register-card {
-  background-color: var(--white);
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  background: rgba(255,255,255,0.98);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(103, 85, 68, 0.10);
+  padding: 36px 28px 28px 28px;
+  max-width: 370px;
   width: 100%;
-  max-width: 420px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  margin: 0 auto;
 }
 
+/* Título y subtítulo */
 .register-title {
-  font-size: 1.8rem;
-  color: var(--inu-brown);
-  margin: 1rem 0 0.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #675544;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
 }
 
 .register-subtitle {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1.5rem;
+  color: #888;
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
+/* Inputs modernos */
 .register-input {
   width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border: 1px solid var(--input-border);
-  border-radius: 0.5rem;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
-  background-color: var(--input-bg);
+  background: #f7f7f7;
+  color: #675544;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  font-family: inherit;
 }
 
 .register-input:focus {
-  outline: none;
-  border-color: var(--inu-yellow);
+  border-color: #f9af15;
+  box-shadow: 0 0 0 2px #f9af1533;
 }
 
+/* Botón principal */
 .register-button {
   width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  background-color: var(--inu-yellow);
-  color: var(--white);
+  padding: 12px 0;
+  background: #f9af15;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
-  background-color: #e89e10;
+.register-button:disabled {
+  background: #f9af1580;
+  color: #fff;
+  cursor: not-allowed;
 }
 
+.register-button:hover:not(:disabled) {
+  background: #675544;
+  color: #fff;
+}
+
+/* Mensaje de error */
 .error-msg {
-  color: var(--error);
-  font-size: 0.85rem;
+  color: #f44336;
+  font-size: 0.97rem;
+  margin-bottom: 6px;
+  margin-top: -4px;
   text-align: left;
-  margin-top: -0.3rem;
-  margin-bottom: 0.5rem;
+  width: 100%;
 }
 
+/* Link de login */
 .inu-link {
-  color: var(--inu-brown);
-  font-weight: bold;
+  color: #f9af15;
+  font-weight: 700;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.2s, text-decoration 0.2s;
+  text-decoration: underline;
 }
 
 .inu-link:hover {
-  color: var(--inu-yellow);
+  color: #675544;
+  text-decoration: underline wavy;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .register-card {
+    padding: 18px 6px 16px 6px;
+    max-width: 98vw;
+  }
+  .register-title {
+    font-size: 1.3rem;
+  }
 }

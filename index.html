@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,10 +10,54 @@
 
   <!-- Ícono INU personalizado -->
   <link rel="icon" type="image/png" href="/favicon-16x16.png" />
-</head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <style>
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      background: transparent;
+      border-radius: 50%;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float img {
+      width: 56px;
+      height: 56px;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(40, 167, 69, 0.18);
+      transition: box-shadow 0.2s, transform 0.2s;
+      background: transparent;
+    }
+    .whatsapp-float:hover img {
+      box-shadow: 0 8px 32px rgba(40, 167, 69, 0.28);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a
+    href="https://wa.me/573161034386?text=Hola%20INUTrips%2C%20quiero%20más%20información"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp INUTrips"
+  >
+    <img
+      src="/images/m024t0256_f_whatsapp_17oct22.jpg"
+      alt="WhatsApp"
+    />
+  </a>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>

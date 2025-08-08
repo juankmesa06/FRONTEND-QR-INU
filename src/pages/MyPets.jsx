@@ -9,8 +9,19 @@ function MyPets() {
   const navigate = useNavigate();
   const [mascotas, setMascotas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showAlerta, setShowAlerta] = useState(false);
+  const [editImgId, setEditImgId] = useState(null);
+  const [imgLoading, setImgLoading] = useState(false);
+
   const user = JSON.parse(localStorage.getItem('user'))?.user || {};
   const isAdmin = user?.role === 'admin';
+
+  useEffect(() => {
+    if (localStorage.getItem('mascotaPerdida') === '1') {
+      setShowAlerta(true);
+      localStorage.removeItem('mascotaPerdida');
+    }
+  }, []);
 
   const fetchMascotas = async () => {
     try {
@@ -51,12 +62,39 @@ function MyPets() {
     fetchMascotas();
   }, []);
 
-  const editarMascota = (id) => {
-    navigate(`/editar-mascota/${id}`);
+  const handleImageChange = async (e, petId) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImgLoading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const uploadRes = await fetch(`${apiUrl}/files/pet`, {
+        method: 'POST',
+        body: formData,
+      });
+      const uploadData = await uploadRes.json();
+      const imageUrl = uploadData.secureUrl;
+
+      const token = JSON.parse(localStorage.getItem('user'))?.token;
+      await fetch(`${apiUrl}/pets/${petId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image: imageUrl }),
+      });
+      fetchMascotas();
+      setEditImgId(null);
+    } catch (err) {
+      alert('Error al actualizar la foto');
+    }
+    setImgLoading(false);
   };
 
   const eliminarMascota = async (id) => {
-    if (confirm('¿Estás seguro de que deseas eliminar esta mascota?')) {
+    if (window.confirm('¿Estás seguro de que deseas eliminar esta mascota?')) {
       await fetch(`${apiUrl}/pets/${id}`, {
         method: 'DELETE',
         headers: {
@@ -77,10 +115,6 @@ function MyPets() {
     navigate('/dashboard');
   };
 
-  const editarPerfil = () => {
-    navigate('/editar-perfil');
-  };
-
   let mascotasContent;
   if (loading) {
     mascotasContent = <p className="text-center">Cargando mascotas...</p>;
@@ -91,33 +125,46 @@ function MyPets() {
       <div className="row">
         {mascotas.map((m) => (
           <div className="col-md-6 col-lg-4 mb-4" key={m.id}>
-            <div className="card shadow-sm border-0 pet-card-custom">
-              <img src={`${m.image}`} alt={m.nombre} className="card-img-top" />
+            <div className="card pet-card-custom shadow-sm border-0">
+              <div className="pet-img-wrapper position-relative">
+                <img src={m.image || placeholderImg} alt={m.nombre} className="pet-img" />
+                <button
+                  className="btn btn-outline-inu btn-sm pet-img-edit-btn"
+                  style={{ position: 'absolute', bottom: 10, right: 10, zIndex: 2 }}
+                  onClick={() => setEditImgId(m.id)}
+                  type="button"
+                >
+                  Cambiar foto
+                </button>
+                {editImgId === m.id && (
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="form-control mt-2"
+                    style={{ position: 'absolute', bottom: 40, right: 10, width: 150, zIndex: 3, background: "#fff" }}
+                    onChange={(e) => handleImageChange(e, m.id)}
+                    disabled={imgLoading}
+                  />
+                )}
+              </div>
               <div className="card-body text-center">
-                <h5 className="card-title">{m.nombre}</h5>
-                <p className="card-text">
-                  <strong>Nombre:</strong> {m.name} <br />
-                  <strong>Especie:</strong> {m.species}<br />
-                  <strong>Edad:</strong> {m.age} años
-                </p>
+                <h5 className="card-title mb-1">{m.name}</h5>
                 <div className="mb-2">
+                  <span className="badge bg-inu me-1">{m.species}</span>
+                  <span className="badge bg-light text-dark me-1">{m.age} años</span>
                   <span className="badge bg-secondary">ID: {m.petCode.code}</span>
                 </div>
-                <div>
-                  <img src={`${m.qr}`} alt={m.petCode.id} />
+                <div className="mb-2">
+                  <img src={m.qr} alt={m.petCode.id} className="pet-qr-img" />
                 </div>
-                <button
-                  onClick={() => editarMascota(m.id)}
-                  className="btn btn-sm btn-warning me-2"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => eliminarMascota(m.id)}
-                  className="btn btn-sm btn-danger"
-                >
-                  Eliminar
-                </button>
+                <div className="d-flex justify-content-center gap-2 mt-2">
+                  <button
+                    onClick={() => eliminarMascota(m.id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Eliminar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -127,7 +174,19 @@ function MyPets() {
   }
 
   return (
-    <div className="container py-4">
+    <div className="container py-4 mypets-main">
+      {showAlerta && (
+        <div className="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert">
+          <strong>¡Atención!</strong> Has reportado una mascota como perdida.
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={() => setShowAlerta(false)}
+            style={{ position: 'absolute', right: 16, top: 16 }}
+          ></button>
+        </div>
+      )}
       <div className="mypets-header">
         <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
           <h2 className="mypets-title">
@@ -142,13 +201,9 @@ function MyPets() {
             <button onClick={agregarMascota} className="btn-inu-agregar">
               ➕ Agregar Mascota
             </button>
-            <button onClick={editarPerfil} className="btn btn-outline-primary">
-              Editar Perfil
-            </button>
           </div>
         </div>
       </div>
-
       {mascotasContent}
     </div>
   );

@@ -1,95 +1,249 @@
-/* Dashboard.css - Estilo completo modo claro INUTrips */
-
-:root {
-  --inu-yellow: #F9AF15;
-  --inu-brown: #675544;
-  --inu-light: #fdfaf5;
-  --inu-dark: #2f2f2f;
-  --inu-border: #e5e5e5;
-  --inu-muted: #777;
+/* General container */
+.dashboard.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 64px 16px;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #2d2d2d;
+  background: #fff;
 }
 
-body {
-
-  color: var(--inu-dark);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Título principal */
 .dashboard h2 {
-  color: var(--inu-brown);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #675544;
+  margin-bottom: 32px;
+  letter-spacing: -1px;
 }
 
-.stat-card {
-  background-color: white;
-  border-radius: 0.75rem;
-  border: 1px solid var(--inu-border);
-  transition: transform 0.3s ease;
+/* Sección de reportes */
+.dashboard .alert {
+  font-size: 1.1rem;
+  border-radius: 12px;
+  padding: 18px 14px;
+  margin-bottom: 18px;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+.dashboard .list-unstyled {
+  margin: 0;
+  padding: 0;
 }
 
-.stat-card h5 {
-  color: var(--inu-muted);
+.dashboard li {
+  background: #fffbe7;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
+  padding: 18px 18px 12px 18px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.2s;
 }
 
-.stat-card .text-inu {
-  color: var(--inu-yellow);
+.dashboard li:hover {
+  box-shadow: 0 4px 16px 0 rgba(249, 175, 21, 0.13);
 }
 
-.table thead {
-  background-color: var(--inu-brown);
-  color: white;
-}
-
-.table tbody tr:hover {
-  background-color: #fef5e5;
-}
-
-.dashboard-cta h4 {
-  color: var(--inu-brown);
-}
-
-.dashboard-cta .btn {
-  font-weight: 500;
+.dashboard .badge.bg-secondary {
+  background: #675544 !important;
+  color: #fff;
   font-size: 0.95rem;
-  border-radius: 0.5rem;
-  transition: background 0.3s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
 }
 
-.dashboard-cta .btn-inu {
-  background-color: var(--inu-yellow);
-  color: white;
+.dashboard img {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(103, 85, 68, 0.08);
+  margin-bottom: 8px;
+}
+
+.dashboard button.btn-outline-danger {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dashboard button.btn-outline-danger:hover {
+  background: #f44336;
+  color: #fff;
+  border-color: #f44336;
+}
+
+/* Tabla de historial */
+.dashboard .table-responsive {
+  margin-top: 12px;
+}
+
+.dashboard table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px 0 rgba(103, 85, 68, 0.07);
+}
+
+.dashboard th, .dashboard td {
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+.dashboard th {
+  background: #f9af15;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
   border: none;
 }
 
-.dashboard-cta .btn-inu:hover {
-  background-color: #e09d12;
+.dashboard td {
+  font-size: 1rem;
+  color: #444;
+  border: none;
 }
 
-.dashboard-cta .btn-outline-warning:hover,
-.dashboard-cta .btn-outline-secondary:hover,
-.dashboard-cta .btn-outline-danger:hover,
-.dashboard-cta .btn-outline-info:hover,
-.dashboard-cta .btn-outline-success:hover,
-.dashboard-cta .btn-outline-dark:hover,
-.dashboard-cta .btn-outline-primary:hover {
-  opacity: 0.85;
+.dashboard .badge.bg-danger {
+  background: #f44336 !important;
+  color: #fff;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 6px 12px;
 }
 
-/* Gráficos */
-.dashboard canvas {
-  background: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 0 0.5rem rgba(0,0,0,0.05);
+.dashboard .badge.bg-success {
+  background: #4caf50 !important;
+  color: #fff;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 6px 12px;
 }
 
-/* Responsive mejoras */
-@media (max-width: 768px) {
-  .dashboard-cta .btn {
-    margin-bottom: 10px;
+/* Tarjetas resumen */
+.stat-card {
+  border-radius: 14px;
+  background: #fffbe7;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+  padding: 24px 0 18px 0;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 16px 0 rgba(249, 175, 21, 0.15);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.stat-card .text-inu {
+  color: #f9af15;
+}
+
+.stat-card h5 {
+  color: #675544;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.stat-card h3 {
+  color: #2d2d2d;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+/* Gráfica */
+.dashboard .col-12 .Bar {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+  padding: 18px;
+}
+
+.dashboard .fw-bold {
+  font-weight: 700 !important;
+}
+
+/* Acciones rápidas */
+.dashboard-cta {
+  background: #fffbe7;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+  padding: 32px 24px;
+  margin-top: 32px;
+  text-align: center;
+}
+
+.dashboard-cta h4 {
+  color: #f9af15;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.dashboard-cta .btn {
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 24px;
+  margin-bottom: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dashboard-cta .btn-outline-warning {
+  border-color: #f9af15;
+  color: #f9af15;
+}
+
+.dashboard-cta .btn-outline-warning:hover {
+  background: #f9af15;
+  color: #fff;
+}
+
+.dashboard-cta .btn-outline-success {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.dashboard-cta .btn-outline-success:hover {
+  background: #4caf50;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard .row.g-4 {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .stat-card {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard.container {
+    padding: 12px 2px 32px 2px;
+  }
+  .dashboard h2 {
+    font-size: 1.5rem;
+  }
+  .stat-card h3 {
+    font-size: 1.3rem;
+  }
+  .dashboard-cta {
+    padding: 18px 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard h2 {
+    font-size: 1.1rem;
+  }
+  .dashboard-cta h4 {
+    font-size: 1.1rem;
+  }
+  .stat-card {
+    padding: 12px 0 8px 0;
+  }
+  .dashboard .table-responsive {
+    font-size: 0.95rem;
   }
 }

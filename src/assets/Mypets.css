@@ -1,117 +1,113 @@
-/* ===== DISEÑO GENERAL DE LA SECCIÓN MIS MASCOTAS ===== */
+.mypets-main {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
 
 .mypets-header {
-  background-color: #fffaf0; /* fondo claro suave */
-  border-radius: 20px;
-  padding: 2.5rem;
-  margin-top: 70px;
-  margin-bottom: 40px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
 }
 
 .mypets-title {
   font-size: 2rem;
-  font-weight: 700;
-  color: #675544; /* marrón de marca */
+  font-weight: 800;
+  color: #675544;
+  letter-spacing: -1px;
 }
 
-.inu-highlight {
-  color: #F9AF15; /* amarillo de marca */
-}
-
-.mypets-subtitle {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Botón agregar mascota */
 .btn-inu-agregar {
-  background-color: #F9AF15;
+  background: #f9af15;
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
-  border-radius: 30px;
-  padding: 10px 22px;
-  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 1.05rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
 }
 
 .btn-inu-agregar:hover {
-  background-color: #d99000;
+  background: #675544;
   color: #fff;
 }
 
-/* ===== TARJETAS DE MASCOTAS ===== */
-
 .pet-card-custom {
-  border-radius: 16px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #ffffff;
 }
 
 .pet-card-custom:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
+  transform: translateY(-4px) scale(1.02);
 }
 
-.pet-card-custom img {
-  height: 220px;
+.pet-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fffbe7;
+  padding: 18px 0 8px 0;
+}
+
+.pet-img {
+  width: 150px;
+  height: 300px;
   object-fit: cover;
-  border-bottom: 3px solid #F9AF15;
+  border-radius: 50%;
+  border: 3px solid #f9af15;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.10);
 }
 
-.card-body {
-  padding: 1.2rem;
+.pet-qr-img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px solid #f9af15;
 }
 
-.card-title {
-  color: #675544;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+.badge.bg-inu {
+  background: #f9af15;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  border-radius: 8px;
+  margin-right: 2px;
 }
 
-.card-text {
-  color: #444;
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
+.btn-outline-inu {
+  border: 1.5px solid #f9af15;
+  color: #f9af15;
+  background: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.btn-warning {
-  background-color: #ffc107;
-  border: none;
-  color: #212529;
+.btn-outline-inu:hover {
+  background: #f9af15;
+  color: #fff;
 }
 
-.btn-danger {
-  background-color: #dc3545;
-  border: none;
-  color: white;
-}
-
-.btn-warning:hover {
-  background-color: #e0a800;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
-
-/* RESPONSIVE */
-@media (max-width: 767px) {
-  .mypets-header {
-    padding: 1.5rem;
-    text-align: center;
-  }
-
+@media (max-width: 600px) {
   .mypets-title {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
-
-  .mypets-subtitle {
-    font-size: 0.9rem;
+  .pet-img {
+    width: 70px;
+    height: 70px;
   }
-
-  .btn-inu-agregar {
-    width: 100%;
+  .pet-qr-img {
+    width: 40px;
+    height: 40px;
+  }
+  .pet-card-custom {
+    padding: 0;
   }
 }

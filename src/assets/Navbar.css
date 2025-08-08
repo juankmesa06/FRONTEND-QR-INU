@@ -1,133 +1,100 @@
-:root {
-  --inu-yellow: #F9AF15;
-  --inu-brown: #675544;
-  --inu-white: #ffffff;
-  --inu-light: #fefbf5;
-  --inu-dark: #4a3d33;
-  --inu-radius: 2rem;
-  --inu-shadow: 0 8px 32px rgba(0,0,0,0.10);
+/* Espacio para que el contenido no quede debajo del navbar fijo */
+body {
+  padding-top: 80px !important;
 }
 
-/* Barra completamente redondeada y fondo sólido */
+/* Navbar principal */
 .custom-navbar {
-  width: 100vw;
-  left: 0;
-  top: 0;
-  position: fixed;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.85); /* Blanco translúcido */
-  -webkit-backdrop-filter: blur(12px); /* Efecto blur para Safari */
-  backdrop-filter: blur(12px);         /* Efecto blur estándar */
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  border-radius: 0 0 2rem 2rem;
-  padding: 1.2rem 2rem;
-  margin: 0;
-  transition: background 0.9s, box-shadow 0.9s;
+  z-index: 1050;
+  min-height: 70px;
+  border-bottom: 1.5px solid #f9af15;
+  background: #fff !important;
+  transition: box-shadow 0.2s;
 }
 
-/* Detalle decorativo inferior opcional */
-.custom-navbar::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -12px;
-  height: 18px;
-  background: url('/images/huella-navbar.svg') repeat-x center;
-  opacity: 0.13;
-  pointer-events: none;
-  z-index: 1;
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
+
+.logo-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
 .logo-trips {
-  color: var(--inu-yellow);
-  font-weight: bold;
+  color: #f9af15;
+  font-weight: 700;
+  margin-left: 2px;
 }
 
-.navbar-brand {
-  font-family: 'Nunito', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: var(--inu-white) !important;
-  text-shadow: 1px 2px 6px rgba(0,0,0,0.13);
-  transition: transform 0.3s, color 0.3s;
-  letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.navbar-brand img {
-  height: 38px;
-  width: auto;
-  margin-right: 0.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-}
-
-.navbar-brand:hover {
-  transform: scale(1.07) rotate(-2deg);
-  color: var(--inu-light) !important;
-}
-
-.navbar-toggler {
-  border: none;
-  outline: none;
-  background: var(--inu-yellow);
-  border-radius: 50%;
-  padding: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  transition: background 0.3s;
-}
-
-.navbar-toggler-icon {
-  filter: brightness(0) invert(1);
-}
-
-.navbar-nav {
-  align-items: center;
+.brand-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 4px;
 }
 
 .navbar-nav .nav-link {
-  color: var(--inu-dark) !important;
-  margin: 0 0.7rem;
-  padding: 0.5rem 1.2rem;
-  font-weight: 700;
-  border-radius: 50px;
   font-size: 1.08rem;
-  transition: background 0.3s, color 0.3s, transform 0.3s;
-  position: relative;
-  background: var(--inu-white);
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-  background: var(--inu-light);
-  color: var(--inu-brown) !important;
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #f9af15;
+  color: #fff !important;
 }
 
-.navbar-nav .nav-link.active::after {
-  content: '';
-  display: block;
-  margin: 0.3rem auto 0 auto;
-  width: 18px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--inu-brown);
-  opacity: 0.7;
+.btn-inu {
+  background: #f9af15;
+  color: #fff !important;
+  font-weight: 700;
+  border: none;
+  transition: background 0.2s, color 0.2s;
 }
 
-@media (max-width: 768px) {
+.btn-inu:hover {
+  background: #675544;
+  color: #fff !important;
+}
+
+.btn-outline-dark {
+  border: 1.5px solid #675544;
+  color: #675544;
+  font-weight: 600;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-outline-dark:hover {
+  background: #675544;
+  color: #fff !important;
+}
+
+@media (max-width: 991px) {
+  .custom-navbar .navbar-nav {
+    gap: 0.5rem !important;
+  }
   .custom-navbar {
-    padding: 0.8rem 1rem;
-    border-radius: var(--inu-radius);
-    max-width: 98vw;
+    min-height: 60px;
   }
-  .navbar-brand {
-    font-size: 1.5rem;
+  body {
+    padding-top: 100px !important;
   }
-  .navbar-nav .nav-link {
-    margin: 0.4rem 0;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 600px) {
+  .custom-navbar .navbar-brand img {
+    height: 36px !important;
+  }
+  .brand-text, .logo-brand {
+    font-size: 1.1rem;
+  }
+  body {
+    padding-top: 110px !important;
   }
 }

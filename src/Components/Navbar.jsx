@@ -62,7 +62,7 @@ const Navbar = () => {
 
             <li className="nav-item">
               <Link className="btn btn-inu rounded-pill px-4" to="/CompraQr">
-                Comprar QR
+                Solicitar Medalla
               </Link>
             </li>
 
