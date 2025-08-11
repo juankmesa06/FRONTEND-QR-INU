@@ -21,6 +21,9 @@ import NuevaMascota from './pages/NuevaMascota';
 import GenerarCodigos from './pages/generar-codigos';
 import VerCodigos from './pages/VerCodigos';
 import EditarMascota from './pages/EditarMascota';
+import Compras from './pages/Compras';
+import Recuperar from './pages/Recuperar';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -42,6 +45,11 @@ function App() {
           <Route path="/generar-codigos" element={<GenerarCodigos />} />
           <Route path="/ver-codigos" element={<VerCodigos />} />
           <Route path="/editar-mascota/:id" element={<EditarMascota />} />
+          <Route path="/compras" element={<PrivateRoute><Compras /></PrivateRoute>} />
+        <Route path="/recuperar" element={<Recuperar />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+<Route path="/restablecer-contrasena" element={<ResetPassword />} />
   
         </Routes>
       </main>

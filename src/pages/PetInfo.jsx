@@ -131,8 +131,8 @@ function PetInfo() {
             }
           }}
         >
-          <i className="bi bi-exclamation-triangle me-2"></i>
-          Reportar mascota perdida
+          <i className="bi bi-exclamation-triangle me-2"></i>{' '}
+          Me encontre Esta Mascota
         </button>
       </div>
     </div>

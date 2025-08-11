@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/CompraQR.css';
 
 const precios = {
-  pequeno: 10000,
-  mediano: 15000,
-  grande: 20000,
+  pequeno: 15000,
+  mediano: 20000,
+  grande: 25000,
 };
 
 function CompraQR() {
@@ -16,14 +16,12 @@ function CompraQR() {
     grande: 0,
   });
 
-  // Nombres para grabar en cada placa
   const [nombres, setNombres] = useState({
     pequeno: [''],
     mediano: [''],
     grande: [''],
   });
 
-  // Datos de envío
   const [datosEnvio, setDatosEnvio] = useState({
     fullName: '',
     phone: '',
@@ -33,10 +31,8 @@ function CompraQR() {
     postalCode: '',
   });
 
-  // Estado de compra
   const [comprando, setComprando] = useState(false);
 
-  // Actualiza cantidad y nombres
   const handleCantidad = (tipo, valor) => {
     setCantidades(prev => {
       const nuevaCantidad = Math.max(0, prev[tipo] + valor);
@@ -48,7 +44,6 @@ function CompraQR() {
     });
   };
 
-  // Actualiza nombre grabado
   const handleNombreChange = (tipo, idx, value) => {
     setNombres(prev => ({
       ...prev,
@@ -56,19 +51,16 @@ function CompraQR() {
     }));
   };
 
-  // Actualiza datos de envío
   const handleEnvioChange = e => {
     setDatosEnvio({ ...datosEnvio, [e.target.name]: e.target.value });
   };
 
-  // Calcula total
   const total =
     cantidades.pequeno * precios.pequeno +
     cantidades.mediano * precios.mediano +
     cantidades.grande * precios.grande +
     (cantidades.pequeno + cantidades.mediano + cantidades.grande > 0 ? 20000 : 0);
 
-  // Realiza la compra
   const handleCompra = async () => {
     setComprando(true);
     const items = [
@@ -93,28 +85,38 @@ function CompraQR() {
       items,
       ...datosEnvio
     };
-
-    try {
-      const token = JSON.parse(localStorage.getItem('user'))?.token;
-      const res = await fetch(`${apiUrl}/purchase`, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' ,
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(compra)
-      });
-      const result = await res.json();
-      if (res.ok && result.mercadoPagoUrl) {
-        window.location.href = result.mercadoPagoUrl;
-      } else {
-        alert(result.message || 'No se pudo procesar la compra');
-      }
-    } catch  {
-            alert('Error al conectar con el servidor');
-    } finally {
+    if (items.length === 0) {
+      alert('Debes seleccionar al menos una medalla y proporcionar un nombre para grabar.');
       setComprando(false);
+      return;
     }
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user?.token;
+      if (!token) {
+        alert('Debes iniciar sesión para comprar.');
+    setComprando(false);
+    return;
+  }
+  const res = await fetch(`${apiUrl}/purchase`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(compra)
+  });
+  const result = await res.json();
+  if (res.ok && result.mercadoPagoUrl) {
+    window.location.href = result.mercadoPagoUrl;
+  } else {
+    alert(result.message || 'No se pudo procesar la compra');
+  }
+} catch {
+  alert('Error al conectar con el servidor');
+} finally {
+  setComprando(false);
+}
   };
 
   return (

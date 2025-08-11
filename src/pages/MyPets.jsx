@@ -201,8 +201,36 @@ function MyPets() {
             <button onClick={agregarMascota} className="btn-inu-agregar">
               ➕ Agregar Mascota
             </button>
+            <a
+    href="https://play.google.com/store/apps/details?id=com.inutrips.app" // Cambia por el enlace real de tu app
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn btn-primary"
+    style={{ whiteSpace: 'nowrap' }}
+  >
+    🚗 Pedir un viaje
+  </a>
           </div>
         </div>
+              <section className="dashboard-cta mt-5">
+        <h4 className="fw-bold text-center mb-4">📌 Acciones Rápidas</h4>
+        <div className="row g-3 justify-content-center">
+          {[
+            {
+              text: '✅ Mis Medallas Compradas',
+              route: '/compras',
+              className: 'btn btn-outline-success'
+            },
+            
+          ].map((btn, index) => (
+            <div className="col-12 col-md-auto" key={index}>
+              <button className={`${btn.className} px-4 py-2 w-100`} onClick={() => navigate(btn.route)}>
+                {btn.text}
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
       </div>
       {mascotasContent}
     </div>

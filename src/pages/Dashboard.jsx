@@ -29,6 +29,14 @@ const Dashboard = () => {
   const [showLostAlert, setShowLostAlert] = useState(false);
   const [reportHistory, setReportHistory] = useState([]);
 
+  // Admin compras
+  const [compras, setCompras] = useState([]);
+  const [status, setStatus] = useState('paid');
+  const [loadingCompras, setLoadingCompras] = useState(false);
+  const [carrier, setCarrier] = useState('');
+  const [tracking, setTracking] = useState('');
+  const [selectedCompra, setSelectedCompra] = useState(null);
+
   useEffect(() => {
     const fetchDashboard = async () => {
       const userData = JSON.parse(localStorage.getItem('user'));
@@ -85,6 +93,69 @@ const Dashboard = () => {
     fetchDashboard();
   }, [navigate, apiUrl]);
 
+  // --- ADMIN: Gestión de compras ---
+  const fetchCompras = async (status) => {
+    setLoadingCompras(true);
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const token = userData?.token;
+    try {
+      const res = await fetch(`${apiUrl}/purchase/status/${status}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error('No se pudieron cargar las compras');
+      const data = await res.json();
+      setCompras(data);
+    } catch (e) {
+      alert(e.message);
+    } finally {
+      setLoadingCompras(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCompras(status);
+    // eslint-disable-next-line
+  }, [status, apiUrl]);
+
+  const shipCompra = async (id) => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const token = userData?.token;
+    try {
+      const res = await fetch(`${apiUrl}/purchase/ship/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ carrier, trackingCode: tracking })
+      });
+      if (!res.ok) throw new Error('No se pudo marcar como enviada');
+      alert('Compra marcada como enviada');
+      setCarrier('');
+      setTracking('');
+      setSelectedCompra(null);
+      fetchCompras(status);
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
+  const completeCompra = async (id) => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const token = userData?.token;
+    try {
+      const res = await fetch(`${apiUrl}/purchase/complete-shipping/${id}`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error('No se pudo completar el envío');
+      alert('Compra marcada como completada');
+      fetchCompras(status);
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
   if (!stats) return <p className="text-center my-5">Cargando datos del dashboard...</p>;
 
   const petTypes = stats.petsByType.map(p => p.species);
@@ -94,7 +165,7 @@ const Dashboard = () => {
     <div className="dashboard container py-5">
       <h2 className="text-center fw-bold mb-5">Panel de Control QR INUTrips</h2>
 
-      {/* Sección combinada de reportes activos y su historial */}
+      {/* Sección de reportes activos y su historial */}
       <div className="mt-5">
         <h5 className="fw-bold mb-3">🚨 Mascotas reportadas como perdidas</h5>
         {lostReports.length === 0 ? (
@@ -303,6 +374,102 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Gestión de compras admin */}
+      <section className="admin-compras-section mt-5">
+        <h4 className="fw-bold mb-3">🛒 Gestión de Compras</h4>
+        <div className="mb-3">
+          <label className="me-2" htmlFor="status-select">Filtrar por estado:</label>
+          <select
+            id="status-select"
+            value={status}
+            onChange={e => setStatus(e.target.value)}
+          >
+            <option value="pending">Pendiente</option>
+            <option value="paid">Pagada</option>
+            <option value="shipped">Enviada</option>
+            <option value="completed">Completada</option>
+            <option value="cancelled">Cancelada</option>
+            <option value="failed">Fallida</option>
+          </select>
+        </div>
+        {
+          (() => {
+            if (loadingCompras) {
+              return <p>Cargando compras...</p>;
+            }
+            if (compras.length === 0) {
+              return <div className="alert alert-info">No hay compras con este estado.</div>;
+            }
+            return (
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Items</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {compras.map((compra) => (
+                    <tr key={compra.id}>
+                      <td>{new Date(compra.createdAt).toLocaleString('es-CO')}</td>
+                      <td>{compra.id || '-'}</td>
+                      <td>
+                        <ul>
+                          {compra.items.map((item, idx) => (
+                      <li key={item.id || `${item.type}-${item.nameToEngrave || ''}-${idx}`}>
+                        {item.type} - {item.nameToEngrave} (${item.price})
+                      </li>
+                      ))}
+                      </ul>
+                      </td>
+                      <td>{compra.status}</td>
+                      <td>
+                        {status === 'paid' && (
+                          <>
+                            <button className="btn btn-sm btn-primary mb-2" onClick={() => setSelectedCompra(compra.id)}>
+                              Marcar como enviada
+                            </button>
+                            {selectedCompra === compra.id && (
+                              <div className="mt-2">
+                                <input
+                                  type="text"
+                                  placeholder="Transportadora"
+                                  value={carrier}
+                                  onChange={e => setCarrier(e.target.value)}
+                                  className="form-control mb-1"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="Código de seguimiento"
+                                  value={tracking}
+                                  onChange={e => setTracking(e.target.value)}
+                                  className="form-control mb-1"
+                                />
+                                <button className="btn btn-success btn-sm" onClick={() => shipCompra(compra.id)}>
+                                  Confirmar envío
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        )}
+                        {status === 'shipped' && (
+                          <button className="btn btn-sm btn-success" onClick={() => completeCompra(compra.id)}>
+                            Marcar como completada
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          })()
+        }
+      </section>
+
       {/* Acciones rápidas */}
       <section className="dashboard-cta mt-5">
         <h4 className="fw-bold text-center mb-4">📌 Acciones Rápidas</h4>
@@ -317,11 +484,6 @@ const Dashboard = () => {
               text: '⚙️ Ver Códigos NO RECLAMADOS',
               route: '/ver-codigos',
               className: 'btn btn-outline-warning'
-            },
-            {
-              text: '✅ Compras',
-              route: '/compras',
-              className: 'btn btn-outline-success'
             },
             {
               text: '✅ Ver Códigos Reclamados y Usuarios',
