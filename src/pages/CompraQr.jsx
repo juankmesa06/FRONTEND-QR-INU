@@ -107,8 +107,8 @@ function CompraQR() {
     body: JSON.stringify(compra)
   });
   const result = await res.json();
-  if (res.ok && result.mercadoPagoUrl) {
-    window.location.href = result.mercadoPagoUrl;
+  if (res.ok && result.initPoint) {
+    window.location.href = result.initPoint;
   } else {
     alert(result.message || 'No se pudo procesar la compra');
   }

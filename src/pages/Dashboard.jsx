@@ -178,7 +178,7 @@ const Dashboard = () => {
               <li key={report.id} className="mb-4 border-bottom pb-3">
                 <div className="mb-2">
                   <span className="badge bg-secondary">
-                    ID: {report.pet?.petCode_id}
+                    ID: {report.id}
                   </span>
                 </div>
                 <div className="mb-2">
@@ -214,7 +214,7 @@ const Dashboard = () => {
                     try {
                       const userData = JSON.parse(localStorage.getItem('user'));
                       const token = userData?.token;
-                      const res = await fetch(`${apiUrl}/lost-pet-report/found/${report.id}`, {
+                      const res = await fetch(`${apiUrl}/lost-pet-report/found/${report.pet_id}`, {
                         method: 'PATCH',
                         headers: {
                           'Content-Type': 'application/json',

@@ -80,14 +80,14 @@ function PetInfo() {
       <hr />
       {/* Dueño */}
       <div className="petinfo-owner mb-3">
-        <p className="mb-1"><strong>Dueño:</strong> {pet.owner?.name} {pet.owner?.last_name}</p>
-        <p className="mb-1"><strong>Teléfono:</strong> {pet.owner?.phone}</p>
+        <p className="mb-1"><strong>Dueño:</strong> {pet.pet.owner.name} {pet.pet.owner.last_name}</p>
+        <p className="mb-1"><strong>Teléfono:</strong> {pet.pet.owner.phone}</p>
       </div>
 
       {/* Botones de acción */}
       <div className="d-flex flex-column gap-2 mt-3 petinfo-actions">
         <a
-          href={`https://wa.me/57${pet.owner?.phone}?text=Hola, encontramos tu mascota ${pet.pet.name} usando el QR de INUTrips.`}
+          href={`https://wa.me/57${pet.pet.owner.phone}?text=Hola, encontramos tu mascota ${pet.pet.name} usando el QR de INUTrips.`}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-success"
