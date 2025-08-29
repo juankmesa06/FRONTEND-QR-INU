@@ -1,289 +1,243 @@
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import "../assets/About.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Accordion, ProgressBar } from 'react-bootstrap';
+import React from 'react';
+import '../assets/About.css';
 
-// Componente para lazy loading de imágenes
-const LazyImage = ({ src, alt, className = "" }) => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 },
-    )
-
-    const element = document.getElementById(`img-${src}`)
-    if (element) observer.observe(element)
-
-    return () => observer.disconnect()
-  }, [src])
-
-  return (
-    <div id={`img-${src}`} className={`image-container ${className}`}>
-      {isInView && (
-        <img
-          src={src || "/placeholder.svg"}
-          alt={alt}
-          className={`lazy-image ${isLoaded ? "loaded" : "loading"}`}
-          onLoad={() => setIsLoaded(true)}
-          loading="lazy"
-        />
-      )}
-      {!isLoaded && isInView && (
-        <div className="image-skeleton">
-          <div className="skeleton-shimmer"></div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// Componente para las tarjetas de valores
-const ValueCard = ({ title, children, delay = 0 }) => {
-  return (
-    <motion.div
-      className="about-section"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-      viewport={{ once: true }}
-      whileHover={{ y: -12, scale: 1.02 }}
-    >
-      <h3>{title}</h3>
-      {children}
-    </motion.div>
-  )
-}
-
-// Componente principal
 function About() {
-  const galleryImages = [
-    { src: "/images/1.1.jpg", alt: "Perro feliz disfrutando del viaje" },
-    { src: "/images/4.jpg", alt: "Paseo pet-friendly por la ciudad" },
-    { src: "/images/medalla2.png", alt: "Gato protegido con tecnología INU" },
-  ]
-
-  const contactInfo = [
-    {
-      icon: "📧",
-      label: "Email",
-      value: "soporte@inutrips.com",
-      href: "mailto:soporte@inutrips.com",
-    },
-    {
-      icon: "📞",
-      label: "Teléfono",
-      value: "+57 300 123 4567",
-      href: "tel:+573001234567",
-    },
-    {
-      icon: "📍",
-      label: "Dirección",
-      value: "Calle 123 #45-67, Medellín, Colombia",
-      href: "https://maps.google.com/?q=Medellín,Colombia",
-    },
-    {
-      icon: "🌐",
-      label: "Web",
-      value: "www.inutrips.com",
-      href: "https://www.inutrips.com",
-    },
-  ]
-
   return (
-    <div className="about-container">
-      {/* Hero amigable y moderno */}
-      <section className="about-hero-section simple-hero">
-        <motion.div
-          className="about-hero-content"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="about-hero-title">
-            Movilidad pet-friendly con propósito
-          </h1>
-          <p className="about-hero-subtitle">
-            Tecnología, amor y seguridad para tu mascota en cada viaje.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* 🐾 Quiénes Somos - Tarjeta principal */}
-      <motion.section
-        className="about-card"
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="about-title">Quiénes Somos</h2>
-
-  <div className="about-content-grid">
-  <motion.div
-    className="text-content"
-    initial={{ opacity: 0, x: -40 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.7 }}
-    viewport={{ once: true }}
-  >
-    <p className="about-text">
-      <strong>INUTrips</strong> es una plataforma y aplicación móvil 100% pet-friendly en Colombia, que conecta a propietarios de mascotas con conductores capacitados para ofrecer viajes seguros y cómodos para todos. Nuestra app facilita la movilidad urbana de las familias multiespecie, permitiendo solicitar servicios de transporte especialmente adaptados para mascotas.
-    </p>
-    <div className="about-benefits-box">
-      <p className="about-text fw-semibold mb-2" style={{ color: "#f9af15" }}>
-        ¿Por qué elegir INUTrips?
-      </p>
-      <ul className="about-benefits-list">
-        <li>Solicitar viajes en tiempo real o programados para ti y tu mascota.</li>
-        <li>Contar con conductores entrenados en manejo y bienestar animal.</li>
-        <li>Registrar y gestionar el perfil de tus mascotas desde la app.</li>
-        <li>Acceder a servicios y comercios pet-friendly aliados.</li>
-        <li>Viajar con tranquilidad gracias a la identificación QR y soporte en caso de extravío.</li>
-      </ul>
-    </div>
-    <motion.p
-      className="about-text"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      Nuestro producto <strong>QR Mascotas</strong> permite identificar y proteger a tu mascota con collares inteligentes que la conectan contigo en caso de pérdida, facilitando su regreso a casa.
-    </motion.p>
-    <motion.p
-      className="about-text"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      Además, contamos con el <strong>Kit INU</strong>: un conjunto de accesorios diseñados para proteger tanto a tu mascota como a tu vehículo durante los trayectos. Incluye lona impermeable, cinturones de seguridad y bozal especial, garantizando comodidad y seguridad para todos.
-    </motion.p>
-    <motion.p
-      className="about-text"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4, duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      Esta iniciativa nace del amor por los animales y la visión de una movilidad más empática, conectada y responsable en las ciudades.
-    </motion.p>
-  </motion.div>
-  <motion.div
-    className="image-content"
-    initial={{ opacity: 0, scale: 0.92 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.8 }}
-    viewport={{ once: true }}
-    whileHover={{ scale: 1.04, rotate: 1 }}
-    style={{ boxShadow: "0 4px 24px 0 rgba(249, 175, 21, 0.10)", borderRadius: "1.5rem" }}
-  >
-    <LazyImage
-      src="/images/juntos a todas partes.jpg"
-      alt="Familia con mascota disfrutando de un viaje seguro"
-      className="about-img-full"
-    />
-  </motion.div>
-</div>
-      </motion.section>
-
-      {/* 🚀 Misión, Visión, Valores */}
-      <section className="about-sections">
-        <ValueCard title="Misión" delay={0.1}>
-          <p>Conectar la movilidad urbana con el bienestar animal, promoviendo ciudades más seguras y humanas.</p>
-        </ValueCard>
-
-        <ValueCard title="Visión" delay={0.2}>
-          <p>Ser la red pet-friendly más confiable de Latinoamérica, integrando innovación y empatía.</p>
-        </ValueCard>
-
-        <ValueCard title="Valores" delay={0.3}>
-          <ul>
-            <li>Amor por los animales</li>
-            <li>Seguridad e integridad</li>
-            <li>Tecnología con propósito</li>
-            <li>Movilidad inclusiva</li>
-            <li>Sostenibilidad</li>
-            <li>Comunidad y colaboración</li>
-          </ul>
-        </ValueCard>
-      </section>
-
-      {/* 🐶 Galería de Mascotas mejorada */}
-      <section className="about-gallery">
-        <motion.h2
-          className="about-title"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Nuestros Productos
-        </motion.h2>
-
-        <div className="gallery-grid">
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-            >
-              <LazyImage src={image.src} alt={image.alt} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* 📬 Contacto mejorado */}
-      <motion.section
-        className="about-contact"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h3>Contáctanos</h3>
-        <p>¿Tienes preguntas? ¡Estamos aquí para ayudarte!</p>
-
-        <div className="contact-grid">
-          {contactInfo.map((contact, index) => (
-            <motion.div
-              key={index}
-              className="contact-item"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="contact-icon">{contact.icon}</span>
-              <div className="contact-info">
-                <span className="contact-label">{contact.label}:</span>
-                <a
-                  href={contact.href}
-                  target={contact.label === "Web" || contact.label === "Dirección" ? "_blank" : undefined}
-                  rel={contact.label === "Web" || contact.label === "Dirección" ? "noopener noreferrer" : undefined}
-                  className="contact-link"
-                >
-                  {contact.value}
-                </a>
+    <div className="container-fluid py-5 neu-bg" style={{ fontFamily: "'Nunito', Arial, sans-serif" }}>
+      <div className="container">
+        {/* Sección principal */}
+        <div className="row align-items-center justify-content-center">
+          <div className="col-lg-10 mx-auto">
+            <div className="neu-card p-4 mb-4">
+              <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '3rem', textAlign: 'center' }}>
+                <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>{' '}
+                <span className="logo-trips" style={{ color: '#f9af15' }}>Trips</span>
+                : Movilidad Pet-Friendly en Colombia
+              </h1>
+              <div className="row g-5 align-items-center mb-5 flex-column flex-md-row">
+                <div className="col-md-5">
+                  <div className="about-img rounded-4 overflow-hidden shadow-sm">
+                    <img
+                      className="img-fluid w-100 shadow-drop-left-right"
+                      src="/images/3.jpg"
+                      srcSet="/images/3.jpg 1x, /images/3.jpg 2x, /images/3@3x.jpg 3x"
+                      alt="Viaje seguro con mascotas"
+                      style={{ objectFit: "cover", minHeight: 500, maxHeight: 500 }}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-7">
+                  <p className="lead mb-4">
+                    INU Trips es la primera app y plataforma de movilidad 100% pet-friendly en Colombia. Conectamos familias multiespecie con conductores capacitados, para que humanos y mascotas viajen seguros, cómodos y felices.<br /><br />
+                    <strong>¿Por qué elegirnos?</strong> Nuestra app te permite programar o pedir viajes en tiempo real, registrar a tus mascotas y acceder a servicios aliados pet-friendly. Además, donamos parte de nuestros ingresos a fundaciones de animales, apoyando el rescate y bienestar de mascotas en situación vulnerable.
+                  </p>
+                  <div className="row g-4 mb-4">
+                    <div className="col-sm-6">
+                      <div className="d-flex align-items-center">
+                        <div className="flex-shrink-0 btn-xl-square bg-light me-3 rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48 }}>
+                          <i className="bi bi-geo-alt text-warning fs-3"></i>
+                        </div>
+                        <h6 className="lh-base mb-0">Viajes programados y en tiempo real</h6>
+                      </div>
+                    </div>
+                    <div className="col-sm-6">
+                      <div className="d-flex align-items-center">
+                        <div className="flex-shrink-0 btn-xl-square bg-light me-3 rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48 }}>
+                          <i className="bi bi-shield-check text-warning fs-3"></i>
+                        </div>
+                        <h6 className="lh-base mb-0">Seguridad y soporte 24/7</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <p><i className="bi bi-check-square text-warning me-2"></i>Registro fácil de mascotas</p>
+                  <p><i className="bi bi-check-square text-warning me-2"></i>Acceso a servicios pet-friendly</p>
+                  <p><i className="bi bi-check-square text-warning me-2"></i>Disponible para Android y iOS</p>
+                  <div className="border border-3 border-warning p-4 text-center mt-4 rounded-4 bg-white">
+                    <h5 className="lh-base mb-0">
+                      Descarga la app y vive la experiencia INUTrips<br />
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.zqinutrips"
+                        className="btn btn-inu btn-sm px-4 mt-3 me-2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="bi bi-google-play me-1"></i> Google Play
+                      </a>
+                      <a
+                        href="https://apps.apple.com/co/app/inutrips/id6450268527"
+                        className="btn btn-inu btn-sm px-4 mt-3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="bi bi-apple me-1"></i> App Store
+                      </a>
+                    </h5>
+                  </div>
+                </div>
               </div>
-            </motion.div>
-          ))}
+              {/* Características / Features */}
+              <div className="row g-4 mb-4 justify-content-center">
+                <div className="col-sm-6 col-lg-4">
+                  <div className="d-flex align-items-center neu-card ps-3 py-2">
+                    <div className="flex-shrink-0 btn-xl-square me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: 48, height: 48, background: "#e0e0e0" }}>
+                      <i className="bi bi-award text-warning fs-3"></i>
+                    </div>
+                    <div>
+                      <h5 className="lh-base text-uppercase mb-0" style={{ fontWeight: 700 }}>Medalla QR INU</h5>
+                      <p className="mb-0 small">Identificador inteligente para tu mascota. Si se pierde, pueden contactarte escaneando el QR.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-6 col-lg-4">
+                  <div className="d-flex align-items-center neu-card ps-3 py-2">
+                    <div className="flex-shrink-0 btn-xl-square me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: 48, height: 48, background: "#e0e0e0" }}>
+                      <i className="bi bi-box-seam text-warning fs-3"></i>
+                    </div>
+                    <div>
+                      <h5 className="lh-base text-uppercase mb-0" style={{ fontWeight: 700 }}>Kit INU</h5>
+                      <p className="mb-0 small">Accesorios de seguridad: lona, cinturones y bozal especial para proteger a tu mascota y tu vehículo.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex flex-wrap gap-2 mb-3 justify-content-center">
+                <span className="badge bg-warning text-dark"><i className="bi bi-check-circle me-1"></i>Viajes programados y en tiempo real</span>
+                <span className="badge bg-warning text-dark"><i className="bi bi-check-circle me-1"></i>Conductores entrenados en bienestar animal</span>
+                <span className="badge bg-warning text-dark"><i className="bi bi-check-circle me-1"></i>Acceso a servicios pet-friendly</span>
+              </div>
+              <div className="neu-card p-4 text-center mt-4 mx-auto" style={{ maxWidth: 600 }}>
+                <h4 className="lh-base text-uppercase mb-0" style={{ fontWeight: 900, color: "#f9af15" }}>
+                  ¡Con INUTrips, tu mascota viaja feliz y tú ayudas a salvar vidas!
+                </h4>
+                <p className="mt-2 mb-0 small">
+                  Parte de nuestros servicios apoya a fundaciones de animales en Colombia.
+                </p>
+                <div className="mt-3">
+                  <ProgressBar now={30} label="30% donado a fundaciones" variant="warning" style={{ height: 18, fontWeight: 700 }} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </motion.section>
+        {/* Características adicionales */}
+        <div className="container pt-5">
+          <div className="row g-0 feature-row justify-content-center">
+            <div className="col-md-6 col-lg-3">
+              <div className="feature-item neu-card h-100 text-center p-4">
+                <div className="feature-icon btn-xxl-square bg-warning mb-4 mt-n4 d-flex align-items-center justify-content-center rounded-circle mx-auto" style={{ width: 64, height: 64 }}>
+                  <i className="bi bi-geo-alt text-white fs-2"></i>
+                </div>
+                <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Viajes Pet-Friendly</h5>
+                <p>Viaja con tu mascota en cualquier momento, con seguridad y comodidad.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <div className="feature-item neu-card h-100 text-center p-4">
+                <div className="feature-icon btn-xxl-square bg-warning mb-4 mt-n4 d-flex align-items-center justify-content-center rounded-circle mx-auto" style={{ width: 64, height: 64 }}>
+                  <i className="bi bi-shield-check text-white fs-2"></i>
+                </div>
+                <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Seguridad</h5>
+                <p>Conductores capacitados y accesorios para el bienestar de tu mascota y tu familia.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <div className="feature-item neu-card h-100 text-center p-4">
+                <div className="feature-icon btn-xxl-square bg-warning mb-4 mt-n4 d-flex align-items-center justify-content-center rounded-circle mx-auto" style={{ width: 64, height: 64 }}>
+                  <i className="bi bi-award text-white fs-2"></i>
+                </div>
+                <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Medalla QR</h5>
+                <p>Identifica y protege a tu mascota con nuestra medalla QR exclusiva.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3">
+              <div className="feature-item neu-card h-100 text-center p-4">
+                <div className="feature-icon btn-xxl-square bg-warning mb-4 mt-n4 d-flex align-items-center justify-content-center rounded-circle mx-auto" style={{ width: 64, height: 64 }}>
+                  <i className="bi bi-heart-fill text-white fs-2"></i>
+                </div>
+                <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Apoyo Social</h5>
+                <p>Donamos parte de nuestros ingresos a fundaciones de animales en Colombia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* FAQ dinámico con Accordion */}
+        <div className="container pt-5">
+          <h3 className="text-inu mb-4 fw-bold text-center">Preguntas frecuentes</h3>
+          <Accordion>
+            <Accordion.Item eventKey="0" className="neu-card">
+              <Accordion.Header>¿Cómo funciona la medalla QR?</Accordion.Header>
+              <Accordion.Body>
+                Cada medalla tiene un código único. Si tu mascota se pierde, quien la encuentre puede escanear el QR y contactarte fácilmente.
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1" className="neu-card">
+              <Accordion.Header>¿Qué incluye el Kit INU?</Accordion.Header>
+              <Accordion.Body>
+                Incluye lona protectora, cinturón de seguridad y bozal especial para viajes seguros y cómodos.
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2" className="neu-card">
+              <Accordion.Header>¿Cómo ayudan a las fundaciones?</Accordion.Header>
+              <Accordion.Body>
+                Donamos un porcentaje de cada servicio a fundaciones aliadas para el rescate y bienestar animal.
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
+        {/* Newsletter / Contacto */}
+        <div className="">
+          <div className="container pb-5">
+            <div className="neu-card p-5 mb-5">
+              <div className="row g-5">
+                <div className="col-md-6">
+                  <h1 className="display-6 text-uppercase mb-4" style={{ fontWeight: 900, color: "#3d2c1e" }}>Contáctanos</h1>
+                  <div className="d-flex align-items-center">
+                    <i className="bi bi-envelope-open-fill fs-1 text-warning me-4"></i>
+                    <p className="fs-5 mb-0">
+                      ¿Tienes dudas o quieres ser parte de nuestra comunidad? Escríbenos y te responderemos pronto.
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <form>
+                    <div className="form-floating mb-3">
+                      <input
+                        type="email"
+                        className="neu-input form-control border-0"
+                        id="mail"
+                        placeholder="Tu correo"
+                      />
+                      <label htmlFor="mail">Tu correo</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                      <textarea
+                        className="neu-input form-control border-0"
+                        placeholder="Escribe tu mensaje"
+                        id="mensaje"
+                        style={{ minHeight: "100px" }}
+                      ></textarea>
+                      <label htmlFor="mensaje">Mensaje</label>
+                    </div>
+                    <button className="neu-btn w-100 py-3" type="submit">
+                      Enviar mensaje
+                    </button>
+                  </form>
+                </div>
+                <div className="mt-4">
+                  <p className="mb-1"><i className="bi bi-envelope-fill text-warning me-2"></i> soporte@inutrips.com</p>
+                  <p className="mb-1"><i className="bi bi-telephone-fill text-warning me-2"></i> +57 300 123 4567</p>
+                  <p className="mb-1"><i className="bi bi-geo-alt-fill text-warning me-2"></i> Calle 123 #45-67, Medellín, Colombia</p>
+                  <p className="mb-0"><i className="bi bi-globe2 text-warning me-2"></i> <a href="https://www.inutrips.com" target="_blank" rel="noopener noreferrer">www.inutrips.com</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default About
+export default About;

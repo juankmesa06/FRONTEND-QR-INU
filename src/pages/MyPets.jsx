@@ -12,6 +12,7 @@ function MyPets() {
   const [showAlerta, setShowAlerta] = useState(false);
   const [editImgId, setEditImgId] = useState(null);
   const [imgLoading, setImgLoading] = useState(false);
+  const [search, setSearch] = useState(""); // Nueva funcionalidad: búsqueda
 
   const user = JSON.parse(localStorage.getItem('user'))?.user || {};
   const isAdmin = user?.role === 'admin';
@@ -60,6 +61,7 @@ function MyPets() {
 
   useEffect(() => {
     fetchMascotas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleImageChange = async (e, petId) => {
@@ -87,7 +89,7 @@ function MyPets() {
       });
       fetchMascotas();
       setEditImgId(null);
-    } catch (err) {
+    } catch  {
       alert('Error al actualizar la foto');
     }
     setImgLoading(false);
@@ -115,15 +117,22 @@ function MyPets() {
     navigate('/dashboard');
   };
 
+  // Nueva funcionalidad: búsqueda de mascotas por nombre o especie
+  const mascotasFiltradas = mascotas.filter(
+    (m) =>
+      m.name.toLowerCase().includes(search.toLowerCase()) ||
+      m.species.toLowerCase().includes(search.toLowerCase())
+  );
+
   let mascotasContent;
   if (loading) {
     mascotasContent = <p className="text-center">Cargando mascotas...</p>;
-  } else if (mascotas.length === 0) {
-    mascotasContent = <p className="text-center">No tienes mascotas registradas.</p>;
+  } else if (mascotasFiltradas.length === 0) {
+    mascotasContent = <p className="text-center">No tienes mascotas registradas o no hay coincidencias.</p>;
   } else {
     mascotasContent = (
       <div className="row">
-        {mascotas.map((m) => (
+        {mascotasFiltradas.map((m) => (
           <div className="col-md-6 col-lg-4 mb-4" key={m.id}>
             <div className="card pet-card-custom shadow-sm border-0">
               <div className="pet-img-wrapper position-relative">
@@ -174,10 +183,10 @@ function MyPets() {
   }
 
   return (
-    <div className="container py-4 mypets-main">
+    <div className="">
       {showAlerta && (
         <div className="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert">
-          <strong>¡Atención!</strong> Has reportado una mascota como perdida.
+          <strong>¡Atención!</strong> tienes una mascota como perdida.
           <button
             type="button"
             className="btn-close"
@@ -202,35 +211,45 @@ function MyPets() {
               ➕ Agregar Mascota
             </button>
             <a
-    href="https://play.google.com/store/apps/details?id=com.inutrips.app" // Cambia por el enlace real de tu app
-    target="_blank"
-    rel="noopener noreferrer"
-    className="btn btn-primary"
-    style={{ whiteSpace: 'nowrap' }}
-  >
-    🚗 Pedir un viaje
-  </a>
+              href="https://play.google.com/store/apps/details?id=com.inutrips.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              🚗 Pedir un viaje
+            </a>
           </div>
         </div>
-              <section className="dashboard-cta mt-5">
-        <h4 className="fw-bold text-center mb-4">📌 Acciones Rápidas</h4>
-        <div className="row g-3 justify-content-center">
-          {[
-            {
-              text: '✅ Mis Medallas Compradas',
-              route: '/compras',
-              className: 'btn btn-outline-success'
-            },
-            
-          ].map((btn, index) => (
-            <div className="col-12 col-md-auto" key={index}>
-              <button className={`${btn.className} px-4 py-2 w-100`} onClick={() => navigate(btn.route)}>
-                {btn.text}
-              </button>
-            </div>
-          ))}
+        {/* Nueva funcionalidad: búsqueda */}
+        <div className="mb-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Buscar por nombre o especie..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ maxWidth: 350, margin: '0 auto' }}
+          />
         </div>
-      </section>
+        <section className="dashboard-cta mt-5">
+          <h4 className="fw-bold text-center mb-4">📌 Acciones Rápidas</h4>
+          <div className="row g-3 justify-content-center">
+            {[
+              {
+                text: '✅ Mis Medallas Compradas',
+                route: '/compras',
+                className: 'btn btn-outline-success'
+              },
+            ].map((btn, index) => (
+              <div className="col-12 col-md-auto" key={index}>
+                <button className={`${btn.className} px-4 py-2 w-100`} onClick={() => navigate(btn.route)}>
+                  {btn.text}
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
       {mascotasContent}
     </div>

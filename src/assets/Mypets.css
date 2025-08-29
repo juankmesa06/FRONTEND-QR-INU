@@ -1,10 +1,16 @@
+/* Fondo principal */
 .mypets-main {
   min-height: 100vh;
   background: #f8f9fa;
+  padding-bottom: 2rem;
 }
 
+/* Header y título */
 .mypets-header {
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .mypets-title {
@@ -12,6 +18,12 @@
   font-weight: 800;
   color: #675544;
   letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+}
+
+/* Botones principales */
+.d-flex.gap-2.flex-wrap > * {
+  margin-bottom: 0.5rem;
 }
 
 .btn-inu-agregar {
@@ -24,61 +36,13 @@
   font-size: 1.05rem;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
+  margin-left: 0.5rem;
 }
 
-.btn-inu-agregar:hover {
+.btn-inu-agregar:hover,
+.btn-inu-agregar:focus {
   background: #675544;
   color: #fff;
-}
-
-.pet-card-custom {
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.08);
-  transition: box-shadow 0.2s, transform 0.2s;
-  overflow: hidden;
-}
-
-.pet-card-custom:hover {
-  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
-  transform: translateY(-4px) scale(1.02);
-}
-
-.pet-img-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fffbe7;
-  padding: 18px 0 8px 0;
-}
-
-.pet-img {
-  width: 150px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #f9af15;
-  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.10);
-}
-
-.pet-qr-img {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-  margin-top: 8px;
-  margin-bottom: 4px;
-  background: #fff;
-  border-radius: 10px;
-  border: 1.5px solid #f9af15;
-}
-
-.badge.bg-inu {
-  background: #f9af15;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.98rem;
-  border-radius: 8px;
-  margin-right: 2px;
 }
 
 .btn-outline-inu {
@@ -88,11 +52,84 @@
   font-weight: 600;
   border-radius: 10px;
   transition: background 0.2s, color 0.2s;
+  margin-left: 0.5rem;
 }
 
-.btn-outline-inu:hover {
+.btn-outline-inu:hover,
+.btn-outline-inu:focus {
   background: #f9af15;
   color: #fff;
+}
+
+/* Tarjeta de mascota */
+.pet-card-custom {
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 1rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pet-card-custom:hover {
+  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Imagen de mascota */
+.pet-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fffbe7;
+  padding: 18px 0 8px 0;
+  width: 100%;
+}
+
+.pet-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #f9af15;
+  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.10);
+}
+
+/* Imagen QR */
+.pet-qr-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin: 8px auto 4px auto; /* Centra horizontalmente */
+  display: block;            /* Asegura que respete el margin auto */
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px solid #f9af15;
+}
+
+/* Badges */
+.badge.bg-inu {
+  background: #f9af15;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  border-radius: 8px;
+  margin-right: 2px;
+  padding: 0.3em 0.8em;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mypets-main {
+    padding: 0.5rem;
+  }
+  .pet-card-custom {
+    padding: 0.7rem 0.5rem 1rem 0.5rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -108,6 +145,17 @@
     height: 40px;
   }
   .pet-card-custom {
-    padding: 0;
+    padding: 0.5rem 0.2rem 0.8rem 0.2rem;
+  }
+  .btn-inu-agregar,
+  .btn-outline-inu {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    margin-left: 0;
+    margin-bottom: 0.4rem;
+  }
+  .d-flex.gap-2.flex-wrap {
+    flex-direction: column;
+    gap: 0.3rem;
   }
 }

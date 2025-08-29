@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/Navbar.css';
@@ -7,21 +7,26 @@ import { AuthContext } from '../context/AuthContext';
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
+    setMenuOpen(false);
   };
 
   const roles = user?.user?.roles || [];
   const isAdmin = roles.includes('admin');
+
+  // Cierra el menú al hacer click en un link
+  const handleLinkClick = () => setMenuOpen(false);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top custom-navbar">
       <div className="container">
 
         {/* LOGO INUTRIPS */}
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
+        <Link className="navbar-brand d-flex align-items-center gap-2" to="/" onClick={handleLinkClick}>
           <img
             src="/images/LOGO PRINCIPAL.png"
             alt="INUTrips Logo"
@@ -29,39 +34,36 @@ const Navbar = () => {
           />
           <strong className="brand-text">
             <span className="logo-brand">
-  <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>
-  <span className="logo-trips">Trips</span>
-</span>
+              <span style={{ color: '#675544', fontWeight: 'bold', fontSize: '1.5rem' }}>INU</span>
+              <span className="logo-trips" style={{ fontSize: '1.5rem' }}>Trips</span>
+            </span>
           </strong>
         </Link>
 
-        {/* Botón responsive */}
+        {/* Botón hamburguesa */}
         <button
           className="navbar-toggler border-0"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* Navegación */}
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div className={`collapse navbar-collapse justify-content-end${menuOpen ? ' show' : ''}`} id="navbarNav">
           <ul className="navbar-nav align-items-center gap-3">
 
             <li className="nav-item">
-              <Link className="nav-link text-dark fw-semibold" to="/about">Quiénes Somos</Link>
+              <Link className="nav-link text-dark fw-semibold" to="/about" onClick={handleLinkClick}>Quiénes Somos</Link>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link text-dark fw-semibold" to="/report">Encontré una Mascota</Link>
+              <Link className="nav-link text-dark fw-semibold" to="/report" onClick={handleLinkClick}>Encontré una Mascota</Link>
             </li>
 
             <li className="nav-item">
-              <Link className="btn btn-inu rounded-pill px-4" to="/CompraQr">
+              <Link className="btn btn-inu rounded-pill px-4" to="/CompraQr" onClick={handleLinkClick}>
                 Solicitar Medalla
               </Link>
             </li>
@@ -69,21 +71,21 @@ const Navbar = () => {
             {/* Si no hay sesión */}
             {!user ? (
               <li className="nav-item">
-                <Link className="nav-link text-dark fw-semibold" to="/login">Iniciar Sesión</Link>
+                <Link className="nav-link text-dark fw-semibold" to="/login" onClick={handleLinkClick}>Iniciar Sesión</Link>
               </li>
             ) : (
               <>
                 {/* SOLO PARA USUARIOS COMUNES */}
                 {!isAdmin && (
                   <li className="nav-item">
-                    <Link className="nav-link text-dark fw-semibold" to="/mypets">Mis Mascotas</Link>
+                    <Link className="nav-link text-dark fw-semibold" to="/mypets" onClick={handleLinkClick}>Mis Mascotas</Link>
                   </li>
                 )}
 
                 {/* SOLO PARA ADMIN */}
                 {isAdmin && (
                   <li className="nav-item">
-                    <Link className="nav-link text-dark fw-semibold" to="/dashboard">Dashboard</Link>
+                    <Link className="nav-link text-dark fw-semibold" to="/dashboard" onClick={handleLinkClick}>Dashboard</Link>
                   </li>
                 )}
 

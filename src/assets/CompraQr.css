@@ -1,144 +1,159 @@
-.compraqr-page {
-  background: #f8f9fa;
-  border-radius: 18px;
-  padding-bottom: 40px;
+/* Fuente Nunito para todo */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
+
+/* Fondo animado suave (opcional, puedes agregar un fondo si lo deseas) */
+/* body, .compraqr-bg {
+  background: linear-gradient(135deg, #fffbe7 0%, #f9f6e7 100%);
+} */
+
+/* Títulos principales */
+.text-inu, .display-5, h2, h4, h5 {
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #3d2c1e !important;
+  font-family: 'Nunito', Arial, sans-serif;
 }
 
+/* Card de medalla neumorfismo */
 .card-collar {
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 2px 16px 0 rgba(249, 175, 21, 0.08);
-  transition: box-shadow 0.2s, transform 0.2s;
-  min-height: 480px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card-collar:hover {
-  box-shadow: 0 6px 24px 0 rgba(249, 175, 21, 0.15);
-  transform: translateY(-4px) scale(1.02);
-}
-
-.card-collar img {
-  border-radius: 12px;
   background: #fffbe7;
-  border: 2px solid #f9af15;
-  padding: 6px;
-  margin-bottom: 10px;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
+  border-radius: 1.2rem;
+  box-shadow: 8px 8px 24px #e0e0e0, -8px -8px 24px #fff;
+  border: none;
+  transition: box-shadow 0.2s;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.card-collar:hover {
+  box-shadow: 0 8px 32px 0 rgba(249, 175, 21, 0.18);
 }
 
-.card-collar h5 {
+/* Imagen de medalla centrada y neumorfismo */
+.card-collar img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin: 12px auto 8px auto;
+  display: block;
+  background: #fff;
+  border-radius: 1rem;
+  border: 1.5px solid #f9af15;
+  box-shadow: 2px 2px 12px #e0e0e0, -2px -2px 12px #fff;
+}
+
+/* Botones de cantidad neumorfismo */
+.btn-outline-secondary {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.card-collar ul {
-  padding-left: 18px;
-}
-
-.card-collar .badge {
-  font-size: 1rem;
-  border-radius: 8px;
-  margin-top: 6px;
-}
-
-.btn-outline-secondary {
-  border-radius: 8px;
-  font-weight: 600;
-  border: 1.5px solid #675544;
-  color: #675544;
-  background: #fff;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btn-outline-secondary:hover {
-  background: #f9af15;
-  color: #fff;
-}
-
-.form-label {
-  font-weight: 600;
-  color: #675544;
-  margin-bottom: 4px;
-}
-
-.form-control {
-  border-radius: 10px;
-  border: 1.5px solid #e0e0e0;
-  background: #f7f7f7;
-  color: #675544;
-  font-size: 1rem;
-  padding: 10px 14px;
-  margin-bottom: 2px;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-
-.form-control:focus {
-  border-color: #f9af15;
-  box-shadow: 0 0 0 2px #f9af1533;
-  background: #fff;
-  color: #2d2d2d;
-}
-
-.btn-primary {
-  background: #f9af15;
-  color: #fff;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  margin-top: 10px;
-  margin-bottom: 4px;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
-  cursor: pointer;
-}
-
-.btn-primary:disabled {
-  background: #f9af1580;
-  color: #fff;
-  cursor: not-allowed;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: #675544;
-  color: #fff;
-}
-
-.alert-info, .alert-secondary {
-  border-radius: 14px;
-  font-size: 1.05rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fffbe7;
-  color: #675544;
-  border: 1.5px solid #f9af15;
+  border: 1.5px solid #e0e0e0;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+  color: #3d2c1e;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+  background: #f9af15;
+  color: #fff;
+  border-color: #f9af15;
 }
 
+/* Inputs y selects neumorfismo */
+.form-control {
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  background: #fff;
+  border: 1.5px solid #f9af15;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+}
+.form-control:focus {
+  border-color: #3d2c1e;
+  box-shadow: 0 0 0 0.15rem #f9af1533, 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+}
+
+/* Badges de precio */
+.badge {
+  font-size: 1rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  background: #f9af15;
+  color: #fff;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+}
+
+/* Alertas neumorfismo */
+.alert-info, .alert-secondary {
+  background: #fff;
+  border-radius: 1.2rem;
+  color: #3d2c1e;
+  border: 2px solid #f9af15;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 12px 0 rgba(249, 175, 21, 0.07);
+  padding: 1.2rem 1rem;
+}
 .alert-info strong, .alert-secondary strong {
   color: #f9af15;
 }
 
-@media (max-width: 900px) {
-  .card-collar {
-    min-height: 420px;
-  }
+/* Botón de pago neumorfismo */
+.btn-primary {
+  background: #f9af15;
+  color: #3d2c1e;
+  border: none;
+  font-weight: 800;
+  border-radius: 0.7rem;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background: #3d2c1e;
+  color: #fffbe7;
 }
 
-@media (max-width: 600px) {
-  .compraqr-page {
-    padding: 0 2px 24px 2px;
+/* Responsive */
+@media (max-width: 991px) {
+  .card-collar img {
+    width: 90px !important;
+    height: 90px !important;
   }
   .card-collar {
-    min-height: 0;
-    padding: 16px 6px;
+    padding: 1.2rem !important;
+  }
+}
+@media (max-width: 767px) {
+  .card-collar {
+    padding: 1rem !important;
   }
   .card-collar img {
-    width: 60px;
-    height: 60px;
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .display-5 {
+    font-size: 1.3rem !important;
+  }
+  .alert-info, .alert-secondary {
+    font-size: 0.98rem;
+    padding: 1rem 0.5rem;
+  }
+}
+@media (max-width: 575px) {
+  .card-collar {
+    padding: 0.7rem !important;
+  }
+  .card-collar img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .alert-info, .alert-secondary {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.3rem;
   }
 }

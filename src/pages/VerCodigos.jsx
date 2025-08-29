@@ -32,6 +32,46 @@ const VerCodigos = () => {
   useEffect(() => {
     fetchCodigos(cantidad);
   }, [cantidad]);
+// ...existing code...
+const descargarQRyCodigo = (item) => {
+  const canvas = document.createElement('canvas');
+  const width = 220;
+  const height = 270;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  // Fondo blanco
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, width, height);
+
+  // Cargar imagen QR
+  const img = new window.Image();
+  img.crossOrigin = "anonymous";
+  img.onload = () => {
+    // Dibuja el QR centrado
+    ctx.drawImage(img, 10, 10, 200, 200);
+
+    // Texto del código
+    ctx.font = "bold 22px Nunito, Arial";
+    ctx.fillStyle = "#3d2c1e";
+    ctx.textAlign = "center";
+    ctx.fillText(item.code, width / 2, 235);
+
+    // Marca INUTrips (opcional)
+    ctx.font = "bold 15px Nunito, Arial";
+    ctx.fillStyle = "#f9af15";
+    ctx.fillText("INUTRIPS", width / 2, 260);
+
+    // Descargar imagen
+    const link = document.createElement('a');
+    link.download = `QR-${item.code}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+  img.src = item.qr;
+};
+// ...existing code...
 
   return (
     <div className="container py-5">
@@ -85,22 +125,13 @@ const VerCodigos = () => {
                   </td>
                   <td>
                     <div className="d-flex flex-column gap-2">
+                     
                       <button
-                        className="btn btn-outline-success btn-sm"
-                        onClick={() => {
-                          navigator.clipboard.writeText(item.code);
-                          alert('Código copiado al portapapeles');
-                        }}
-                      >
-                        📋 Copiar Código
-                      </button>
-                      <a
-                        href={item.qr}
-                        download={`QR-${item.code}.png`}
-                        className="btn btn-outline-primary btn-sm"
-                      >
-                        ⬇️ Descargar QR
-                      </a>
+  className="btn btn-outline-primary btn-sm"
+  onClick={() => descargarQRyCodigo(item)}
+>
+  ⬇️ Descargar QR + Código
+</button>
                     </div>
                   </td>
                 </tr>

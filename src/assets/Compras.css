@@ -1,0 +1,160 @@
+/* Contenedor principal */
+.compras-container {
+  max-width: 950px;
+  margin: 2.5rem auto;
+  padding: 2.5rem 1.5rem;
+  background: #fffbe7;
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 24px #e0e0e0, -8px -8px 24px #fff;
+  transition: box-shadow 0.3s;
+}
+
+.compras-container:hover {
+  box-shadow: 0 10px 40px 0 rgba(249, 175, 21, 0.18);
+}
+
+/* Título */
+.compras-title {
+  color: #f9af15;
+  font-weight: 900;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 2.2rem;
+  font-family: 'Nunito', Arial, sans-serif;
+}
+
+/* Tabla neumorfismo */
+.table.compras-table {
+  background: #fffbe7;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 4px 4px 16px #e0e0e0, -4px -4px 16px #fff;
+  margin-bottom: 0;
+}
+
+.table.compras-table th {
+  background: linear-gradient(90deg, #f9af15 60%, #ffd966 100%);
+  color: #4d3a0b;
+  font-weight: 800;
+  text-align: center;
+  font-size: 1.08rem;
+  border: none;
+  padding: 1rem 0.5rem;
+  font-family: 'Nunito', Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.table.compras-table td {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  padding: 0.8rem 0.5rem;
+  background: #fffdfa;
+  transition: background 0.2s;
+  font-family: 'Nunito', Arial, sans-serif;
+}
+
+.table.compras-table tr:hover td {
+  background: #fff7e6;
+}
+
+/* Lista de items */
+.compras-items-list {
+  padding-left: 1.2rem;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.compras-items-list li {
+  margin-bottom: 0.2rem;
+  font-size: 0.98rem;
+}
+
+/* Estados de compra */
+.compras-status {
+  font-weight: bold;
+  border-radius: 0.7rem;
+  padding: 0.25rem 1rem;
+  display: inline-block;
+  font-size: 0.98rem;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.compras-status.Pendiente {
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffe082;
+}
+
+.compras-status.Pagada {
+  background: #d4edda;
+  color: #155724;
+  border-color: #a5d6a7;
+}
+
+.compras-status.Enviada {
+  background: #cce5ff;
+  color: #004085;
+  border-color: #90caf9;
+}
+
+.compras-status.Completada {
+  background: #d1ecf1;
+  color: #0c5460;
+  border-color: #b2ebf2;
+}
+
+.compras-status.Cancelada,
+.compras-status.Fallida {
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #ef9a9a;
+}
+
+/* Botón de factura y acciones */
+.btn-factura, .btn-compras {
+  border-radius: 1rem !important;
+  background: #fffbe7 !important;
+  color: #f9af15 !important;
+  font-weight: 700;
+  border: 1.5px solid #f9af15 !important;
+  box-shadow: 2px 2px 8px #e0e0e0, -2px -2px 8px #fff;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  padding: 0.4rem 1.2rem;
+}
+
+.btn-factura:hover, .btn-compras:hover {
+  background: #f9af15 !important;
+  color: #fff !important;
+}
+
+/* Badge de descarga no disponible */
+.text-muted {
+  color: #bdbdbd !important;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .compras-container {
+    padding: 1.2rem 0.3rem;
+    border-radius: 0.7rem;
+  }
+  .compras-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .table.compras-table th,
+  .table.compras-table td {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.2rem;
+  }
+  .table.compras-table {
+    border-radius: 0.7rem;
+  }
+}

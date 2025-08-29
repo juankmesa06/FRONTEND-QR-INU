@@ -1,15 +1,10 @@
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background: #f8f9fa;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
 
 .login-inu-wrapper {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: linear-gradient(-45deg, #fffbe7, #f9af15, #ffe6a7, #fffbe7, #f9af15);
+  background-size: 400% 400%;
+  animation: gradientBG 18s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,10 +12,16 @@ html, body {
   box-sizing: border-box;
 }
 
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .login-inu-box {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 32px 0 rgba(249, 175, 21, 0.10);
+  background: #e0e0e0;
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 24px #bebebe, -8px -8px 24px #ffffff;
   padding: 36px 28px 28px 28px;
   max-width: 370px;
   width: 100%;
@@ -29,49 +30,53 @@ html, body {
   align-items: center;
   border: none;
   margin: 0 auto;
-}
-
-.text-inu-dark {
-  color: #675544;
+  border-top: 6px solid #f9af15;
+  border-bottom: 6px solid #f9af15;
 }
 
 .login-inu-box img {
   margin-bottom: 6px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 4px 4px 16px #bebebe, -4px -4px 16px #ffffff;
 }
 
 .login-inu-box h2 {
-  font-size: 1.7rem;
-  font-weight: 800;
+  font-size: 2rem;
+  font-weight: 900;
   margin-bottom: 4px;
   letter-spacing: -1px;
+  color: #3d2c1e;
 }
 
 .login-inu-box .text-muted {
   color: #888 !important;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   margin-bottom: 18px;
 }
 
 .form-label {
-  font-weight: 600;
+  font-weight: 700;
   color: #675544;
   margin-bottom: 4px;
 }
 
-.form-control, .form-select {
-  border-radius: 10px;
+.login-inu-box .form-control {
+  border-radius: 1rem;
   border: 1.5px solid #e0e0e0;
   background: #f7f7f7;
   color: #675544;
   font-size: 1rem;
-  padding: 10px 14px;
+  padding: 12px 16px;
   margin-bottom: 2px;
   transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 12px #bebebe, -4px -4px 12px #ffffff;
 }
 
-.form-control:focus, .form-select:focus {
+.login-inu-box .form-control:focus {
   border-color: #f9af15;
-  box-shadow: 0 0 0 2px #f9af1533;
+  box-shadow: 0 0 0 2px #f9af1533, 2px 2px 8px #bebebe, -2px -2px 8px #ffffff;
   background: #fff;
   color: #2d2d2d;
 }
@@ -79,16 +84,17 @@ html, body {
 .btn-inu {
   background: #f9af15;
   color: #fff !important;
-  font-weight: 700;
+  font-weight: 800;
   border: none;
-  border-radius: 10px;
-  padding: 12px 0;
+  border-radius: 1rem;
+  padding: 14px 0;
   font-size: 1.1rem;
   margin-top: 10px;
   margin-bottom: 4px;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(249, 175, 21, 0.07);
+  box-shadow: 4px 4px 12px #bebebe, -4px -4px 12px #ffffff;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .btn-inu:disabled {
@@ -98,11 +104,11 @@ html, body {
 }
 
 .btn-inu:hover:not(:disabled) {
-  background: #675544;
+  background: #3d2c1e;
   color: #fff;
 }
 
-.is-invalid, .form-control.is-invalid, .form-select.is-invalid {
+.is-invalid, .login-inu-box .form-control.is-invalid {
   border-color: #f44336 !important;
   background: #fff0f0;
 }
@@ -127,19 +133,33 @@ html, body {
 }
 
 .fw-bold {
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
 
 .text-decoration-none {
   text-decoration: none !important;
 }
 
+.badge-inu {
+  background: #fffbe7;
+  color: #f9af15;
+  font-weight: 700;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  padding: 0.4em 1em;
+  margin-bottom: 10px;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
   .login-inu-box {
     padding: 18px 6px 16px 6px;
     max-width: 98vw;
+    border-radius: 1.2rem;
   }
   .login-inu-box h2 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 }

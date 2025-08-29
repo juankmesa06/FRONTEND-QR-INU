@@ -16,14 +16,22 @@ function PetInfo() {
         if (!res.ok) throw new Error('Mascota no encontrada');
         const data = await res.json();
         setPet(data);
-      } catch (err) {
+      } catch {
         setPet(null);
       } finally {
         setLoading(false);
       }
     };
     fetchPet();
-  }, [qrCode]);
+  }, [qrCode, apiUrl]);
+
+  // Ocultar alerta automáticamente después de 4 segundos
+  useEffect(() => {
+    if (alert.message) {
+      const timer = setTimeout(() => setAlert({ type: '', message: '' }), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
 
   const crearReporte = async (loc) => {
     const body = {
@@ -65,6 +73,7 @@ function PetInfo() {
           src={pet.pet.image || "/placeholder.svg"}
           alt="Foto mascota"
           className="petinfo-avatar"
+          
         />
         <h3 className="petinfo-name">{pet.pet.name}</h3>
         <span className="petinfo-species">{pet.pet.species}</span>
@@ -113,27 +122,30 @@ function PetInfo() {
           }}
         >
           <i className="bi bi-geo-alt me-2"></i>
-          Soporte INUTrips (enviar ubicación)
+          <span>Soporte INUTrips (enviar ubicación)</span>
         </button>
         <button
-          className="btn btn-danger"
-          onClick={async () => {
-            let location = '';
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(async (position) => {
-                location = `${position.coords.latitude},${position.coords.longitude}`;
-                await crearReporte(location);
-              }, async () => {
-                await crearReporte('');
-              });
-            } else {
-              await crearReporte('');
-            }
-          }}
-        >
-          <i className="bi bi-exclamation-triangle me-2"></i>{' '}
-          Me encontre Esta Mascota
-        </button>
+  className="btn btn-danger"
+  onClick={async () => {
+    let location = '';
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        location = `${position.coords.latitude},${position.coords.longitude}`;
+        await crearReporte(location);
+        window.alert('¡Gracias! Esta mascota fue reportada como perdida. El dueño será notificado.');
+      }, async () => {
+        await crearReporte('');
+        window.alert('¡Gracias! Esta mascota fue reportada como perdida. El dueño será notificado.');
+      });
+    } else {
+      await crearReporte('');
+      window.alert('¡Gracias! Esta mascota fue reportada como perdida. El dueño será notificado.');
+    }
+  }}
+>
+  <i className="bi bi-exclamation-triangle me-2"></i>{' '}
+  Me encontre Esta Mascota
+</button>
       </div>
     </div>
   );

@@ -1,8 +1,65 @@
-body {
-  font-family: var(--fuente-principal);
-  background-color: var(--color-fondo);
-  color: var(--color-secundario);
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
+
+/* Reset y base mínima */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  background: #fff;
 }
+
+/* Fondo animado */
+.bg {
+  animation: slide 30s ease-in-out infinite alternate;
+  background-image:rgba(255, 255, 255, 0) ;
+  opacity: .5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+.bg3 {
+  animation-duration: 5s;
+}
+@keyframes slide {
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(25%); }
+}
+
+/* Imágenes y videos fluidos globales */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive helpers globales */
+@media (max-width: 1200px) {
+  body {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 991px) {
+  body {
+    font-size: 0.98rem;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 0.96rem;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 0.93rem;
+  }
+}
+
+/* Fin del CSS global: solo fondo y helpers responsive */

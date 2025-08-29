@@ -26,17 +26,19 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [lostReports, setLostReports] = useState([]);
-  const [showLostAlert, setShowLostAlert] = useState(false);
   const [reportHistory, setReportHistory] = useState([]);
-
-  // Admin compras
+  const [reportPage, setReportPage] = useState(0);
+  const reportsPerPage = 10;
   const [compras, setCompras] = useState([]);
+  const [comprasPage, setComprasPage] = useState(0);
+  const comprasPerPage = 10;
   const [status, setStatus] = useState('paid');
   const [loadingCompras, setLoadingCompras] = useState(false);
   const [carrier, setCarrier] = useState('');
   const [tracking, setTracking] = useState('');
   const [selectedCompra, setSelectedCompra] = useState(null);
 
+  // Cargar datos del dashboard
   useEffect(() => {
     const fetchDashboard = async () => {
       const userData = JSON.parse(localStorage.getItem('user'));
@@ -54,7 +56,6 @@ const Dashboard = () => {
         const res = await fetch(`${apiUrl}/admin/dashboard`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-
         if (!res.ok) throw new Error('Error al cargar el dashboard');
         const data = await res.json();
 
@@ -66,7 +67,7 @@ const Dashboard = () => {
           petsByType: data.petsByType ?? [],
         });
 
-        // Reportes activos y el historial de reportes (paginado)
+        // Reportes activos
         const lostRes = await fetch(`${apiUrl}/lost-pet-report`, {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -74,18 +75,17 @@ const Dashboard = () => {
         if (lostRes.ok) {
           lostData = await lostRes.json();
           setLostReports(lostData);
-          setShowLostAlert(lostData.length > 0);
         }
 
-        const historyRes = await fetch(`${apiUrl}/lost-pet-report?limit=20&offset=0`, {
+        // Historial de reportes
+        const historyRes = await fetch(`${apiUrl}/lost-pet-report?limit=100&offset=0`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (historyRes.ok) {
           const historyData = await historyRes.json();
           setReportHistory(historyData);
         }
-      } catch (error) {
-        console.error('Error al cargar el dashboard:', error);
+      } catch {
         alert('Error al cargar el dashboard');
       }
     };
@@ -114,13 +114,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchCompras(status);
-    // eslint-disable-next-line
+    setComprasPage(0);
   }, [status, apiUrl]);
 
+  // Marcar compra como enviada y pasar a completada directamente
   const shipCompra = async (id) => {
     const userData = JSON.parse(localStorage.getItem('user'));
     const token = userData?.token;
     try {
+      // Marcar como enviada (puede dejarla en SHIPPED)
       const res = await fetch(`${apiUrl}/purchase/ship/${id}`, {
         method: 'PATCH',
         headers: {
@@ -130,7 +132,14 @@ const Dashboard = () => {
         body: JSON.stringify({ carrier, trackingCode: tracking })
       });
       if (!res.ok) throw new Error('No se pudo marcar como enviada');
-      alert('Compra marcada como enviada');
+
+      // Marcar como completada (asegura que pase a COMPLETED)
+      await fetch(`${apiUrl}/purchase/complete-shipping/${id}`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      alert('Compra marcada como completada');
       setCarrier('');
       setTracking('');
       setSelectedCompra(null);
@@ -140,19 +149,35 @@ const Dashboard = () => {
     }
   };
 
-  const completeCompra = async (id) => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    const token = userData?.token;
+  // --- Desactivar alerta de mascota perdida ---
+  const desactivarAlerta = async (report) => {
     try {
-      const res = await fetch(`${apiUrl}/purchase/complete-shipping/${id}`, {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      const token = userData?.token;
+      const res = await fetch(`${apiUrl}/lost-pet-report/found/${report.pet_id}`, {
         method: 'PATCH',
-        headers: { Authorization: `Bearer ${token}` }
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       });
-      if (!res.ok) throw new Error('No se pudo completar el envío');
-      alert('Compra marcada como completada');
-      fetchCompras(status);
-    } catch (e) {
-      alert(e.message);
+      if (res.ok) {
+        // Recarga los reportes activos
+        const lostRes = await fetch(`${apiUrl}/lost-pet-report`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        let lostData = [];
+        if (lostRes.ok) {
+          lostData = await lostRes.json();
+          setLostReports(lostData);
+        }
+        alert('Alerta desactivada correctamente.');
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        alert(errorData.message || 'No se pudo desactivar la alerta.');
+      }
+    } catch {
+      alert('Error al desactivar la alerta.');
     }
   };
 
@@ -161,86 +186,79 @@ const Dashboard = () => {
   const petTypes = stats.petsByType.map(p => p.species);
   const petCounts = stats.petsByType.map(p => p._count);
 
+  // Paginación reportes recientes
+  const paginatedReports = reportHistory.slice(
+    reportPage * reportsPerPage,
+    (reportPage + 1) * reportsPerPage
+  );
+
+  // Paginación compras
+  const paginatedCompras = compras.slice(
+    comprasPage * comprasPerPage,
+    (comprasPage + 1) * comprasPerPage
+  );
+
   return (
-    <div className="dashboard container py-5">
+    <div className="container dashboard-container py-5">
       <h2 className="text-center fw-bold mb-5">Panel de Control QR INUTrips</h2>
 
-      {/* Sección de reportes activos y su historial */}
+      {/* Sección de reportes activos */}
       <div className="mt-5">
         <h5 className="fw-bold mb-3">🚨 Mascotas reportadas como perdidas</h5>
-        {lostReports.length === 0 ? (
+        {lostReports.filter(r => r.is_active).length === 0 ? (
           <div className="alert alert-success text-center mb-4">
             No hay mascotas reportadas como perdidas actualmente.
           </div>
         ) : (
           <ul className="list-unstyled mb-4">
-            {lostReports.map((report) => (
-              <li key={report.id} className="mb-4 border-bottom pb-3">
-                <div className="mb-2">
-                  <span className="badge bg-secondary">
-                    ID: {report.id}
-                  </span>
-                </div>
-                <div className="mb-2">
-                  <strong>Nombre:</strong> {report.pet?.name}
-                </div>
-                {report.pet?.image && (
+            {lostReports
+              .filter(report => report.is_active)
+              .map((report) => (
+                <li key={report.id} className="mb-4 border-bottom pb-3">
                   <div className="mb-2">
-                    <img
-                      src={report.pet.image}
-                      alt={report.pet.name}
-                      style={{ maxWidth: 120, borderRadius: 8 }}
-                    />
+                    <span className="badge bg-secondary">
+                      ID: {report.id}
+                    </span>
                   </div>
-                )}
-                <div>
-                  <strong>Mensaje:</strong> {report.message || 'Sin mensaje'}
-                </div>
-                {report.location && (
+                  <div className="mb-2">
+                    <strong>Nombre:</strong> {report.pet?.name}
+                  </div>
+                  {report.pet?.image && (
+                    <div className="mb-2">
+                      <img
+                        src={report.pet.image}
+                        alt={report.pet.name}
+                        style={{ maxWidth: 120, borderRadius: 8 }}
+                      />
+                    </div>
+                  )}
                   <div>
-                    <strong>Ubicación:</strong>{' '}
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${report.location}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {report.location}
-                    </a>
+                    <strong>Mensaje:</strong> {report.message || 'Sin mensaje'}
                   </div>
-                )}
-                <button
-                  className="btn btn-outline-danger mt-2"
-                  onClick={async () => {
-                    try {
-                      const userData = JSON.parse(localStorage.getItem('user'));
-                      const token = userData?.token;
-                      const res = await fetch(`${apiUrl}/lost-pet-report/found/${report.pet_id}`, {
-                        method: 'PATCH',
-                        headers: {
-                          'Content-Type': 'application/json',
-                          Authorization: `Bearer ${token}`,
-                        },
-                      });
-                      if (res.ok) {
-                        setLostReports(lostReports.filter(r => r.id !== report.id));
-                        if (lostReports.length - 1 === 0) setShowLostAlert(false);
-                        alert('Alerta desactivada correctamente.');
-                      } else {
-                        const errorData = await res.json().catch(() => ({}));
-                        alert(errorData.message || 'No se pudo desactivar la alerta.');
-                      }
-                    } catch {
-                      alert('Error al desactivar la alerta.');
-                    }
-                  }}
-                >
-                  Desactivar alerta (mascota encontrada)
-                </button>
-              </li>
-            ))}
+                  {report.location && (
+                    <div>
+                      <strong>Ubicación:</strong>{' '}
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${report.location}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {report.location}
+                      </a>
+                    </div>
+                  )}
+                  <button
+                    className="btn btn-outline-danger mt-2"
+                    onClick={() => desactivarAlerta(report)}
+                  >
+                    Desactivar alerta (mascota encontrada)
+                  </button>
+                </li>
+              ))}
           </ul>
         )}
 
+        {/* Historial de reportes */}
         <h5 className="fw-bold mb-3 mt-5">Historial de reportes recientes</h5>
         <div className="table-responsive">
           <table className="table table-striped table-bordered">
@@ -254,16 +272,16 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {reportHistory.length === 0 ? (
+              {paginatedReports.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center">No hay reportes recientes.</td>
                 </tr>
               ) : (
-                reportHistory.map((rep) => (
+                paginatedReports.map((rep) => (
                   <tr key={rep.id}>
                     <td>
-                      {rep.createdAt
-                        ? new Date(rep.createdAt).toLocaleString('es-CO', { hour12: false })
+                      {rep.created_at
+                        ? new Date(rep.created_at).toLocaleString('es-CO', { hour12: false })
                         : 'Sin fecha'}
                     </td>
                     <td>{rep.pet?.name || 'Sin nombre'}</td>
@@ -291,6 +309,24 @@ const Dashboard = () => {
               )}
             </tbody>
           </table>
+          {/* Paginación reportes */}
+          <div className="d-flex justify-content-center align-items-center gap-2 my-2">
+            <button
+              className="btn btn-sm btn-outline-warning"
+              disabled={reportPage === 0}
+              onClick={() => setReportPage(reportPage - 1)}
+            >
+              Anterior
+            </button>
+            <span>Página {reportPage + 1} de {Math.ceil(reportHistory.length / reportsPerPage)}</span>
+            <button
+              className="btn btn-sm btn-outline-warning"
+              disabled={(reportPage + 1) * reportsPerPage >= reportHistory.length}
+              onClick={() => setReportPage(reportPage + 1)}
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
       </div>
 
@@ -386,10 +422,7 @@ const Dashboard = () => {
           >
             <option value="pending">Pendiente</option>
             <option value="paid">Pagada</option>
-            <option value="shipped">Enviada</option>
             <option value="completed">Completada</option>
-            <option value="cancelled">Cancelada</option>
-            <option value="failed">Fallida</option>
           </select>
         </div>
         {
@@ -397,74 +430,136 @@ const Dashboard = () => {
             if (loadingCompras) {
               return <p>Cargando compras...</p>;
             }
-            if (compras.length === 0) {
+            if (paginatedCompras.length === 0) {
               return <div className="alert alert-info">No hay compras con este estado.</div>;
             }
             return (
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Usuario</th>
-                    <th>Items</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {compras.map((compra) => (
-                    <tr key={compra.id}>
-                      <td>{new Date(compra.createdAt).toLocaleString('es-CO')}</td>
-                      <td>{compra.id || '-'}</td>
-                      <td>
-                        <ul>
-                          {compra.items.map((item, idx) => (
-                      <li key={item.id || `${item.type}-${item.nameToEngrave || ''}-${idx}`}>
-                        {item.type} - {item.nameToEngrave} (${item.price})
-                      </li>
-                      ))}
-                      </ul>
-                      </td>
-                      <td>{compra.status}</td>
-                      <td>
-                        {status === 'paid' && (
-                          <>
-                            <button className="btn btn-sm btn-primary mb-2" onClick={() => setSelectedCompra(compra.id)}>
-                              Marcar como enviada
-                            </button>
-                            {selectedCompra === compra.id && (
-                              <div className="mt-2">
-                                <input
-                                  type="text"
-                                  placeholder="Transportadora"
-                                  value={carrier}
-                                  onChange={e => setCarrier(e.target.value)}
-                                  className="form-control mb-1"
-                                />
-                                <input
-                                  type="text"
-                                  placeholder="Código de seguimiento"
-                                  value={tracking}
-                                  onChange={e => setTracking(e.target.value)}
-                                  className="form-control mb-1"
-                                />
-                                <button className="btn btn-success btn-sm" onClick={() => shipCompra(compra.id)}>
-                                  Confirmar envío
-                                </button>
-                              </div>
-                            )}
-                          </>
-                        )}
-                        {status === 'shipped' && (
-                          <button className="btn btn-sm btn-success" onClick={() => completeCompra(compra.id)}>
-                            Marcar como completada
-                          </button>
-                        )}
-                      </td>
+              <>
+                <table className="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>ID de Compra</th>
+                      <th>Items</th>
+                      <th>Datos de Envío</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {paginatedCompras.map((compra) => (
+                      <tr key={compra.id}>
+                        <td>{new Date(compra.created_at).toLocaleString('es-CO')}</td>
+                        <td>{compra.id || '-'}</td>
+                        <td>
+                          <ul>
+                            {compra.items.map((item, idx) => (
+                              <li key={item.id || `${item.type}-${item.name_to_engrave || ''}-${idx}`}>
+                                <strong>{item.type}</strong> - {item.name_to_engrave} <span className="badge bg-warning text-dark ms-1">${item.unit_price}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td>
+                          {compra.shippingInfo ? (
+                            <div style={{ fontSize: "0.95rem" }}>
+                              <div><strong>Nombre:</strong> {compra.shippingInfo.full_name}</div>
+                              <div><strong>Tel:</strong> {compra.shippingInfo.phone}</div>
+                              <div><strong>Documento:</strong> {compra.shippingInfo.document}</div>
+                              <div><strong>Dirección:</strong> {compra.shippingInfo.address}</div>
+                              <div><strong>Ciudad:</strong> {compra.shippingInfo.city}</div>
+                              <div><strong>Depto:</strong> {compra.shippingInfo.state}</div>
+                              {compra.shippingInfo.carrier && (
+                                <div><strong>Transportadora:</strong> {compra.shippingInfo.carrier}</div>
+                              )}
+                              {compra.shippingInfo.trackingCode && (
+                                <div><strong>Guía:</strong> {compra.shippingInfo.trackingCode}</div>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-muted">Sin datos</span>
+                          )}
+                        </td>
+                        <td>{compra.status}</td>
+                        <td>
+                          {/* Si el estado es pagada, mostrar inputs y botón solo si ambos campos están completos */}
+                          {compra.status === 'PAID' && (
+                            <div className="mt-2">
+                              <input
+                                type="text"
+                                placeholder="Transportadora"
+                                value={selectedCompra === compra.id ? carrier : ''}
+                                onChange={e => {
+                                  setSelectedCompra(compra.id);
+                                  setCarrier(e.target.value);
+                                }}
+                                className="form-control mb-1"
+                              />
+                              <input
+                                type="text"
+                                placeholder="Código de seguimiento"
+                                value={selectedCompra === compra.id ? tracking : ''}
+                                onChange={e => {
+                                  setSelectedCompra(compra.id);
+                                  setTracking(e.target.value);
+                                }}
+                                className="form-control mb-1"
+                              />
+                              <button
+                                className="btn btn-success btn-sm"
+                                onClick={() => shipCompra(compra.id)}
+                                disabled={!carrier.trim() || !tracking.trim() || selectedCompra !== compra.id}
+                              >
+                                Marcar como enviada
+                              </button>
+                            </div>
+                          )}
+
+                          {/* Si el estado es completada, mostrar todos los datos */}
+                          {compra.status === 'COMPLETED' && (
+                            <div>
+                              <strong>Compra completada</strong>
+                              <ul className="mt-2">
+                                <li><strong>ID Compra:</strong> {compra.id}</li>
+                                <li><strong>Usuario:</strong> {compra.user_id}</li>
+                                <li><strong>Pago:</strong> {compra.payment_id}</li>
+                                <li><strong>Fecha:</strong> {new Date(compra.created_at).toLocaleString('es-CO')}</li>
+                                <li><strong>Total:</strong> ${compra.total_price}</li>
+                                <li><strong>Estado:</strong> {compra.status}</li>
+                                {compra.shippingInfo && (
+                                  <>
+                                    <li><strong>Transportadora:</strong> {compra.shippingInfo.carrier}</li>
+                                    <li><strong>Guía:</strong> {compra.shippingInfo.tracking_code}</li>
+                                    <li><strong>Dirección:</strong> {compra.shippingInfo.address}, {compra.shippingInfo.city}, {compra.shippingInfo.state}</li>
+                                  </>
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* Paginación compras */}
+                <div className="d-flex justify-content-center align-items-center gap-2 my-2">
+                  <button
+                    className="btn btn-sm btn-outline-warning"
+                    disabled={comprasPage === 0}
+                    onClick={() => setComprasPage(comprasPage - 1)}
+                  >
+                    Anterior
+                  </button>
+                  <span>Página {comprasPage + 1} de {Math.ceil(compras.length / comprasPerPage)}</span>
+                  <button
+                    className="btn btn-sm btn-outline-warning"
+                    disabled={(comprasPage + 1) * comprasPerPage >= compras.length}
+                    onClick={() => setComprasPage(comprasPage + 1)}
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </>
             );
           })()
         }
@@ -481,13 +576,18 @@ const Dashboard = () => {
               className: 'btn btn-outline-warning'
             },
             {
-              text: '⚙️ Ver Códigos NO RECLAMADOS',
+              text: '🐾 Ver Códigos NO RECLAMADOS',
               route: '/ver-codigos',
               className: 'btn btn-outline-warning'
             },
             {
-              text: '✅ Ver Códigos Reclamados y Usuarios',
-              route: '/codigos-reclamados',
+              text: '✅ Ver Usuarios Registrados',
+              route: '/usuarios-registrados',
+              className: 'btn btn-outline-success'
+            },
+            {
+              text: '🐾 Ver Mascotas Registrados',
+              route: '/mascotas-admin',
               className: 'btn btn-outline-success'
             },
           ].map((btn, index) => (

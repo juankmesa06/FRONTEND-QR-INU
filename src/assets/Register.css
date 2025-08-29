@@ -1,12 +1,5 @@
 /* Elimina scroll horizontal global */
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background: #f8f9fa;
-  margin: 0;
-  padding: 0;
-}
+
 
 /* Fondo limpio y centrado */
 .register-container {

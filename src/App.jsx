@@ -2,7 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './index.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import PrivateRoute from './Components/PrivateRoute';
@@ -20,41 +21,51 @@ import QRGenerado from './pages/QRGenerado';
 import NuevaMascota from './pages/NuevaMascota';
 import GenerarCodigos from './pages/generar-codigos';
 import VerCodigos from './pages/VerCodigos';
-import EditarMascota from './pages/EditarMascota';
+
 import Compras from './pages/Compras';
 import Recuperar from './pages/Recuperar';
 import ResetPassword from './pages/ResetPassword';
+import UsuariosRegistrados from './pages/UsuariosRegistrados';
+import MascotasAdmin from './pages/MascotasAdmin';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <main className="container my-5">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/report" element={<ReportLostPet />} />
-          <Route path="/mypets" element={ <PrivateRoute> <MyPets /> </PrivateRoute>}/>
-          <Route path="/dashboard" element={ <PrivateRouteAdmin> <Dashboard /> </PrivateRouteAdmin> } />
-          <Route path="/mascota/:qrCode" element={<PetInfo />} />
-          <Route path="/compraqr" element={<CompraQR />} />
-          <Route path="/qr-generado" element={<QRGenerado />} />
-          <Route path="/nueva-mascota" element={<NuevaMascota />} />
-          <Route path="/generar-codigos" element={<GenerarCodigos />} />
-          <Route path="/ver-codigos" element={<VerCodigos />} />
-          <Route path="/editar-mascota/:id" element={<EditarMascota />} />
-          <Route path="/compras" element={<PrivateRoute><Compras /></PrivateRoute>} />
-        <Route path="/recuperar" element={<Recuperar />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-<Route path="/restablecer-contrasena" element={<ResetPassword />} />
-  
-        </Routes>
-      </main>
-      <Footer />
-    </Router>
+    <>
+      {/* Fondo animado */}
+      <div className="bg"></div>
+      <div className="bg bg2"></div>
+      <div className="bg bg3"></div>
+      {/* Tu contenido principal */}
+      <Router>
+        <Navbar />
+        <main className="container my-5">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/report" element={<ReportLostPet />} />
+            <Route path="/mypets" element={ <PrivateRoute> <MyPets /> </PrivateRoute>}/>
+            <Route path="/dashboard" element={ <PrivateRouteAdmin> <Dashboard /> </PrivateRouteAdmin> } />
+            <Route path="/mascota/:qrCode" element={<PetInfo />} />
+            <Route path="/compraqr" element={<CompraQR />} />
+            <Route path="/qr-generado" element={<QRGenerado />} />
+            <Route path="/nueva-mascota" element={<NuevaMascota />} />
+            <Route path="/generar-codigos" element={<GenerarCodigos />} />
+            <Route path="/ver-codigos" element={<VerCodigos />} />
+            
+            <Route path="/compras" element={<PrivateRoute><Compras /></PrivateRoute>} />
+            <Route path="/recuperar" element={<Recuperar />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/restablecer-contrasena" element={<ResetPassword />} />
+            <Route path="/usuarios-registrados" element={<UsuariosRegistrados />} />
+            <Route path="/mascotas-admin" element={<MascotasAdmin />} />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </>
   );
 }
 

@@ -94,7 +94,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
+    <div className="">
       <div className="register-card">
         {/* ICONO DE MARCA */}
         <img src="/images/LOGO PRINCIPAL.png" alt="INUTrips Logo" style={{ height: '60px' }} />

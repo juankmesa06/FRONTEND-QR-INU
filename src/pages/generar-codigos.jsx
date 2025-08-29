@@ -38,8 +38,9 @@ function GenerarCodigos() {
 
       <div className="row justify-content-center mb-4">
         <div className="col-md-4">
-          <label className="form-label">Cantidad de códigos a generar</label>
+          <label className="form-label" htmlFor="cantidad-codigos">Cantidad de códigos a generar</label>
           <input
+            id="cantidad-codigos"
             type="number"
             className="form-control"
             min={1}

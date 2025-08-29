@@ -1,0 +1,49 @@
+
+h2 {
+  color: #3d2c1e;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.table {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.table th {
+  background: #f9af15;
+  color: #3d2c1e;
+  font-weight: 700;
+  border: none;
+  text-align: center;
+}
+
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  border: none;
+}
+
+.table-bordered > :not(caption) > * > * {
+  border-width: 1.5px;
+  border-color: #f9af15;
+}
+
+.alert-info {
+  background: #f9af1522;
+  color: #3d2c1e;
+  border-color: #f9af15;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.3rem;
+  }
+  .table th, .table td {
+    font-size: 0.95rem;
+    padding: 0.5rem;
+  }
+}

@@ -83,10 +83,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login-inu-wrapper d-flex align-items-center justify-content-center">
+    <div className="">
       <div className="login-inu-box shadow-lg">
         <div className="text-center mb-4">
-          <img src="/images/LOGO PRINCIPAL.png" alt="INUTrips Logo" style={{ height: '60px' }} />
+          <img src="/images/LOGO PRINCIPAL.png" alt="INUTrips Logo" style={{ height: '60px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} />
           <h2 className="mt-3 text-inu-dark fw-bold">Inicia Sesión</h2>
           <p className="text-muted">Accede para gestionar a tus mascotas</p>
         </div>

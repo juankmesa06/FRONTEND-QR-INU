@@ -8,7 +8,7 @@ body {
   z-index: 1050;
   min-height: 70px;
   border-bottom: 1.5px solid #f9af15;
-  background: #fff !important;
+  background: #f9af15 !important;
   transition: box-shadow 0.2s;
 }
 
@@ -98,3 +98,4 @@ body {
     padding-top: 110px !important;
   }
 }
+
