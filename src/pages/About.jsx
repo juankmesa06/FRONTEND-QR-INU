@@ -12,7 +12,8 @@ function About() {
           <div className="col-lg-10 mx-auto">
             <div className="neu-card p-4 mb-4">
               <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '3rem', textAlign: 'center' }}>
-                <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>{' '}
+                <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>
+                <span> </span>
                 <span className="logo-trips" style={{ color: '#f9af15' }}>Trips</span>
                 : Movilidad Pet-Friendly en Colombia
               </h1>
@@ -22,7 +23,7 @@ function About() {
                     <img
                       className="img-fluid w-100 shadow-drop-left-right"
                       src="/images/3.jpg"
-                      srcSet="/images/3.jpg 1x, /images/3.jpg 2x, /images/3@3x.jpg 3x"
+                      
                       alt="Viaje seguro con mascotas"
                       style={{ objectFit: "cover", minHeight: 500, maxHeight: 500 }}
                     />
@@ -35,7 +36,7 @@ function About() {
                   </p>
                   <div className="row g-4 mb-4">
                     <div className="col-sm-6">
-                      <div className="d-flex align-items-center">
+                      <div className="d-fl/ex align-items-center">
                         <div className="flex-shrink-0 btn-xl-square bg-light me-3 rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48 }}>
                           <i className="bi bi-geo-alt text-warning fs-3"></i>
                         </div>
