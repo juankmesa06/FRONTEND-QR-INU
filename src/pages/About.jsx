@@ -13,7 +13,7 @@ function About() {
             <div className="neu-card p-4 mb-4">
               <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '3rem', textAlign: 'center' }}>
                 <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>
-                <span> </span>
+                {' '}
                 <span className="logo-trips" style={{ color: '#f9af15' }}>Trips</span>
                 : Movilidad Pet-Friendly en Colombia
               </h1>

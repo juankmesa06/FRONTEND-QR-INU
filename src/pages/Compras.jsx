@@ -60,37 +60,18 @@ const Compras = () => {
   useEffect(() => {
     const fetchCompras = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
-      const token = user?.token;
-      if (!token) {
-        alert('Debes iniciar sesión.');
-        return;
-      }
-      try {
-        const res = await fetch(`${apiUrl}/purchase`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!res.ok) throw new Error('No se pudieron cargar las compras');
-        const data = await res.json();
-        setCompras(data);
-      } catch (e) {
-        alert(e.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCompras();
-  }, [apiUrl]);
 
   if (loading) return <p className="text-center my-5">Cargando compras...</p>;
 
   return (
+    <div className="container py-5">
+      <h2 className="fw-bold mb-4">Mis Compras</h2>
     <div className="compras-container">
       <h2 className="compras-title">Mis Compras</h2>
       {compras.length === 0 ? (
         <div className="alert alert-info">No tienes compras registradas.</div>
       ) : (
+        <table className="table table-bordered">
         <table className="table table-bordered compras-table">
           <thead>
             <tr>
@@ -104,16 +85,21 @@ const Compras = () => {
           <tbody>
             {compras.map((compra, idx) => (
               <tr key={idx}>
+                <td>{new Date(compra.createdAt).toLocaleString('es-CO')}</td>
                 <td>{new Date(compra.created_at).toLocaleString('es-CO')}</td>
                 <td>
+                  <ul>
                   <ul className="compras-items-list">
                     {compra.items.map((item, i) => (
                       <li key={i}>
+                        {item.type} - {item.nameToEngrave} (${item.price})
                         {item.type} - {item.name_to_engrave} (${item.unit_price})
                       </li>
                     ))}
                   </ul>
                 </td>
+                <td>{compra.status || 'Pendiente'}</td>
+                <td>${compra.total || '-'}</td>
                 <td>
                   <span className={`compras-status ${compra.status || 'Pendiente'}`}>
                     {compra.status || 'Pendiente'}
@@ -140,6 +126,6 @@ const Compras = () => {
       )}
     </div>
   );
-};
+
 
 export default Compras;
