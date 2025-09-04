@@ -39,12 +39,17 @@ const Home = () => {
           {/* APP INUTrips */}
           <div className="row g-5 align-items-center mb-5 flex-column flex-md-row">
             <div className="col-md-5 wow fadeIn" data-wow-delay="0.1s">
-              <div className="about-img rounded-4 overflow-hidden shadow-sm">
+              <div className="">
                 <img
                   className="img-fluid w-100 shadow-drop-left-right"
                   src="/images/5.134.jpg"
                   alt="App INUTrips"
-                  style={{ objectFit: "cover", minHeight: 600, maxHeight: 700 }}
+                  style={{ objectFit: "cover",
+                                width: "100%",
+                                height: "auto",
+                                maxHeight: 600,
+                                borderRadius: "3rem"
+                                }}
                 />
               </div>
             </div>
@@ -97,12 +102,17 @@ const Home = () => {
           {/* MEDALLA QR INU */}
           <div className="row g-5 align-items-center mb-5 flex-column flex-md-row-reverse">
             <div className="col-md-5 wow fadeIn" data-wow-delay="0.1s">
-              <div className="about-img rounded-4 overflow-hidden shadow-sm">
+              <div className="">
                 <img
                   className="img-fluid w-100 shadow-drop-left-right"
                   src="/images/juntos a todas partes.jpg"
                   alt="Medalla QR INU"
-                  style={{ objectFit: "cover", minHeight: 600, maxHeight: 700 }}
+                  style={{ objectFit: "cover",
+                                width: "100%",
+                                height: "auto",
+                                maxHeight: 600,
+                                borderRadius: "3rem"
+                                }}
                 />
               </div>
             </div>
@@ -149,12 +159,19 @@ const Home = () => {
           {/* KIT INU */}
           <div className="row g-5 align-items-center flex-column flex-md-row">
             <div className="col-md-5 wow fadeIn" data-wow-delay="0.1s">
-              <div className="about-img rounded-4 overflow-hidden shadow-sm">
+              <div className="">
                 <img
                   className="img-fluid w-100 shadow-drop-left-right"
                   src="/images/1.1.jpg"
                   alt="Kit INU"
-                  style={{ objectFit: "cover", minHeight: 600, maxHeight: 700 }}
+                  style={{ objectFit: "cover",
+                                width: "100%",
+                                height: "auto",
+                                maxHeight: 600,
+                                borderRadius: "3rem"
+                                }}
+                    
+                  
                 />
               </div>
             </div>

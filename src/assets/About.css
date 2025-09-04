@@ -59,6 +59,13 @@
   padding: 2rem;
 }
 
+.feature-row {
+  display: flex;
+  gap: 2rem; /* Espacio horizontal entre tarjetas */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* --- FIN BLOQUE LADO A LADO --- */
 
 /* Botón neumorfismo */

@@ -12,20 +12,18 @@ function About() {
           <div className="col-lg-10 mx-auto">
             <div className="neu-card p-4 mb-4">
               <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '3rem', textAlign: 'center' }}>
-                <span style={{ color: '#675544', fontWeight: 'bold' }}>INU</span>
+                <span style={{ color: '#675544', fontWeight: 'bold', marginRight: '0.5rem' }}>INU</span>
                 {' '}
                 <span className="logo-trips" style={{ color: '#f9af15' }}>Trips</span>
                 : Movilidad Pet-Friendly en Colombia
               </h1>
               <div className="row g-5 align-items-center mb-5 flex-column flex-md-row">
                 <div className="col-md-5">
-                  <div className="about-img rounded-4 overflow-hidden shadow-sm">
+                  <div>
                     <img
-                      className="img-fluid w-100 shadow-drop-left-right"
+                      className="img-fluid w-100 shadow-drop-left-right img-rounded-effect"
                       src="/images/3.jpg"
-                      
                       alt="Viaje seguro con mascotas"
-                      style={{ objectFit: "cover", minHeight: 500, maxHeight: 500 }}
                     />
                   </div>
                 </div>
@@ -35,15 +33,15 @@ function About() {
                     <strong>¿Por qué elegirnos?</strong> Nuestra app te permite programar o pedir viajes en tiempo real, registrar a tus mascotas y acceder a servicios aliados pet-friendly. Además, donamos parte de nuestros ingresos a fundaciones de animales, apoyando el rescate y bienestar de mascotas en situación vulnerable.
                   </p>
                   <div className="row g-4 mb-4">
-                    <div className="col-sm-6">
-                      <div className="d-fl/ex align-items-center">
+                    <div className="col-12 col-sm-6">
+                      <div className="d-flex align-items-center">
                         <div className="flex-shrink-0 btn-xl-square bg-light me-3 rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48 }}>
                           <i className="bi bi-geo-alt text-warning fs-3"></i>
                         </div>
                         <h6 className="lh-base mb-0">Viajes programados y en tiempo real</h6>
                       </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-12 col-sm-6">
                       <div className="d-flex align-items-center">
                         <div className="flex-shrink-0 btn-xl-square bg-light me-3 rounded-circle d-flex align-items-center justify-content-center" style={{ width: 48, height: 48 }}>
                           <i className="bi bi-shield-check text-warning fs-3"></i>
@@ -79,7 +77,7 @@ function About() {
                 </div>
               </div>
               {/* Características / Features */}
-              <div className="row g-4 mb-4 justify-content-center">
+              <div className="row g-4 mb-4 justify-content-center feature-row">
                 <div className="col-sm-6 col-lg-4">
                   <div className="d-flex align-items-center neu-card ps-3 py-2">
                     <div className="flex-shrink-0 btn-xl-square me-3 d-flex align-items-center justify-content-center rounded-circle" style={{ width: 48, height: 48, background: "#e0e0e0" }}>
@@ -150,15 +148,6 @@ function About() {
                 </div>
                 <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Medalla QR</h5>
                 <p>Identifica y protege a tu mascota con nuestra medalla QR exclusiva.</p>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="feature-item neu-card h-100 text-center p-4">
-                <div className="feature-icon btn-xxl-square bg-warning mb-4 mt-n4 d-flex align-items-center justify-content-center rounded-circle mx-auto" style={{ width: 64, height: 64 }}>
-                  <i className="bi bi-heart-fill text-white fs-2"></i>
-                </div>
-                <h5 className="text-uppercase mb-3" style={{ fontWeight: 700 }}>Apoyo Social</h5>
-                <p>Donamos parte de nuestros ingresos a fundaciones de animales en Colombia.</p>
               </div>
             </div>
           </div>
