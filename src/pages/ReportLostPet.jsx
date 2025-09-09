@@ -12,14 +12,21 @@ function ReportLostPet() {
   const [scanning, setScanning] = useState(false);
 
   useEffect(() => {
-    // Obtener cámaras disponibles
-    Html5Qrcode.getCameras()
-      .then((devices) => {
-        setCameras(devices);
-        if (devices.length > 0) setSelectedCameraId(devices[0].id);
-      })
-      .catch(() => setCameras([]));
-  }, []);
+  Html5Qrcode.getCameras()
+    .then((devices) => {
+      setCameras(devices);
+      // Buscar cámara trasera (environment)
+      const backCam = devices.find(cam =>
+        cam.label && (cam.label.toLowerCase().includes('back') || cam.label.toLowerCase().includes('environment'))
+      );
+      if (backCam) {
+        setSelectedCameraId(backCam.id);
+      } else if (devices.length > 0) {
+        setSelectedCameraId(devices[0].id);
+      }
+    })
+    .catch(() => setCameras([]));
+}, []);
 
   useEffect(() => {
     if (!selectedCameraId) return;
