@@ -51,16 +51,16 @@ function App() {
             <Route path="/compraqr" element={<CompraQR />} />
             <Route path="/qr-generado" element={<QRGenerado />} />
             <Route path="/nueva-mascota" element={<NuevaMascota />} />
-            <Route path="/generar-codigos" element={<GenerarCodigos />} />
-            <Route path="/ver-codigos" element={<VerCodigos />} />
-            
+
+            <Route path="/generar-codigos" element={<PrivateRouteAdmin><GenerarCodigos /></PrivateRouteAdmin>} />
+            <Route path="/ver-codigos" element={<PrivateRouteAdmin><VerCodigos /></PrivateRouteAdmin>} />
+            <Route path="/usuarios-registrados" element={<PrivateRouteAdmin><UsuariosRegistrados /></PrivateRouteAdmin>} />
             <Route path="/compras" element={<PrivateRoute><Compras /></PrivateRoute>} />
             <Route path="/recuperar" element={<Recuperar />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/restablecer-contrasena" element={<ResetPassword />} />
-            <Route path="/usuarios-registrados" element={<UsuariosRegistrados />} />
-            <Route path="/mascotas-admin" element={<MascotasAdmin />} />
+            
           </Routes>
         </main>
         <Footer />
