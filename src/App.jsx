@@ -17,7 +17,6 @@ import MyPets from './pages/MyPets';
 import ReportLostPet from './pages/ReportLostPet';
 import PetInfo from './pages/PetInfo';
 import CompraQR from './pages/CompraQR';
-import QRGenerado from './pages/QRGenerado';
 import NuevaMascota from './pages/NuevaMascota';
 import GenerarCodigos from './pages/generar-codigos';
 import VerCodigos from './pages/VerCodigos';
@@ -49,8 +48,7 @@ function App() {
             <Route path="/dashboard" element={ <PrivateRouteAdmin> <Dashboard /> </PrivateRouteAdmin> } />
             <Route path="/mascota/:qrCode" element={<PetInfo />} />
             <Route path="/compraqr" element={<CompraQR />} />
-            <Route path="/qr-generado" element={<QRGenerado />} />
-            <Route path="/nueva-mascota" element={<NuevaMascota />} />
+            <Route path="/nueva-mascota" element={ <PrivateRoute> <NuevaMascota /> </PrivateRoute>}/>
 
             <Route path="/generar-codigos" element={<PrivateRouteAdmin><GenerarCodigos /></PrivateRouteAdmin>} />
             <Route path="/ver-codigos" element={<PrivateRouteAdmin><VerCodigos /></PrivateRouteAdmin>} />
@@ -58,7 +56,7 @@ function App() {
             <Route path="/compras" element={<PrivateRoute><Compras /></PrivateRoute>} />
             <Route path="/recuperar" element={<Recuperar />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/mascotas-admin" element={<PrivateRouteAdmin><MascotasAdmin /></PrivateRouteAdmin>} />
             <Route path="/restablecer-contrasena" element={<ResetPassword />} />
             
           </Routes>
